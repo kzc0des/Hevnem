@@ -66,7 +66,7 @@ body {
     font-size: .9rem;
 }
 
-.container .info-box .artist-name {
+.container .info-box .album-name {
     color: #f2f2f2;
     font-weight: 100;
     font-size: .7rem;
@@ -109,26 +109,33 @@ body {
 
 /* Icons */
 
-.container .control-box .backward-button,
-.container .control-box .play-pause-button,
-.container .control-box .forward-button {
+.container .control-box #backward-button,
+.container .control-box #play-pause-button,
+.container .control-box #forward-button {
     display: flex;
     justify-content: center;
     align-items: center;
     
     width: 25px;
     height: 25px;
+
+    cursor: pointer;
 }
 
-.container .control-box .play-pause-button {
+.container .control-box #play-pause-button {
     background-color: #71767E;
     padding: 4px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
-.container .control-box .play-pause-button img{
+.container .control-box #play-pause-button:hover {
+    background-color: #43484f;
+}
+
+.container .control-box #play-pause-button img{
     width: 60%;
     height: 60%;
 }
@@ -142,9 +149,11 @@ body {
 .container .disk {
     max-width: 120px;
 }
-.container .disk .active{
-    animation: keyframe 3s linear 0s infinite forwards;
+
+.container .disk .cover.active{
+    animation: rotate 3s linear 0s infinite forwards;
 }
+
 .container .disk .cover{
     width: 110px;
     height: 110px;
@@ -172,7 +181,19 @@ body {
     border-radius: 50%;
 }
 
-@keyframe rotate {
+.container .controls #play{
+    background-color: #1db954;
+    color: #fff;
+    padding: 15px 17px 14px 18px;
+    font-size: 28px;
+    border-radius: 50%;
+}
+
+.container .controls #play:hover{
+    background: #189945;
+}
+
+@keyframes rotate {
     0% {
         transform: rotateZ(0deg);
     }
