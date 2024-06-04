@@ -230,7 +230,8 @@ const hevPlaylist = [
     {
         name: "Ayaw - ayaw",
         album: "Kwentong Jimenez",
-        src: "res/songs/Kwentong Jimenez/Ayaw - ayaw.mp3"
+        src: "res/songs/Kwentong Jimenez/Ayaw - ayaw.mp3",
+        cover: "res/assets/cover_4.jpg"
     },      
     {
         name: "Told You",
