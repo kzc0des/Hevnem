@@ -40,7 +40,204 @@ const hevPlaylist = [
         album: "Pautang ng Pagibig",
         src: "res/songs/Pautang ng Pagibig/Hev Abi - PWEDE BANG_.mp3",
         cover: "res/assets/cover_1.jpg"
-    }
+    },
+    {
+        name: "1999",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - 1999 feat. Harlem.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Albat",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Albat feat. Unotheone.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Ganggang",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Gang Gang feat. Unotheone (Official Music Video).mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "ganitongrapbalikongcap",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - ganitongrapbalikongcap  3 Sticks.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Lahat Gagawin",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Lahat Gagawin.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Late Kenanrd",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Late Kenanrd feat. L.K, Unotheone, & A77EX.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Magka Kotse",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Magka Kotse.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Nice Tin",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Nice Tin feat. L.K & Unotheone.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Outside",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Outside (Official Music Video).mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Paano Ka Ba",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Paano Ka Ba_.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Para Sikat",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Para Sikat feat.  Unotheone & A77EX.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Sa Dako Paroon (Interlude)",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Sa Dako Paroon (Interlude).mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Tagaytay",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Tagaytay.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Walang Makapa",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Hev Abi - Walang Makapa (Official Music Video).mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Loyal To Everybody",
+        album: "Sakred Boy",
+        src: "res/songs/Sakred Boy/Loyal To Everybody.mp3",
+        cover: "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Alam mo ba Girl",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Alam Mo Ba Girl.mp3",
+        cover: "res/assets/cover_2.jpg"
+    },
+    {
+        name: "Antagonista",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Antagonista feat. Unotheone.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "Binibiroksi",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Binibiroksi.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "C2 Boyz",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - C2 Boyz.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "drugr4ts",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - drugr4ts feat. Simmo, gins&melodies.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "From Torillo, With Love",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - From Torillo, With Love.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "Introhan Ko Lang",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Introhan Ko Lang.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "Kulay Downtown",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Kulay Downtown feat. Kristina Dawn.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "Pasaway Mode",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Pasaway Mode feat. Nazty Kidd.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "Still",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Still.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "Sumugal",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Sumugal feat. Unotheone, LK.mp3",
+        cover: "res/assets/cover_2.jpg"
+    }, 
+    {
+        name: "Walang Alam",
+        album: "Kung Alam Mo Lang",
+        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Walang Alam.mp3",
+        cover: "res/assets/cover_2.jpg"
+    },      
+    {
+        name: "Sa Kabila",
+        album: "Kwentong Jimenez",
+        src: "res/songs/Kwentong Jimenez/Sa Kabila.mp3",
+        cover: "res/assets/cover_4.jpg"
+    },      
+    {
+        name: "151 - B",
+        album: "Kwentong Jimenez",
+        src: "res/songs/Kwentong Jimenez/151 - B.mp3",
+        cover: "res/assets/cover_4.jpg"
+    },      
+    {
+        name: "Missing Piece",
+        album: "Kwentong Jimenez",
+        src: "res/songs/Kwentong Jimenez/Missing Piece.mp3",
+        cover: "res/assets/cover_4.jpg"
+    },      
+    {
+        name: "Istolok",
+        album: "Kwentong Jimenez",
+        src: "res/songs/Kwentong Jimenez/Istolok.mp3",
+        cover: "res/assets/cover_4.jpg"
+    },      
+    {
+        name: "Ayaw - ayaw",
+        album: "Kwentong Jimenez",
+        src: "res/songs/Kwentong Jimenez/Ayaw - ayaw.mp3"
+    },      
+    {
+        name: "Told You",
+        album: "Kwentong Jimenez",
+        src: "res/songs/Kwentong Jimenez/Told You.mp3",
+        cover: "res/assets/cover_4.jpg"
+    }      
 ]
 
 const musicName = document.querySelector('.song-name');
