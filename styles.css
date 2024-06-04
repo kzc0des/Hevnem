@@ -14,7 +14,13 @@ body {
 
     display: flex;
     flex-direction: column;
-    padding-top: calc(100% - 300px);
+
+}
+
+@media screen and (max-height: 800px) and (max-width: 450px) {
+    body{
+        justify-content: center;
+    }
 }
 
 .logo-container,
@@ -22,7 +28,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
 }
 
 
@@ -31,7 +36,6 @@ body {
     display: flex;
     width: 350px;
     height: 350px;
-    margin-bottom: -20px;
 }
 
 .logo-container .logo img {
@@ -42,17 +46,18 @@ body {
 /* Music Box */
 .container .info-box {
     background: #191414;
-    width: calc(100% - 200px);
-    
+    width: calc(100% - 150px);
+    max-width: 400px;
     display: flex;
     flex-direction: column;
 
-    padding: 10px 16px 10px 60px;
+    padding: 10px 16px 10px 70px;
     gap: 5px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 
     margin: 0 15px;
+    position: relative;
 }
 
 .container .info-box .song-name {
@@ -96,7 +101,9 @@ body {
     background-color: #302E28;
     border-radius: 20px;
 
-    width: calc(100% - 160px);
+    width: calc(100% - 100px);
+    height: 68px;
+    max-width: 450px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
@@ -139,17 +146,19 @@ body {
     animation: keyframe 3s linear 0s infinite forwards;
 }
 .container .disk .cover{
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     position: absolute;
+    top: -6px;
+    left: -55px;
     border-radius: 50%;
-    left: 50px;
     background: url("res/assets/cover_1.jpg");
     background-repeat: no-repeat;
     background-position: bottom center;
     background-size: cover;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease-in-out;
+    border: 1px solid white;
 }
 
 .container .disk .circle{
@@ -169,5 +178,50 @@ body {
     }
     100% {
         transform: rotateZ(360deg);
+    }
+}
+
+@media screen and (min-width: 801px) {
+    body{
+        justify-content: center;
+    }
+
+    .logo-container .logo {
+        width: 450px;
+        height: 450px;
+        margin-bottom: -20px;
+    }
+
+    .container .info-box { 
+        padding: 10px 16px 10px 60px;
+    }
+
+    .container .disk .cover{
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        left: -100px;
+        top: -30px;
+    }
+
+    .container .disk .circle{
+        width: 35px;
+        height: 35px;
+        left: 35%;
+        top: 40%;
+    }
+
+    .container .control-box {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px 70px;
+        background-color: #302E28;
+        border-radius: 20px;
+    
+        width: calc(100% - 100px);
+        height: 68px;
+        max-width: 450px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 }
