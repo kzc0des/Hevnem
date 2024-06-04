@@ -121,8 +121,8 @@ function playMusic() {
     loadSong(currentSong);
     song.play();
     playing = true;
-    img.src = "res/assets/pause.svg";
-    cover.classList.add('active', playing);
+    playImg.src = "res/assets/pause.svg";
+    cover.classList.toggle('active', playing);
 }
 
 function seek(e) {
