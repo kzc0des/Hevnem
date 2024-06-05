@@ -111,7 +111,9 @@ body {
 
 .container .control-box #backward-button,
 .container .control-box #play-pause-button,
-.container .control-box #forward-button {
+.container .control-box #forward-button,
+.container .control-box #shuffle-button,
+.container .control-box #repeat-button {
     display: flex;
     justify-content: center;
     align-items: center;

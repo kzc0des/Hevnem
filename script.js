@@ -251,11 +251,19 @@ const cover = document.getElementById('cover');
 const playBtn = document.getElementById('play-pause-button');
 const prevBtn = document.getElementById('backward-button');
 const nextBtn = document.getElementById('forward-button');
-const playImg = document.getElementById('play-pause')
+const playImg = document.getElementById('play-pause');
+const shuffleBtn = document.getElementById('shuffle-button');
+const repeatBtn = document.getElementById('repeat-button');
+const repeatIco = document.getElementById('repeat');
+const shuffleIco = document.getElementById('shuffle');
+
 
 let song = new Audio();
 let currentSong = 0;
 let playing = false;
+let shuffled = false;
+let repeat = false;
+let originalPlaylist = [...hevPlaylist];
 
 document.addEventListener('DOMContentLoaded', () => {
     loadSong(currentSong);
@@ -265,6 +273,8 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', nextSong);
     playBtn.addEventListener('click', togglePlayPause);
     prog.addEventListener('click', seek);
+    shuffleBtn.addEventListener('click', shuffleSongs);
+    repeatBtn.addEventListener('click', repeatSong);
 })
 
 function loadSong(index) {
@@ -282,7 +292,11 @@ function updateProgress() {
 
         const duration = formatTime(song.duration);
         const currentTime = formatTime(song.currentTime);
-        time.innerText = `${currentTime} - ${duration}`
+        time.innerText = `${currentTime} - ${duration}`;
+
+        if (song.ended && repeat) {
+            playMusic(); // Play the song again
+        }
     }
 }
 
@@ -305,16 +319,6 @@ function togglePlayPause() {
     cover.classList.toggle('active', playing);
 }
 
-function nextSong() {
-    currentSong = (currentSong + 1) % hevPlaylist.length;
-    playMusic();
-}
-
-function prevSong() {
-    currentSong = (currentSong - 1 + hevPlaylist.length) % hevPlaylist.length;
-    playMusic();
-}
-
 function playMusic() {
     loadSong(currentSong);
     song.play();
@@ -326,4 +330,52 @@ function playMusic() {
 function seek(e) {
     const pos = (e.offsetX / prog.clientWidth) * song.duration;
     song.currentTime = pos;
+}
+
+function shuffle(arr) {
+    for (let  i = arr.length; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i+1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+
+function repeatSong() {
+    repeat = !repeat;
+
+    if(repeat){
+        repeatIco.src = "res/assets/repeated.svg";
+    }else{
+        repeatIco.src = "res/assets/repeat.svg";
+    }
+}
+
+function findSong(songName) {
+    return originalPlaylist.findIndex(song => song.name === songName);
+}
+
+function shuffleSongs() {
+    const currentSongName = hevPlaylist[currentSong]?.name;
+
+    if(shuffled){
+        hevPlaylist.splice(0, hevPlaylist.length, ...originalPlaylist); //returns the real arrangement
+        shuffleIco.src = "res/assets/shuffle.svg";
+    }else{ 
+        // shuffled
+        shuffle(hevPlaylist);
+        shuffleIco.src = "res/assets/shuffled.svg";
+    }
+    
+    currentSong = hevPlaylist.findIndex(song => song.name === currentSongName);
+
+    shuffled = !shuffled;
+}
+
+function nextSong() {
+    currentSong = (currentSong + 1) % hevPlaylist.length;
+    playMusic();
+}
+
+function prevSong() {
+    currentSong = (currentSong - 1 + hevPlaylist.length) % hevPlaylist.length;
+    playMusic();
 }
