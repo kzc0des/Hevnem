@@ -241,9 +241,57 @@ const hevPlaylist = [
     },      
     {
         name: "Babaero",
-        album: "Kwentong Jimenez",
+        album: "gins&melodies (ft. Hev Abi)",
         src: "res/songs/Solo Tracks/Babaero (feat. Hev Abi).mp3",
         cover: "res/assets/babaero.jpg"
+    },      
+    {
+        name: "Baliko Asinta",
+        album: "Solo Track",
+        src: "res/songs/Solo Tracks/hev - baliko asinta.mp3",
+        cover: "res/assets/baliko-asinta.jpg"
+    },      
+    {
+        name: "Di na Saluhin",
+        album: "Solo Track",
+        src: "res/songs/Solo Tracks/Hev Abi - Di Na Saluhin.mp3",
+        cover: "res/assets/dinasaluhin.jpg"
+    },     
+    {
+        name: "Kung Ika'y Sasaglit",
+        album: "Solo Track",
+        src: "res/songs/Solo Tracks/Hev Abi - Kung Ika'y Sasaglit (Official Lyric Video).mp3",
+        cover: "res/assets/kungikaysasaglit.png"
+    },     
+    {
+        name: "Lil Kasalanan Shortie",
+        album: "Solo Track",
+        src: "res/songs/Solo Tracks/Lil Kasalanan Shortie.mp3",
+        cover: "res/assets/lilkasalanan.png"
+    },     
+    {
+        name: "Mossa Downtown",
+        album: "Hev Abi (ft. gins&melodies)",
+        src: "res/songs/Solo Tracks/Mossa Downtown (feat. gins & melodies).mp3  ",
+        cover: "res/assets/mossadowntown.jpg"
+    },     
+    {
+        name: "Para sa Streets",
+        album: "Solo Track",
+        src: "res/songs/Solo Tracks/Para Sa Streets.mp3",
+        cover: "res/assets/parasastreets.jpg"
+    },     
+    {
+        name: "QC Girls",
+        album: "Solo Track",
+        src: "res/songs/Solo Tracks/QC Girls.mp3",
+        cover: "res/assets/qcgirls.jpg"
+    },     
+    {
+        name: "WELCOME2DTQ",
+        album: "Solo Track",
+        src: "res/songs/Solo Tracks/WELCOME2DTQ.mp3",
+        cover: "res/assets/welcomed2q.jpg"
     }      
 ]
 
