@@ -238,6 +238,12 @@ const hevPlaylist = [
         album: "Kwentong Jimenez",
         src: "res/songs/Kwentong Jimenez/Told You.mp3",
         cover: "res/assets/cover_4.jpg"
+    },      
+    {
+        name: "Babaero",
+        album: "Kwentong Jimenez",
+        src: "res/songs/Solo Tracks/Babaero (feat. Hev Abi).mp3",
+        cover: "res/assets/babaero.jpg"
     }      
 ]
 
