@@ -1,399 +1,142 @@
-const hevPlaylist = [
-    {
-        name: "Balisa",
-        album: "Pautang ng Pagibig",
-        src: "res/songs/Pautang ng Pagibig/Hev Abi - BALISA.mp3",
-        cover: "res/assets/cover_1.jpg"
-    },
-    {
-        name: "I know",
-        album: "Pautang ng Pagibig",
-        src: "res/songs/Pautang ng Pagibig/Hev Abi - I KNOW ft. Mcee Zabala - BONUS.mp3",
-        cover: "res/assets/cover_1.jpg"
-    },
-    {
-        name: "Introhan Natin",
-        album: "Pautang ng Pagibig",
-        src: "res/songs/Pautang ng Pagibig/Hev Abi - INTROHAN NATIN.mp3",
-        cover: "res/assets/cover_1.jpg"
-    },
-    {
-        name: "Manhid",
-        album: "Pautang ng Pagibig",
-        src: "res/songs/Pautang ng Pagibig/Hev Abi - MANHID.mp3",
-        cover: "res/assets/cover_1.jpg"
-    },
-    {
-        name: "Pantasya Panaginip",
-        album: "Pautang ng Pagibig",
-        src: "res/songs/Pautang ng Pagibig/Hev Abi - PANTASYA PANAGINIP.mp3",
-        cover: "res/assets/cover_1.jpg"
-    },
-    {
-        name: "Pulang Karpet",
-        album: "Pautang ng Pagibig",
-        src: "res/songs/Pautang ng Pagibig/Hev Abi - PULANG KARPET.mp3",
-        cover: "res/assets/cover_1.jpg"
-    },
-    {
-        name: "Pwede bang?",
-        album: "Pautang ng Pagibig",
-        src: "res/songs/Pautang ng Pagibig/Hev Abi - PWEDE BANG_.mp3",
-        cover: "res/assets/cover_1.jpg"
-    },
-    {
-        name: "1999",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - 1999 feat. Harlem.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Albat",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Albat feat. Unotheone.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Ganggang",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Gang Gang feat. Unotheone (Official Music Video).mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "ganitongrapbalikongcap",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - ganitongrapbalikongcap  3 Sticks.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Lahat Gagawin",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Lahat Gagawin.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Late Kenanrd",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Late Kenanrd feat. L.K, Unotheone, & A77EX.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Magka Kotse",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Magka Kotse.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Nice Tin",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Nice Tin feat. L.K & Unotheone.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Outside",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Outside (Official Music Video).mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Paano Ka Ba",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Paano Ka Ba_.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Para Sikat",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Para Sikat feat.  Unotheone & A77EX.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Sa Dako Paroon (Interlude)",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Sa Dako Paroon (Interlude).mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Tagaytay",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Tagaytay.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Walang Makapa",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Hev Abi - Walang Makapa (Official Music Video).mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Loyal To Everybody",
-        album: "Sakred Boy",
-        src: "res/songs/Sakred Boy/Loyal To Everybody.mp3",
-        cover: "res/assets/cover_3.jpg"
-    },
-    {
-        name: "Alam mo ba Girl",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Alam Mo Ba Girl.mp3",
-        cover: "res/assets/cover_2.jpg"
-    },
-    {
-        name: "Antagonista",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Antagonista feat. Unotheone.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "Binibiroksi",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Binibiroksi.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "C2 Boyz",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - C2 Boyz.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "drugr4ts",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - drugr4ts feat. Simmo, gins&melodies.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "From Torillo, With Love",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - From Torillo, With Love.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "Introhan Ko Lang",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Introhan Ko Lang.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "Kulay Downtown",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Kulay Downtown feat. Kristina Dawn.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "Pasaway Mode",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Pasaway Mode feat. Nazty Kidd.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "Still",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Still.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "Sumugal",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Sumugal feat. Unotheone, LK.mp3",
-        cover: "res/assets/cover_2.jpg"
-    }, 
-    {
-        name: "Walang Alam",
-        album: "Kung Alam Mo Lang",
-        src: "res/songs/Kung Alam Mo Lang/Hev Abi - Walang Alam.mp3",
-        cover: "res/assets/cover_2.jpg"
-    },      
-    {
-        name: "Sa Kabila",
-        album: "Kwentong Jimenez",
-        src: "res/songs/Kwentong Jimenez/Sa Kabila.mp3",
-        cover: "res/assets/cover_4.jpg"
-    },      
-    {
-        name: "151 - B",
-        album: "Kwentong Jimenez",
-        src: "res/songs/Kwentong Jimenez/151 - B.mp3",
-        cover: "res/assets/cover_4.jpg"
-    },      
-    {
-        name: "Missing Piece",
-        album: "Kwentong Jimenez",
-        src: "res/songs/Kwentong Jimenez/Missing Piece.mp3",
-        cover: "res/assets/cover_4.jpg"
-    },      
-    {
-        name: "Istolok",
-        album: "Kwentong Jimenez",
-        src: "res/songs/Kwentong Jimenez/Istolok.mp3",
-        cover: "res/assets/cover_4.jpg"
-    },      
-    {
-        name: "Ayaw - ayaw",
-        album: "Kwentong Jimenez",
-        src: "res/songs/Kwentong Jimenez/Ayaw - ayaw.mp3",
-        cover: "res/assets/cover_4.jpg"
-    },      
-    {
-        name: "Told You",
-        album: "Kwentong Jimenez",
-        src: "res/songs/Kwentong Jimenez/Told You.mp3",
-        cover: "res/assets/cover_4.jpg"
-    },      
-    {
-        name: "Babaero",
-        album: "gins&melodies (ft. Hev Abi)",
-        src: "res/songs/Solo Tracks/Babaero (feat. Hev Abi).mp3",
-        cover: "res/assets/babaero.jpg"
-    },      
-    {
-        name: "Baliko Asinta",
-        album: "Solo Track",
-        src: "res/songs/Solo Tracks/hev - baliko asinta.mp3",
-        cover: "res/assets/baliko-asinta.jpg"
-    },      
-    {
-        name: "Di na Saluhin",
-        album: "Solo Track",
-        src: "res/songs/Solo Tracks/Hev Abi - Di Na Saluhin.mp3",
-        cover: "res/assets/dinasaluhin.jpg"
-    },     
-    {
-        name: "Kung Ika'y Sasaglit",
-        album: "Solo Track",
-        src: "res/songs/Solo Tracks/Hev Abi - Kung Ika'y Sasaglit (Official Lyric Video).mp3",
-        cover: "res/assets/kungikaysasaglit.png"
-    },     
-    {
-        name: "Lil Kasalanan Shortie",
-        album: "Solo Track",
-        src: "res/songs/Solo Tracks/Lil Kasalanan Shortie.mp3",
-        cover: "res/assets/lilkasalanan.png"
-    },     
-    {
-        name: "Mossa Downtown",
-        album: "Hev Abi (ft. gins&melodies)",
-        src: "res/songs/Solo Tracks/Mossa Downtown (feat. gins & melodies).mp3  ",
-        cover: "res/assets/mossadowntown.jpg"
-    },     
-    {
-        name: "Para sa Streets",
-        album: "Solo Track",
-        src: "res/songs/Solo Tracks/Para Sa Streets.mp3",
-        cover: "res/assets/parasastreets.jpg"
-    },     
-    {
-        name: "QC Girls",
-        album: "Solo Track",
-        src: "res/songs/Solo Tracks/QC Girls.mp3",
-        cover: "res/assets/qcgirls.jpg"
-    },     
-    {
-        name: "WELCOME2DTQ",
-        album: "Solo Track",
-        src: "res/songs/Solo Tracks/WELCOME2DTQ.mp3",
-        cover: "res/assets/welcomed2q.jpg"
-    }      
-]
+import hevPlaylist from "./APISource.js";
 
-const musicName = document.querySelector('.song-name');
+const musicName = document.querySelector('.song-name');   // media display
 const albumName = document.querySelector('.album-name');;
+const cover = document.getElementById('cover');
 const prog = document.querySelector('.progress-bar');
 const fillBar = document.querySelector('.fill-bar');
 const time = document.querySelector('.time')
 
-const cover = document.getElementById('cover');
-const playBtn = document.getElementById('play-pause-button');
+const playBtn = document.getElementById('play-pause-button'); // controls
+const playImg = document.getElementById('play-pause');
 const prevBtn = document.getElementById('backward-button');
 const nextBtn = document.getElementById('forward-button');
-const playImg = document.getElementById('play-pause');
 const shuffleBtn = document.getElementById('shuffle-button');
+const shuffleIco = document.getElementById('shuffle');
 const repeatBtn = document.getElementById('repeat-button');
 const repeatIco = document.getElementById('repeat');
-const shuffleIco = document.getElementById('shuffle');
 
-
-let song = new Audio();
-let currentSong = 0;
-let playing = false;
-let shuffled = false;
-let repeat = false;
-let originalPlaylist = [...hevPlaylist];
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadSong(currentSong);
-    song.addEventListener('timeupdate', updateProgress);
-    song.addEventListener('ended', nextSong);
-    prevBtn.addEventListener('click', prevSong);
+document.addEventListener("DOMContentLoaded", () => {
+    loadSong(userData?.currentSong);
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('ended', nextSong)
     nextBtn.addEventListener('click', nextSong);
-    playBtn.addEventListener('click', togglePlayPause);
-    prog.addEventListener('click', seek);
+    prevBtn.addEventListener('click', prevSong);
+    playBtn.addEventListener('click', playorpause);
     shuffleBtn.addEventListener('click', shuffleSongs);
     repeatBtn.addEventListener('click', repeatSong);
+    prog.addEventListener('click', seek);
 })
 
-function loadSong(index) {
-    const {name, album, src, cover: thumb} = hevPlaylist[index];
+const audio = new Audio();
+let userData = {
+    songs: [...hevPlaylist],
+    currentSong: 0
+    }
+let playing = false;
+console.table(userData?.songs)
+
+const loadSong = (index) => { //ung index jan, manggagaling sa value ng currentSong
+    const {name, album, src, cover: thumb} = userData?.songs[index];
     musicName.innerText = name;
     albumName.innerText = album;
-    song.src = src;
+    audio.src = src;
     cover.style.backgroundImage = `url(${thumb})`;
 }
 
-function updateProgress() {
-    if(song.duration){
-        const pos = (song.currentTime / song.duration) * 100;
+const updateProgress = () => {
+    if(audio.duration){ // if ung kanta ba is still playing kumbaga nasa loob pa ng duration
+        const pos = (audio.currentTime / audio.duration) * 100;
         fillBar.style.width = `${pos}%`;
 
-        const duration = formatTime(song.duration);
-        const currentTime = formatTime(song.currentTime);
-        time.innerText = `${currentTime} - ${duration}`;
+        const start = formatTime(audio.currentTime);
+        const end = formatTime(audio.duration);
+        time.innerText = `${start} - ${end}`;
 
-        if (song.ended && repeat) {
-            playMusic(); // Play the song again
+        if(audio.ended && repeat){
+            playSong();
         }
     }
 }
 
-function formatTime(seconds) {
+const formatTime = (seconds) => { //kasi ang irereturn sakin is seconds
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
-    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`; 
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}` // so kunwari ung seconds na nacompute is 43 since di naman siya less than 10 ung else code block ung gagawin which is empty
 }
 
-function togglePlayPause() {
+const nextSong = () => {
+    const newSongID = (userData?.currentSong + 1) % userData?.songs.length;
+    userData.currentSong = newSongID;
+    console.log(`ID: ${userData?.currentSong} \nTitle: ${userData?.songs[userData?.currentSong].name}`);
+    playSong();
+}
+
+const prevSong = () => {
+    const newSongID = (userData?.currentSong - 1 + userData?.songs.length) % userData?.songs.length;
+    userData.currentSong = newSongID;
+    console.log(`ID: ${userData?.currentSong} \nTitle: ${userData?.songs[userData?.currentSong].name}`);
+    playSong();
+}
+
+const playSong = () => {
+    loadSong(userData?.currentSong); //
+    audio.play();
+
+    playing = true;
+    cover.classList.toggle("active", playing)
+
+    playImg.src = "res/assets/pause.svg";
+    cover.classList.toggle("active", playing)
+}
+
+const playorpause = () => {
     if(playing){
-        song.pause();
         playImg.src = "res/assets/play.svg";
-    }else{
-        song.play();
+        audio.pause();
+        }else{
         playImg.src = "res/assets/pause.svg";
+        audio.play(); 
     }
 
     playing = !playing;
-    cover.classList.toggle('active', playing);
+    cover.classList.toggle("active", playing)
 }
 
-function playMusic() {
-    loadSong(currentSong);
-    song.play();
-    playing = true;
-    playImg.src = "res/assets/pause.svg";
-    cover.classList.toggle('active', playing);
+let shuffled = false;
+
+const shuffleSongs = () => {
+    const songTitle = userData?.songs[userData?.currentSong]?.name; // kinukuha neto ung title ng kantang tumutugtog the moment we clicked the shuffle btn
+
+    if(shuffled){
+        userData.songs = [...hevPlaylist];
+        shuffleIco.src = "res/assets/shuffle.svg";
+
+        console.table(userData?.songs);
+        console.log("normal");
+    }else{
+        shuffle(userData?.songs)
+        shuffleIco.src = "res/assets/shuffled.svg";
+
+        console.log("shuffled");
+        console.table(userData?.songs);
+    }
+
+    userData.currentSong = userData?.songs.findIndex(song => song.name === songTitle); // once nastore ung title kukunin natin ung index niya after ishuffle or vice versa para gamitin uli sa loadSong na function
+    console.log(userData.currentSong);
+    shuffled = !shuffled;
 }
 
-function seek(e) {
-    const pos = (e.offsetX / prog.clientWidth) * song.duration;
-    song.currentTime = pos;
-}
-
-function shuffle(arr) {
-    for (let  i = arr.length; i > 0; i--) {
+const shuffle = (arr) => {
+    for (let i = userData?.songs.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i+1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 }
 
-function repeatSong() {
+let repeat = false;
+
+const repeatSong = () => {
     repeat = !repeat;
 
     if(repeat){
@@ -403,33 +146,7 @@ function repeatSong() {
     }
 }
 
-function findSong(songName) {
-    return originalPlaylist.findIndex(song => song.name === songName);
-}
-
-function shuffleSongs() {
-    const currentSongName = hevPlaylist[currentSong]?.name;
-
-    if(shuffled){
-        hevPlaylist.splice(0, hevPlaylist.length, ...originalPlaylist); //returns the real arrangement
-        shuffleIco.src = "res/assets/shuffle.svg";
-    }else{ 
-        // shuffled
-        shuffle(hevPlaylist);
-        shuffleIco.src = "res/assets/shuffled.svg";
-    }
-    
-    currentSong = hevPlaylist.findIndex(song => song.name === currentSongName);
-
-    shuffled = !shuffled;
-}
-
-function nextSong() {
-    currentSong = (currentSong + 1) % hevPlaylist.length;
-    playMusic();
-}
-
-function prevSong() {
-    currentSong = (currentSong - 1 + hevPlaylist.length) % hevPlaylist.length;
-    playMusic();
+const seek = (e) => {
+    const pos = (e.offsetX / prog.clientWidth) * audio.duration;
+    audio.currentTime = pos;
 }
