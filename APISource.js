@@ -295,4 +295,33 @@ const hevPlaylist = [
     }      
 ]
 
-export default hevPlaylist;
+const hevAlbum = [
+    {
+        name: "Pautang ng Pagibig",
+        tracks: "7",
+        cover: "res/assets/cover_1.jpg"
+    },
+    {
+        name: "Sakred Boy",
+        tracks: "15",
+        cover:  "res/assets/cover_3.jpg"
+    },
+    {
+        name: "Kung Alam Mo Lang",
+        tracks: "12",
+        cover: "res/assets/cover_2.jpg"
+    },
+    {
+        name: "Kwentong Jimenez",
+        tracks: "6",
+        cover: "res/assets/cover_4.jpg"
+    },
+    {
+        name: "Solo Track",
+        tracks: "9",
+        cover: "res/assets/welcomed2q.jpg"
+    }
+
+]
+
+export {hevPlaylist, hevAlbum}; 

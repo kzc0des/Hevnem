@@ -10,32 +10,71 @@
 body {
     background: linear-gradient(#F2D079, #CD9400);
     background-repeat: no-repeat;
-    height: 100svh;
-
+    overflow: hidden;
+}
+    
+.all {
     display: flex;
     flex-direction: column;
-
+    align-items: center;
+    height: 100svh;
+    position: relative;
+    overflow: hidden;
 }
 
-@media screen and (max-height: 800px) and (max-width: 450px) {
-    body{
-        justify-content: center;
-    }
-}
-
-.logo-container,
-.container {
+.logo-container{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.6s ease;
+    width: 100%;
+}
+
+@media screen and (max-height: 800px) and (max-width: 450px) {
+    .all{
+        justify-content: center;
+    }
+
+    .logo-container {
+        position: relative;
+        animation: downward 0.5s ease-out forwards;
+    }
+    .logo-container.active {
+        animation: upward 0.5s ease forwards;
+    }
+
+    @keyframes upward {
+        0%{
+            top: 0;
+        }
+        100%{
+            top: -140px;
+        }
+    }
+
+    @keyframes downward {
+        0%{
+            top: -140px;
+        }
+        100%{
+            top: 0px;
+        }
+    }
+}
 
 /* Hevnem Logo */
-.logo-container .logo {
+/* dto mo apply ung position */
+.logo-container .logo { 
     display: flex;
     width: 350px;
     height: 350px;
+    transition: width 0.5s ease, height 0.5s ease, bottom 0.5s ease;
 }
 
 .logo-container .logo img {
@@ -204,6 +243,183 @@ body {
     }
 }
 
+/* playlist panel */
+.playlist-songs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    background-color: #191414;
+    width: 60%;
+    border-top-left-radius: 46px;
+    border-top-right-radius: 46px;
+    padding: 10px;
+
+    position: absolute;
+    bottom: -48%;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+@media screen and (max-height: 730px) {
+    .playlist-songs {
+        bottom: -50%;
+    }
+}
+
+.playlist-songs.active {
+    border-radius: 40px;
+    height: calc(100% - 280px);
+    width: calc(100% - 46px);
+    margin-bottom: 15px;
+}
+
+.logo-container .logo.active {
+    width: 260px;
+    height: 260px;
+    top: 25px;
+}
+
+.container.active{
+    opacity: 0;
+    transform: scale(-100%);
+    flex-direction: column;
+    align-items: center;
+}
+
+.playlist-songs .playlist-label {
+    color: #f2f2f2;
+    font-weight: 900;
+    letter-spacing: 2px;
+
+    padding-bottom: 20px;
+}
+
+.playlist-songs .playlist-label.active {
+    font-size: 1.2rem;
+}
+/* end of code */
+
+/* This one holds the album playlist and the song playlist */
+.playlist-songs .playlist { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* First Portion (Maginoo Pilyo) */
+.playlist-songs .playlist .maginoo-pilyo {
+    display: flex;
+    width: 280px;
+    height: 160px;
+
+    margin-bottom: -30px;
+}
+
+.playlist-songs .playlist .maginoo-pilyo img{
+    width: 100%;
+    height: 100%;
+}
+/* end */
+
+/* Second Portion (Albums) */
+.playlist-songs .playlist .albums {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.playlist-songs .playlist .albums .prev-album,
+.playlist-songs .playlist .albums .next-album {
+    display: flex;
+    width: 120px;
+    height: 120px;
+
+    overflow: hidden;
+}
+
+.playlist-songs .playlist .albums .prev-album {
+    position: absolute;
+    left: 20px;
+    transform: rotate(-15deg);
+}
+.playlist-songs .playlist .albums .next-album {
+    position: absolute;
+    right: 20px;
+    transform: rotate(15deg);
+}
+
+.playlist-songs .playlist .albums .prev-album .prev-album-slider,
+.playlist-songs .playlist .albums .next-album .next-album-slider {
+    display: flex;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.playlist-songs .playlist .albums .prev-album .prev-album-slider .prev-slide,
+.playlist-songs .playlist .albums .next-album .next-album-slider .next-slide {
+    flex-shrink: 0;
+
+    scroll-snap-align: start;
+
+    border: 1px solid #5f5f5f;
+}
+
+.playlist-songs .playlist .albums .prev-album .prev-album-slider .prev-slide img,
+.playlist-songs .playlist .albums .next-album .next-album-slider .next-slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.playlist-songs .playlist .albums .present-album {
+    width: 160px;
+    height: 160px;
+    z-index: 100;
+
+    overflow: hidden;
+}
+
+.playlist-songs .playlist .albums .present-album .present-album-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.playlist-songs .playlist .albums .present-album .present-album-slider .present-slide {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    border: 1px solid #f2f2f2;
+}
+
+.playlist-songs .playlist .albums .present-album .present-album-slider .present-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* third portion (album info) */
+.playlist-songs .playlist .album-info {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding: 15px 0;
+}
+
+.playlist-songs .playlist .album-info h1 {
+    color: #b6b6b6;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+.playlist-songs .playlist .album-info h2 {
+    color: #585656;
+    font-weight: 300;
+    font-size: .893rem;
+}
+
 @media screen and (min-width: 801px) {
     body{
         justify-content: center;
@@ -247,4 +463,148 @@ body {
         max-width: 450px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
+}
+
+
+/* mobile device */
+@media screen and (max-height: 680px) {
+    .playlist-songs {
+        bottom: -45%;
+    }
+
+    @keyframes upward {
+        0%{
+            top: 0;
+        }
+        100%{
+            top: -120px;
+        }
+    }
+
+    .playlist-songs .playlist .maginoo-pilyo {
+        display: flex;
+        width: 250px;
+        height: 130px;
+    
+        margin-bottom: -30px;
+    }
+
+    .playlist-songs .playlist .album .active{
+        width: 140px;
+        height: 140px;
+        z-index: 1;
+    }
+
+    .playlist-songs .playlist .album-info h1 {
+        color: #f2f2f2;
+        font-weight: 500;
+        font-size: 1rem;
+    }
+    .playlist-songs .playlist .album-info h2 {
+        color: #f2f2f2;
+        font-weight: 300;
+        font-size: .693rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    .all {
+        justify-content: center;
+    }
+
+    .playlist-songs {
+        display: none;
+    } 
+
+    .container .disk .cover:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+
+
+
+
+/* album songs */
+.playlist-songs .album-songs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    overflow: auto;
+    overflow-y: scroll;
+}
+
+.playlist-songs .album-songs .album-songs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+}
+
+.playlist-songs .album-songs .album-songs-list button {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+
+    outline: none;
+    border: none;
+    background: #d9d9d911;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.playlist-songs .album-songs .album-songs-list button .song-album {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+
+.playlist-songs .album-songs .album-songs-list button .song-album img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.playlist-songs .album-songs .album-songs-list button .song-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start; 
+    color: #f2f2f2;
+
+    padding: 10px;
+}
+
+.playlist-songs .album-songs .album-songs-list button .song-info .title {
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.playlist-songs .album-songs .album-songs-list button .song-info .duration{
+    font-size: .7rem;
+    font-weight: 100;
+}
+
+.playlist-songs .back {
+    display: none;
+    width: 30px;
+    height: 39px;
+
+    position: absolute;
+    top: 0;
+    right: 40px;
+}
+
+.playlist-songs .back.active {
+    display: flex;
+}
+
+.playlist-songs .back img {
+    width: 100%;
+    height: 100%;
 }
