@@ -486,9 +486,11 @@ body {
 
     .playlist-songs .playlist .albums .prev-album {
         transform: rotate(-15deg)scale(0.8);
+        left: 40px;
     }
     .playlist-songs .playlist .albums .next-album {
         transform: rotate(15deg)scale(0.8);
+        right: 40px;
     }
     .playlist-songs .playlist .albums .present-album {
         transform: scale(0.9);
@@ -533,11 +535,6 @@ body {
         bottom: -55%;
     }
 }
-
-
-
-
-
 
 /* album songs */
 .playlist-songs .album-songs {
