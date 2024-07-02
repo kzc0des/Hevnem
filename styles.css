@@ -532,7 +532,7 @@ body {
 
 @media screen and (min-height: 681px) and (max-height: 730px) {
     .playlist-songs {
-        bottom: -55%;
+        bottom: -50%;
     }
 }
 
