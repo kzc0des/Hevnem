@@ -261,9 +261,9 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
-@media screen and (max-height: 730px) {
+@media screen and (min-height: 681px) and (max-height: 730px) {
     .playlist-songs {
-        bottom: -50%;
+        bottom: -55%;
     }
 }
 
@@ -469,7 +469,7 @@ body {
 /* mobile device */
 @media screen and (max-height: 680px) {
     .playlist-songs {
-        bottom: -45%;
+        bottom: -50%;
     }
 
     @keyframes upward {
