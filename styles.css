@@ -97,6 +97,10 @@ body {
 
     margin: 0 15px;
     position: relative;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
 }
 
 .container .info-box .song-name {
@@ -256,7 +260,6 @@ body {
     padding: 10px;
 
     position: absolute;
-    bottom: -48%;
     transition: all 0.5s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
@@ -461,11 +464,7 @@ body {
 
 
 /* mobile device */
-@media screen and (max-height: 680px) {
-    .playlist-songs {
-        bottom: -48%;
-    }
-
+@media screen and (min-height: 650px) and (max-height: 730px) {
     @keyframes upward {
         0%{
             top: 0;
@@ -496,12 +495,6 @@ body {
         transform: scale(0.9);
     }
 
-    .playlist-songs .playlist .album .active{
-        width: 140px;
-        height: 140px;
-        z-index: 1;
-    }
-
     .playlist-songs .playlist .album-info h1 {
         color: #f2f2f2;
         font-weight: 500;
@@ -529,10 +522,137 @@ body {
         cursor: pointer;
     }
 }
+@media screen and (min-height: 661px) and (max-height: 670px) {
+    .playlist-songs {
+        bottom: -48%;
+    }
 
-@media screen and (min-height: 681px) and (max-height: 730px) {
+    .logo-container .logo { 
+        display: flex;
+        width: 300px;
+        height: 300px;
+        transition: width 0.5s ease, height 0.5s ease, bottom 0.5s ease;
+    }
+
+    .container .info-box {
+        background: #191414;
+        width: calc(100% - 150px);
+        max-width: 300px;
+
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    
+        padding: 10px 16px 10px 70px;
+        gap: 5px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    
+        margin: 0 15px;
+        position: relative;
+    
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: auto;
+    }
+}
+
+@media screen and (min-height: 671px) and (max-height: 680px) {
+    .playlist-songs {
+        bottom: -46%;
+    }
+}
+@media screen and (min-height: 681px) and (max-height: 690px) {
+    .playlist-songs {
+        bottom: -55%;
+    }
+}
+@media screen and (min-height: 691px) and (max-height: 700px) {
+    .playlist-songs {
+        bottom: -53%;
+    }
+}
+@media screen and (min-height: 701px) and (max-height: 710px) {
+    .playlist-songs {
+        bottom: -51.9%;
+    }
+}
+@media screen and (min-height: 711px) and (max-height: 720px) {
     .playlist-songs {
         bottom: -50%;
+    }
+
+    .playlist-songs .playlist .album-info h1 {
+        font-size: 0.999rem;
+    }
+    .playlist-songs .playlist .album-info h2 {
+        font-size: .793rem;
+    }
+}
+@media screen and (min-height: 721px) and (max-height: 730px) {
+    .playlist-songs {
+        bottom: -52%;
+    }
+
+    .playlist-songs .playlist .album-info h1 {
+        font-size: 0.999rem;
+    }
+    .playlist-songs .playlist .album-info h2 {
+        font-size: .793rem;
+    }
+
+    .playlist-songs .playlist .maginoo-pilyo {
+        margin-top: 0px;
+    }
+}
+@media screen and (min-height: 731px) and (max-height: 750px) {
+    .playlist-songs {
+        bottom: -50%;
+    }
+    .playlist-songs .playlist .albums .prev-album {
+        transform: rotate(-15deg)scale(0.901);
+        left: 40px;
+    }
+    .playlist-songs .playlist .albums .next-album {
+        transform: rotate(15deg)scale(0.901);
+        right: 40px;
+    }
+    .playlist-songs .playlist .albums .present-album {
+        transform: scale(0.999);
+    }
+    .playlist-songs .playlist .maginoo-pilyo {
+        margin-top: -20px;
+    }
+}
+@media screen and (min-height: 751px) and (max-height: 800px) {
+    .playlist-songs {
+        bottom: -50%;
+    }
+    .playlist-songs .playlist .albums .prev-album {
+        left: 30px;
+    }
+    .playlist-songs .playlist .albums .next-album {
+        right: 30px;
+    }
+    .playlist-songs .playlist .albums .present-album {
+        transform: scale(1.05);
+    }
+}
+
+@media screen and (min-height: 781px) and (max-height: 800px) {
+    @keyframes upward {
+        0%{
+            top: 0;
+        }
+        100%{
+            top: -160px;
+        }
     }
 }
 
