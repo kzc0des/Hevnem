@@ -1,4 +1,4 @@
-import { hevPlaylist, hevAlbum } from "./functions/APISource.js";
+import { hevPlaylist, hevAlbum } from "./APISource.js";
 import { albumTemplate, cloneExtremes } from "./functions/album-creation.js";
 import { swipe, titleChange } from "./functions/album-navigation.js";
 import { openAlbum, showPlaylist } from "./functions/playlist-section.js";
