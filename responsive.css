@@ -1,0 +1,43 @@
+@media (max-width: 768px) {
+    .all{
+        width: 400px;
+    }
+
+    .logo-container>img {
+        width: 300px;
+    }
+
+    .container>.info-box {
+        max-width: 230px;
+        padding: 10px 16px 10px 60px;
+    }
+
+    .disk .cover {
+        width: 100px;
+        height: 100px;
+        top: -6px;
+        left: -55px;
+    }
+
+    .container>.control-box {
+        width: 80%;
+    }
+
+    .playlist-button {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+    }
+
+    .playlist-section {
+        display: flex;
+    }
+
+    .playlist-songs {
+        display: flex;
+    }
+
+    .playlist-button.hide {
+        top: 100%;
+    }
+}
