@@ -1,4 +1,4 @@
-import { loadSong, playSongClicked } from "./script.js";
+import { loadSong, playSongClicked } from "../script.js";
 
 async function songItem({ name, src, cover: thumb }, index) {
     try {
