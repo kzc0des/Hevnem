@@ -460,6 +460,7 @@ body {
 
     border-radius: 10px;
     background-color: #3f85363a;
+    cursor: pointer;
 }
 
 .song-list>button:last-child {
