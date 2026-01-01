@@ -241,7 +241,7 @@ const hevPlaylist = [
     },      
     {
         name: "Babaero",
-        album: "gins&melodies (ft. Hev Abi)",
+        album: "Solo Track",
         src: "res/songs/Solo Tracks/Babaero (feat. Hev Abi).mp3",
         cover: "res/assets/babaero.jpg"
     },      
@@ -271,8 +271,8 @@ const hevPlaylist = [
     },     
     {
         name: "Mossa Downtown",
-        album: "Hev Abi (ft. gins&melodies)",
-        src: "res/songs/Solo Tracks/Mossa Downtown (feat. gins & melodies).mp3  ",
+        album: "Solo Track",
+        src: "res/songs/Solo Tracks/Mossa Downtown (feat. gins & melodies).mp3",
         cover: "res/assets/mossadowntown.jpg"
     },     
     {
