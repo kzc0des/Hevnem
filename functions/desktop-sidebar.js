@@ -5,7 +5,7 @@ import { loadSong, playSongClicked } from "../script.js";
 function setupDesktopSidebar() {
     const sidebar = document.querySelector('.desktop-sidebar');
     const toggleButton = document.querySelector('.desktop-sidebar-toggle');
-    const albumsContainer = sidebar.querySelector('.albums');
+    const albumsContainer = sidebar.querySelector('.desktop-albums-container');
 
     if (!sidebar || !toggleButton || !albumsContainer) return;
 
@@ -50,13 +50,22 @@ async function showSongsForAlbum(albumTitle) {
     const songsContainer = document.querySelector('#desktop-album-songs');
     if (!songsContainer) return;
     
-    // Create and show a 'back' button
+    // --- Start Loading State ---
+    songsContainer.innerHTML = ''; // Clear previous content
     const backButton = document.createElement('button');
     backButton.className = 'back-to-albums';
     backButton.innerHTML = `&larr; Back to Albums`;
     backButton.addEventListener('click', () => {
         songsContainer.classList.remove('active');
     });
+    
+    const spinner = document.createElement('div');
+    spinner.className = 'loading-spinner';
+    
+    songsContainer.appendChild(backButton);
+    songsContainer.appendChild(spinner);
+    songsContainer.classList.add('active'); // Show the panel immediately
+    // --- End Loading State ---
 
     // Get songs for the selected album
     const songsForAlbum = hevPlaylist.filter(song => song.album === albumTitle);
@@ -69,10 +78,11 @@ async function showSongsForAlbum(albumTitle) {
         songList.appendChild(songElement);
     }
     
-    songsContainer.innerHTML = ''; // Clear previous songs
+    // --- Render Final Content ---
+    songsContainer.innerHTML = ''; // Clear spinner
     songsContainer.appendChild(backButton);
     songsContainer.appendChild(songList);
-    songsContainer.classList.add('active'); // Show the song list view
+    // --- End Render ---
 }
 
 // Creates a single song item element
