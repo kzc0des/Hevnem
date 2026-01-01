@@ -1,8 +1,8 @@
 import { albumSelect } from "./song-list-creation.js";
 
-const albums = document.querySelector('.albums');
-const playlist = document.querySelector('.playlist');
-const songs = document.querySelector(".songs");
+const albums = document.querySelector('.mobile-albums');
+const playlist = document.querySelector('.playlist-section .playlist');
+const songs = document.querySelector("#album-songs");
 
 function showPlaylist() {
     const playlistButton = document.querySelector('.playlist-button');

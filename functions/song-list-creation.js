@@ -59,7 +59,7 @@ async function albumSelect(e, src) {
     if (selectedAlbum) {
         const title = selectedAlbum.getAttribute('id');
         if (title) {
-            const songSection = document.querySelector('.songs');
+            const songSection = document.querySelector('#album-songs');
             const label = albumLabel(title);
 
             const songs = await Promise.all(

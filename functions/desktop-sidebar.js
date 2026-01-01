@@ -5,7 +5,7 @@ import { loadSong, playSongClicked } from "../script.js";
 function setupDesktopSidebar() {
     const sidebar = document.querySelector('.desktop-sidebar');
     const toggleButton = document.querySelector('.desktop-sidebar-toggle');
-    const albumsContainer = sidebar.querySelector('.albums');
+    const albumsContainer = sidebar.querySelector('.desktop-albums-container');
 
     if (!sidebar || !toggleButton || !albumsContainer) return;
 
