@@ -55,44 +55,54 @@ async function getSongDuration(src) {
 
 async function albumSelect(e, src) {
     const selectedAlbum = e.target.closest('.present-slide');
-    console.log(selectedAlbum.getAttribute('id'));
-    if (selectedAlbum) {
-        const title = selectedAlbum.getAttribute('id');
-        if (title) {
-            const songSection = document.querySelector('#album-songs');
-            const label = albumLabel(title);
+    if (!selectedAlbum) return;
 
-            const songs = await Promise.all(
-                src?.songs
-                    .filter((song) => song.album === title)
-                    .map(async (song, index) => {
-                        try {
-                            const songHTML = await songItem(song, index);
-                            const songElement = new DOMParser().parseFromString(songHTML, 'text/html').body.firstChild;
+    const title = selectedAlbum.getAttribute('id');
+    if (!title) return;
 
-                            songElement.addEventListener('click', (e) => songSelect(e, src));
+    const songSection = document.querySelector('#album-songs');
+    if (!songSection) return;
 
-                            return songElement;
-                        } catch (error) {
-                            console.error(`Error processing song ${song.name}:`, error);
-                            return null;
-                        }
-                    })
-            );
+    const label = albumLabel(title);
 
-            const songList = document.createElement('div');
-            songList.className = "song-list";
-            songs.forEach(song => {
-                if (song) {
-                    songList.appendChild(song);
+    // --- Start Loading State ---
+    songSection.innerHTML = ''; // Clear previous list
+    const spinner = document.createElement('div');
+    spinner.className = 'loading-spinner';
+    songSection.appendChild(label); // Add label first
+    songSection.appendChild(spinner);
+    // --- End Loading State ---
+
+    const songs = await Promise.all(
+        src?.songs
+            .filter((song) => song.album === title)
+            .map(async (song, index) => {
+                try {
+                    const songHTML = await songItem(song, index);
+                    const songElement = new DOMParser().parseFromString(songHTML, 'text/html').body.firstChild;
+
+                    songElement.addEventListener('click', (e) => songSelect(e, src));
+
+                    return songElement;
+                } catch (error) {
+                    console.error(`Error processing song ${song.name}:`, error);
+                    return null;
                 }
             })
+    );
 
-            songSection.innerHTML = "";
-            songSection.appendChild(label);
-            songSection.appendChild(songList);
+    const songList = document.createElement('div');
+    songList.className = "song-list";
+    songs.forEach(song => {
+        if (song) {
+            songList.appendChild(song);
         }
-    }
+    });
+
+    // --- Render Final Content ---
+    songSection.removeChild(spinner); // Remove only the spinner
+    songSection.appendChild(songList); // Append new songs
+    // --- End Render ---
 }
 
 function albumLabel(str) {

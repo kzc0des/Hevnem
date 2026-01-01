@@ -38,7 +38,7 @@
     }
 }
 
-/* Default state (mobile-first): hide desktop elements */
+
 .desktop-sidebar,
 .desktop-sidebar-toggle {
     display: none;
@@ -126,19 +126,19 @@
 }
 
 @media (min-width: 769px) {
-    /* Hide original mobile playlist elements */
+    
     .playlist-section,
     .playlist-button {
         display: none !important;
     }
 
-    /* Show and style desktop elements */
+    
     .desktop-sidebar-toggle {
         display: flex;
         position: fixed;
         top: 20px;
         left: 20px;
-        z-index: 201; /* Above sidebar */
+        z-index: 201; 
         background-color: #191414;
         border-radius: 50%;
         padding: 10px;
@@ -150,7 +150,7 @@
         width: 24px;
         height: 24px;
         filter: invert(1);
-        transform: rotate(90deg); /* Point right */
+        transform: rotate(90deg); 
     }
 
     .desktop-sidebar.active ~ .desktop-sidebar-toggle {
@@ -158,7 +158,7 @@
     }
     
     .desktop-sidebar.active ~ .desktop-sidebar-toggle img {
-        transform: rotate(-90deg); /* Point left */
+        transform: rotate(-90deg); 
     }
 
     .desktop-sidebar {
@@ -183,7 +183,7 @@
         transform: translateX(0);
     }
 
-    /* Styles for new desktop-specific containers */
+    
     .desktop-sidebar .desktop-playlist {
         position: static;
         transform: none !important;
