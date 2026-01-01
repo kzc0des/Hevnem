@@ -69,7 +69,6 @@ async function albumSelect(e, src) {
     songSection.innerHTML = ''; // Clear previous list
     const spinner = document.createElement('div');
     spinner.className = 'loading-spinner';
-    songSection.appendChild(label); // Add label first
     songSection.appendChild(spinner);
     // --- End Loading State ---
 
@@ -100,7 +99,8 @@ async function albumSelect(e, src) {
     });
 
     // --- Render Final Content ---
-    songSection.removeChild(spinner); // Remove only the spinner
+    songSection.innerHTML = ''; // Clear the spinner
+    songSection.appendChild(label);
     songSection.appendChild(songList); // Append new songs
     // --- End Render ---
 }

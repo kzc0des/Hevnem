@@ -52,17 +52,8 @@ async function showSongsForAlbum(albumTitle) {
     
     // --- Start Loading State ---
     songsContainer.innerHTML = ''; // Clear previous content
-    const backButton = document.createElement('button');
-    backButton.className = 'back-to-albums';
-    backButton.innerHTML = `&larr; Back to Albums`;
-    backButton.addEventListener('click', () => {
-        songsContainer.classList.remove('active');
-    });
-    
     const spinner = document.createElement('div');
     spinner.className = 'loading-spinner';
-    
-    songsContainer.appendChild(backButton);
     songsContainer.appendChild(spinner);
     songsContainer.classList.add('active'); // Show the panel immediately
     // --- End Loading State ---
@@ -80,6 +71,12 @@ async function showSongsForAlbum(albumTitle) {
     
     // --- Render Final Content ---
     songsContainer.innerHTML = ''; // Clear spinner
+    const backButton = document.createElement('button');
+    backButton.className = 'back-to-albums';
+    backButton.innerHTML = `&larr; Back to Albums`;
+    backButton.addEventListener('click', () => {
+        songsContainer.classList.remove('active');
+    });
     songsContainer.appendChild(backButton);
     songsContainer.appendChild(songList);
     // --- End Render ---
