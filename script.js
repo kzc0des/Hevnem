@@ -1,6 +1,7 @@
 import { hevPlaylist, hevAlbum } from "./APISource.js";
 import { albumTemplate, cloneExtremes } from "./functions/album-creation.js";
 import { swipe, titleChange } from "./functions/album-navigation.js";
+import { setupDesktopSidebar } from "./functions/desktop-sidebar.js";
 import { openAlbum, showPlaylist } from "./functions/playlist-section.js";
 
 const musicName = document.querySelector('.song-name');
@@ -20,6 +21,7 @@ const repeatBtn = document.getElementById('repeat-button');
 const repeatIco = document.getElementById('repeat');
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Universal setup
     loadSong(userData?.currentSong);
     audio.addEventListener('timeupdate', updateProgress);
     audio.addEventListener('ended', nextSong)
@@ -30,10 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
     repeatBtn.addEventListener('click', repeatSong);
     prog.addEventListener('click', seek);
 
-    populateAlbums();
-    showPlaylist();
-    initializeSwiping();
-    openAlbum(userData);
+    // View-specific setup
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        // Mobile view
+        populateAlbums();
+        showPlaylist();
+        initializeSwiping();
+        openAlbum(userData);
+    } else {
+        // Desktop view
+        setupDesktopSidebar();
+    }
 })
 
 const audio = new Audio();
@@ -195,7 +204,7 @@ const checkAlbum = (id) => {
 }
 
 function populateAlbums() {
-    const albums = document.querySelector('.albums');
+    const albums = document.querySelector('.mobile-albums');
 
     albums.innerHTML = '';
 
