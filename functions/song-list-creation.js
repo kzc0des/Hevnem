@@ -80,14 +80,17 @@ async function albumSelect(e, src) {
                     })
             );
 
-            songSection.innerHTML = "";
-            songSection.appendChild(label);
+            const songList = document.createElement('div');
+            songList.className = "song-list";
             songs.forEach(song => {
                 if (song) {
-                    songSection.appendChild(song);
+                    songList.appendChild(song);
                 }
             })
-            console.log(songs);
+
+            songSection.innerHTML = "";
+            songSection.appendChild(label);
+            songSection.appendChild(songList);
         }
     }
 }

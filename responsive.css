@@ -1,11 +1,7 @@
 @media (max-width: 768px) {
-    .all{
-        width: 400px;
-    }
 
-    .logo-container>img {
-        width: 300px;
-    }
+
+
 
     .container>.info-box {
         max-width: 230px;
@@ -39,5 +35,85 @@
 
     .playlist-button.hide {
         top: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container>.info-box {
+        max-width: 180px;
+        padding: 8px 10px 8px 50px;
+    }
+
+    .info-box .song-name {
+        font-size: .8rem;
+    }
+
+    .info-box .album-name {
+        font-size: .6rem;
+    }
+
+    .info-box .time {
+        font-size: .5rem;
+    }
+
+    .disk .cover {
+        width: 80px;
+        height: 80px;
+        top: -5px;
+        left: -40px;
+    }
+
+    .container>.control-box {
+        width: 90%;
+        gap: 5px;
+    }
+
+    .playlist-button {
+        width: 90%;
+    }
+
+    .playlist-section .playlist .maginoo-pilyo>img {
+        max-width: 200px;
+        padding-block: 20px;
+    }
+
+    .playlist-section .playlist .album-info h1 {
+        font-size: 1rem;
+    }
+
+    .playlist-section .playlist .album-info h2 {
+        font-size: 0.8rem;
+    }
+
+    .playlist-section .playlist .albums .present-album {
+        width: 120px;
+        height: 120px;
+    }
+
+    .playlist-section .playlist .albums .prev-album,
+    .playlist-section .playlist .albums .next-album {
+        width: 90px !important;
+        height: 90px !important;
+    }
+
+    .playlist-section .playlist .albums .prev-album {
+        left: 10%;
+    }
+
+    .playlist-section .playlist .albums .next-album {
+        right: 10%;
+    }
+
+    .song-list>button {
+        width: 95%;
+        padding-inline: 10px;
+    }
+
+    .song-list>button>.song-info>.title {
+        font-size: .7rem;
+    }
+
+    .song-list>button>.song-info>.duration {
+        font-size: .6rem;
     }
 }
