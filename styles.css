@@ -443,8 +443,6 @@ body {
     gap: 10px;
 
     overflow: auto;
-    overflow-y: scroll;
-    overflow-x: hidden;
 
     width: 100%;
 }
