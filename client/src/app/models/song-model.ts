@@ -24,4 +24,6 @@ interface AlbumSummary {
     thumbnail: string;
 }
 
-export type { Song, SelectedSong, AlbumName, AlbumSummary };
+type RepeatMode = 'off' | 'album' | 'track';
+
+export type { Song, SelectedSong, AlbumName, AlbumSummary, RepeatMode };

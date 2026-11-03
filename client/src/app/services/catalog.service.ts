@@ -1,6 +1,6 @@
 import { computed, Injectable, Signal, signal } from '@angular/core';
 import { AlbumName, AlbumSummary, Song } from '../models/song-model';
-import catalogData from '../data/hevabi-songs.json'
+import catalogData from '../data/hevabi-songs.json';
 
 @Injectable({
   providedIn: 'root',
@@ -10,21 +10,36 @@ export class CatalogService {
   albums = new Map<AlbumName, AlbumSummary>();
 
   currentSongs: Signal<Song[]> = computed<Song[]>(() => {
-    const selectedAlbum = this.currentAlbum();
-    return catalogData.songs
-      .filter(s => s.album === selectedAlbum)
-      .map(s => ({
-        id: s.id,
-        name: s.name,
-        album: s.album as AlbumName,
-        src: s.src,
-        cover: s.cover,
-        duration: s.durationFormatted,
-      }));;
-  })
+    return this.getSongsByAlbum(this.currentAlbum());
+  });
 
   constructor() {
     this.initializeCatalog();
+  }
+
+  private mapSong(s: (typeof catalogData.songs)[number]): Song {
+    return {
+      id: s.id,
+      name: s.name,
+      album: s.album as AlbumName,
+      src: s.src,
+      cover: s.cover,
+      duration: s.durationFormatted,
+    };
+  }
+
+  getAlbumList(): AlbumName[] {
+    return catalogData.albums.map((a) => a.name as AlbumName);
+  }
+
+  getSongsByAlbum(albumName: AlbumName): Song[] {
+    return catalogData.songs
+      .filter((s) => s.album === albumName)
+      .map((s) => this.mapSong(s));
+  }
+
+  getAllSongs(): Song[] {
+    return catalogData.songs.map((s) => this.mapSong(s));
   }
 
   private initializeCatalog() {
@@ -32,15 +47,15 @@ export class CatalogService {
     const rawSongs = catalogData.songs;
 
     for (const album of rawAlbums) {
-      const trackCount = rawSongs.filter(s => s.album === album.name).length;
+      const trackCount = rawSongs.filter((s) => s.album === album.name).length;
 
       this.albums.set(
-        album.name as AlbumName, // key
+        album.name as AlbumName,
         {
           id: album.id,
-          name: album.name as AlbumName, // value
+          name: album.name as AlbumName,
           tracks: trackCount,
-          thumbnail: album.thumbnail
+          thumbnail: album.thumbnail,
         }
       );
     }
