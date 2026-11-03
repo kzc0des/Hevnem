@@ -58,6 +58,7 @@
 }
 
 :root {
+    interpolate-size: allow-keywords;
     --amber-1: #8C5A1C;
     --amber-2: #2B1E12;
     --amber-3: #0C0906;
@@ -78,6 +79,7 @@ html {
 body {
     font-family: var(--font-hev-ui);
     color: var(--color-hev-ink-1);
+    background-color: #04090e;
 
     overflow: hidden;
 }

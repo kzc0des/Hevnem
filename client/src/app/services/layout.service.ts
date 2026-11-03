@@ -1,4 +1,5 @@
-import { computed, inject, Injectable } from '@angular/core';
+import { effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { AlbumName } from '../models/song-model';
 import { AudioPlayerService } from './audio-player.service';
 
@@ -7,6 +8,8 @@ import { AudioPlayerService } from './audio-player.service';
 })
 export class LayoutService {
   private audioPlayerService = inject(AudioPlayerService);
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   readonly ALBUM_BACKGROUNDS: Record<AlbumName, string> = {
     "Maduming Timog":
@@ -38,13 +41,33 @@ export class LayoutService {
     "Bahay Namin Maliit Lamang": "var(--color-bahay-namin-maliit-lamang-1)",
   };
 
-  currentBackground = computed(() => {
-    const currentAlbum = this.audioPlayerService.currentSong().albumName;
-    return this.ALBUM_BACKGROUNDS[currentAlbum];
-  });
+  baseBackground = signal<string>(this.ALBUM_BACKGROUNDS["Pautang ng Pag-ibig"]);
+  incomingBackground = signal<string>('');
+  isFading = signal<boolean>(false);
+  currentAccent = signal<string>(this.ALBUM_ACCENTS["Pautang ng Pag-ibig"]);
+  private fadeTimeout?: ReturnType<typeof setTimeout>;
 
-  currentAccent = computed(() => {
-    const currentAlbum = this.audioPlayerService.currentSong().albumName;
-    return this.ALBUM_ACCENTS[currentAlbum] ?? 'rgba(255, 255, 255, 0.3)';
-  });
+  constructor() {
+    effect(() => {
+      const currentAlbum = this.audioPlayerService.currentSong().albumName;
+      const nextGradient = this.ALBUM_BACKGROUNDS[currentAlbum] ?? this.ALBUM_BACKGROUNDS["Pautang ng Pag-ibig"];
+      this.currentAccent.set(this.ALBUM_ACCENTS[currentAlbum] ?? 'rgba(255, 255, 255, 0.3)');
+
+      if (!this.isBrowser) {
+        this.baseBackground.set(nextGradient);
+        return;
+      }
+
+      if (this.baseBackground() !== nextGradient) {
+        if (this.fadeTimeout) clearTimeout(this.fadeTimeout);
+        this.incomingBackground.set(nextGradient);
+        this.isFading.set(true);
+
+        this.fadeTimeout = setTimeout(() => {
+          this.baseBackground.set(nextGradient);
+          this.isFading.set(false);
+        }, 800);
+      }
+    });
+  }
 }
