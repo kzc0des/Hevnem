@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './top-nav-bar.css',
 })
 export class TopNavBar {
-
+  layout = inject(LayoutService);
 }
