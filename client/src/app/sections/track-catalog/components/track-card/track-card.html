@@ -1,7 +1,9 @@
 <div (click)="playTrack()"
-    class="group flex items-center justify-between px-4 py-3 rounded-2xl cursor-pointer transition-all duration-200 select-none"
-    [class.bg-hev-glass-2]="isActive()" [class.border]="isActive()" [class.border-white/10]="isActive()"
-    [class.shadow-lg]="isActive()" [class.hover:bg-hev-glass]="!isActive()">
+    class="group flex items-center justify-between px-4 py-3 rounded-2xl cursor-pointer border border-transparent transition-[background-color,border-color,color,box-shadow] duration-300 ease-out select-none"
+    [class.bg-hev-glass-2]="isActive()"
+    [class.border-white/10]="isActive()"
+    [class.shadow-lg]="isActive()"
+    [class.hover:bg-hev-glass]="!isActive()">
 
     <div class="flex items-center gap-4 min-w-0">
         <div class="w-6 flex items-center justify-center">
@@ -19,13 +21,16 @@
             }
         </div>
 
-        <span class="text-base font-semibold truncate transition-colors" [class.text-hev-cream]="isActive()"
-            [class.text-hev-ink-1]="!isActive()" [class.group-hover:text-white]="!isActive()">
+        <span class="text-base font-semibold truncate transition-colors duration-200"
+            [class.text-hev-cream]="isActive()"
+            [class.text-hev-ink-1]="!isActive()"
+            [class.group-hover:text-white]="!isActive()">
             {{ song().name }}
         </span>
     </div>
 
-    <span class="text-sm font-medium ml-4 shrink-0" [class.text-hev-cream/80]="isActive()"
+    <span class="text-sm font-medium ml-4 shrink-0 transition-colors duration-200"
+        [class.text-hev-cream/80]="isActive()"
         [class.text-hev-ink-3]="!isActive()">
         {{ song().duration }}
     </span>
