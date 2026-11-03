@@ -1,0 +1,28 @@
+<div class="flex flex-col items-center justify-center text-center select-none max-w-lg mx-auto">
+    <div class="relative group">
+        <div
+            class="absolute -inset-1.5 rounded-3xl bg-white/10 blur-2xl opacity-40 group-hover:opacity-70 transition duration-500">
+        </div>
+
+        <div
+            class="relative w-80 h-80 sm:w-96 sm:h-96 md:w-95 md:h-95 rounded-3xl overflow-hidden shadow-2xl shadow-black/80 ring-1 ring-white/15">
+            <img [src]="currentSong().cover" [alt]="currentSong().name"
+                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+        </div>
+    </div>
+
+    <div class="mt-5 flex flex-col items-center justify-start min-h-23.75 space-y-1">
+        <p class="text-[10px] font-semibold tracking-[0.35em] uppercase text-hev-ink-3">
+            NOW PLAYING
+        </p>
+
+        <h1
+            class="text-3xl sm:text-4xl md:text-[40px] font-hev-display italic font-normal text-hev-ink-1 tracking-wide leading-tight drop-shadow-md max-w-md text-center">
+            {{ formattedTitle() }}
+        </h1>
+
+        <p class="text-xs sm:text-sm font-hev-ui tracking-wider text-hev-ink-2/80">
+            Hev Abi <span class="mx-1 text-hev-ink-3/60">·</span> {{ currentSong().albumName }}
+        </p>
+    </div>
+</div>
