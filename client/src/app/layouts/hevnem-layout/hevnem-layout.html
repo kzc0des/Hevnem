@@ -1,5 +1,5 @@
 <div [style.--album-accent]="background.currentAccent()"
-    class="relative h-screen h-[100dvh] flex flex-col justify-between overflow-hidden"
+    class="relative h-dvh flex flex-col justify-between overflow-hidden"
     [class.cursor-none]="background.isImmersive() && background.isIdle()">
 
     <div [style.background]="background.baseBackground()" class="absolute inset-0 pointer-events-none z-0">
@@ -18,12 +18,11 @@
         <section
             class="w-full max-w-380 mx-auto flex justify-center lg:justify-between items-center transition-all duration-700 ease-in-out"
             [class.gap-8]="!background.isImmersive()" [class.gap-0]="background.isImmersive()">
-            
+
             <!-- Desktop Album Catalog (Hidden on < lg) -->
             <div class="hidden lg:block shrink-0 transition-all duration-700 ease-in-out"
-                [class.w-110]="!background.isImmersive()"
-                [class.w-0]="background.isImmersive()" [class.opacity-0]="background.isImmersive()"
-                [class.pointer-events-none]="background.isImmersive()"
+                [class.w-110]="!background.isImmersive()" [class.w-0]="background.isImmersive()"
+                [class.opacity-0]="background.isImmersive()" [class.pointer-events-none]="background.isImmersive()"
                 [class.overflow-hidden]="background.isImmersive()">
                 <app-album-catalog />
             </div>
@@ -35,9 +34,8 @@
 
             <!-- Desktop Track Catalog (Hidden on < lg) -->
             <div class="hidden lg:block shrink-0 transition-all duration-700 ease-in-out"
-                [class.w-110]="!background.isImmersive()"
-                [class.w-0]="background.isImmersive()" [class.opacity-0]="background.isImmersive()"
-                [class.pointer-events-none]="background.isImmersive()"
+                [class.w-110]="!background.isImmersive()" [class.w-0]="background.isImmersive()"
+                [class.opacity-0]="background.isImmersive()" [class.pointer-events-none]="background.isImmersive()"
                 [class.overflow-hidden]="background.isImmersive()">
                 <app-track-catalog />
             </div>
@@ -45,7 +43,8 @@
     </main>
 
     <!-- Playback Dock -->
-    <footer class="relative z-10 shrink-0 px-3 sm:px-8 lg:px-12 w-full transition-all duration-700 ease-in-out pb-[max(1.25rem,calc(env(safe-area-inset-bottom)+0.75rem))]"
+    <footer
+        class="relative z-10 shrink-0 px-3 sm:px-8 lg:px-12 w-full transition-all duration-700 ease-in-out pb-[max(2.5rem,calc(env(safe-area-inset-bottom)+1.5rem))] sm:pb-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] lg:pb-4"
         [class.h-0]="background.isImmersive()" [class.opacity-0]="background.isImmersive()"
         [class.pointer-events-none]="background.isImmersive()" [class.overflow-hidden]="background.isImmersive()">
         <div class="w-full max-w-380 mx-auto">
@@ -55,20 +54,18 @@
 
     <!-- Mobile Drawer Panel Backdrop & Bottom Sheet -->
     <div class="lg:hidden fixed inset-0 z-50 transition-opacity duration-300"
-        [class.opacity-100]="background.activeDrawer() !== null"
-        [class.opacity-0]="background.activeDrawer() === null"
+        [class.opacity-100]="background.activeDrawer() !== null" [class.opacity-0]="background.activeDrawer() === null"
         [class.pointer-events-none]="background.activeDrawer() === null"
         [class.pointer-events-auto]="background.activeDrawer() !== null">
         <!-- Backdrop tap dismiss -->
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
-            (click)="background.closeDrawer()">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" (click)="background.closeDrawer()">
         </div>
 
         <!-- Sliding Bottom Sheet -->
         <div class="absolute bottom-0 left-0 right-0 h-[75vh] max-h-[75vh] bg-[#0c131a]/95 backdrop-blur-2xl border-t border-white/15 rounded-t-3xl shadow-2xl flex flex-col transition-transform duration-300 ease-out pb-[max(1rem,env(safe-area-inset-bottom))] z-10 pointer-events-auto"
             [class.translate-y-0]="background.activeDrawer() !== null"
             [class.translate-y-full]="background.activeDrawer() === null">
-            
+
             <!-- Handle & Header -->
             <div class="pt-3 pb-2 px-5 flex items-center justify-between border-b border-white/10 shrink-0">
                 <span class="text-xs font-semibold uppercase tracking-[0.25em] text-hev-ink-3">
