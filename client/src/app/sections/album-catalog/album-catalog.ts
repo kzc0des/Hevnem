@@ -3,15 +3,18 @@ import { isPlatformBrowser } from '@angular/common';
 import { CatalogService } from '../../services/catalog.service';
 import { AlbumCard } from './components/album-card/album-card';
 import { AlbumName } from '../../models/song-model';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-album-catalog',
   imports: [AlbumCard],
   templateUrl: './album-catalog.html',
   styleUrl: './album-catalog.css',
+  standalone: true,
 })
 export class AlbumCatalog {
   catalogService = inject(CatalogService);
+  private layout = inject(LayoutService);
   scrollContainer = viewChild<ElementRef<HTMLElement>>('scrollContainer');
   albumItems = viewChildren<ElementRef<HTMLElement>>('albumItem');
   private platformId = inject(PLATFORM_ID);
@@ -34,6 +37,9 @@ export class AlbumCatalog {
 
   albumClick(albumName: AlbumName) {
     this.catalogService.onAlbumSelect(albumName);
+    if (this.layout.activeDrawer() === 'albums') {
+      this.layout.openDrawer('tracks');
+    }
   }
 
   private scrollToItem(itemElement: HTMLElement) {

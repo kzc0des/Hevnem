@@ -3,6 +3,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { AlbumName } from '../models/song-model';
 import { AudioPlayerService } from './audio-player.service';
 
+export type ActiveDrawer = 'albums' | 'tracks' | null;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -50,6 +52,7 @@ export class LayoutService {
 
   isImmersive = signal<boolean>(false);
   isIdle = signal<boolean>(false);
+  activeDrawer = signal<ActiveDrawer>(null);
 
   private autoEnterTimeout?: ReturnType<typeof setTimeout>;
   private idleDimTimeout?: ReturnType<typeof setTimeout>;
@@ -80,10 +83,11 @@ export class LayoutService {
     effect(() => {
       const isPlaying = this.audioPlayerService.isPlaying();
       const immersive = this.isImmersive();
+      const activeDrawer = this.activeDrawer();
 
       if (!this.isBrowser) return;
 
-      if (isPlaying && !immersive) {
+      if (isPlaying && !immersive && !activeDrawer) {
         this.resetAutoEnterTimer();
       } else {
         this.clearAutoEnterTimer();
@@ -95,7 +99,30 @@ export class LayoutService {
     }
   }
 
+  openDrawer(drawer: 'albums' | 'tracks'): void {
+    this.activeDrawer.set(drawer);
+    this.clearAutoEnterTimer();
+  }
+
+  closeDrawer(): void {
+    this.activeDrawer.set(null);
+    if (this.audioPlayerService.isPlaying() && !this.isImmersive()) {
+      this.resetAutoEnterTimer();
+    }
+  }
+
+  toggleDrawer(drawer: 'albums' | 'tracks'): void {
+    const next = this.activeDrawer() === drawer ? null : drawer;
+    this.activeDrawer.set(next);
+    if (next) {
+      this.clearAutoEnterTimer();
+    } else if (this.audioPlayerService.isPlaying() && !this.isImmersive()) {
+      this.resetAutoEnterTimer();
+    }
+  }
+
   enterImmersive(): void {
+    this.closeDrawer();
     this.isImmersive.set(true);
     this.clearAutoEnterTimer();
     this.resetIdleDimTimer();
@@ -105,7 +132,7 @@ export class LayoutService {
     this.isImmersive.set(false);
     this.isIdle.set(false);
     this.clearIdleDimTimer();
-    if (this.audioPlayerService.isPlaying()) {
+    if (this.audioPlayerService.isPlaying() && !this.activeDrawer()) {
       this.resetAutoEnterTimer();
     }
   }
@@ -120,7 +147,8 @@ export class LayoutService {
 
   private resetAutoEnterTimer(): void {
     this.clearAutoEnterTimer();
-    if (!this.audioPlayerService.isPlaying() || this.isImmersive()) return;
+    if (!this.isBrowser) return;
+    if (!this.audioPlayerService.isPlaying() || this.isImmersive() || this.activeDrawer() !== null) return;
 
     this.autoEnterTimeout = setTimeout(() => {
       this.enterImmersive();
@@ -156,7 +184,7 @@ export class LayoutService {
     const onUserActivity = () => {
       if (this.isImmersive()) {
         this.resetIdleDimTimer();
-      } else if (this.audioPlayerService.isPlaying()) {
+      } else if (this.audioPlayerService.isPlaying() && !this.activeDrawer()) {
         this.resetAutoEnterTimer();
       }
     };
@@ -171,10 +199,17 @@ export class LayoutService {
         return;
       }
 
-      if (event.key === 'Escape' && this.isImmersive()) {
-        event.preventDefault();
-        this.exitImmersive();
-        return;
+      if (event.key === 'Escape') {
+        if (this.activeDrawer()) {
+          event.preventDefault();
+          this.closeDrawer();
+          return;
+        }
+        if (this.isImmersive()) {
+          event.preventDefault();
+          this.exitImmersive();
+          return;
+        }
       }
 
       onUserActivity();

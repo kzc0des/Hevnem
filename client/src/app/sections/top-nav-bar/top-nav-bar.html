@@ -1,38 +1,77 @@
-<section class="w-full max-w-380 mx-auto flex justify-between items-center px-8 lg:px-10 py-5">
-    <div class="flex items-center gap-4">
-        <span class="text-3xl display">Hevnem</span>
-        <span class="text-3xl"> | </span>
-        <div class="flex items-center gap-3 opacity-60 text-lg">
+<section
+    class="w-full max-w-380 mx-auto flex justify-between items-center px-4 sm:px-8 lg:px-10 py-3 sm:py-5 pt-[max(0.75rem,env(safe-area-inset-top))]">
+    <div class="flex items-center gap-3 sm:gap-4 select-none">
+        <span class="text-2xl sm:text-3xl display text-hev-ink-1">Hevnem</span>
+        <span class="hidden sm:inline text-3xl text-hev-ink-3/40"> | </span>
+        <div class="hidden sm:flex items-center gap-3 opacity-60 text-lg text-hev-ink-2">
             <span> Timog </span>
             <span>&#8226;</span>
             <span>QC</span>
         </div>
     </div>
 
-    <div class="flex items-center transition-opacity duration-500"
-        [class.opacity-0]="layout.isImmersive() && layout.isIdle()"
-        [class.pointer-events-none]="layout.isImmersive() && layout.isIdle()">
+    <div class="flex items-center gap-2 transition-opacity duration-500"
+        [class.lg:opacity-0]="layout.isImmersive() && layout.isIdle()"
+        [class.lg:pointer-events-none]="layout.isImmersive() && layout.isIdle()"
+        [class.opacity-40]="layout.isImmersive() && layout.isIdle()"
+        [class.hover:opacity-100]="layout.isImmersive() && layout.isIdle()">
         @if (layout.isImmersive()) {
         <button (click)="layout.exitImmersive()"
             class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 hover:bg-black/60 text-white/90 border border-white/10 text-xs font-hev-ui tracking-wider transition backdrop-blur-md cursor-pointer select-none"
-            title="Exit Idle (Esc or F)">
+            title="Exit Idle">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
-            <span>Exit (F)</span>
+            <span>Exit<span class="hidden sm:inline"> (F)</span></span>
         </button>
         } @else {
+        <button (click)="layout.toggleDrawer('albums')"
+            class="flex lg:hidden items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-hev-ui tracking-wider transition backdrop-blur-md cursor-pointer select-none border"
+            [class.bg-hev-cream]="layout.activeDrawer() === 'albums'"
+            [class.text-hev-on-cream]="layout.activeDrawer() === 'albums'"
+            [class.border-hev-cream]="layout.activeDrawer() === 'albums'"
+            [class.bg-black/25]="layout.activeDrawer() !== 'albums'"
+            [class.text-white/80]="layout.activeDrawer() !== 'albums'"
+            [class.border-white/10]="layout.activeDrawer() !== 'albums'" title="Browse Albums">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="3" />
+            </svg>
+            <span>Albums</span>
+        </button>
+
+        <button (click)="layout.toggleDrawer('tracks')"
+            class="flex lg:hidden items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-hev-ui tracking-wider transition backdrop-blur-md cursor-pointer select-none border"
+            [class.bg-hev-cream]="layout.activeDrawer() === 'tracks'"
+            [class.text-hev-on-cream]="layout.activeDrawer() === 'tracks'"
+            [class.border-hev-cream]="layout.activeDrawer() === 'tracks'"
+            [class.bg-black/25]="layout.activeDrawer() !== 'tracks'"
+            [class.text-white/80]="layout.activeDrawer() !== 'tracks'"
+            [class.border-white/10]="layout.activeDrawer() !== 'tracks'" title="Browse Tracks">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6" />
+                <line x1="8" y1="12" x2="21" y2="12" />
+                <line x1="8" y1="18" x2="21" y2="18" />
+                <line x1="3" y1="6" x2="3.01" y2="6" />
+                <line x1="3" y1="12" x2="3.01" y2="12" />
+                <line x1="3" y1="18" x2="3.01" y2="18" />
+            </svg>
+            <span>Tracks</span>
+        </button>
+
         <button (click)="layout.enterImmersive()"
-            class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/20 hover:bg-black/40 text-white/80 hover:text-white border border-white/10 text-xs font-hev-ui tracking-wider transition backdrop-blur-md cursor-pointer select-none"
-            title="Enter Idle Mode (F)">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/20 hover:bg-black/40 text-white/80 hover:text-white border border-white/10 text-xs font-hev-ui tracking-wider transition backdrop-blur-md cursor-pointer select-none"
+            title="Enter Idle Mode">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                 stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="14" width="15" height="5" rx="1" />
                 <line x1="6.5" y1="14" x2="6.5" y2="19" />
                 <path d="M15 10c.8-1.5-.8-2.8 0-4.3s.8-2.8 0-4.2" />
                 <path d="M19 11c1-1.8-1-3.2 0-5s1-3.2 0-4.8" />
             </svg>
-            <span>Idle</span>
+            <span>Idle<span class="hidden sm:inline"> (F)</span></span>
         </button>
         }
     </div>

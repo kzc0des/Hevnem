@@ -2,15 +2,18 @@ import { Component, computed, effect, ElementRef, inject, input, PLATFORM_ID } f
 import { isPlatformBrowser } from '@angular/common';
 import { Song } from '../../../../models/song-model';
 import { AudioPlayerService } from '../../../../services/audio-player.service';
+import { LayoutService } from '../../../../services/layout.service';
 
 @Component({
   selector: 'app-track-card',
   imports: [],
   templateUrl: './track-card.html',
   styleUrl: './track-card.css',
+  standalone: true,
 })
 export class TrackCard {
   audioService = inject(AudioPlayerService);
+  private layout = inject(LayoutService);
   private elementRef = inject(ElementRef);
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
@@ -49,5 +52,6 @@ export class TrackCard {
       src: this.song().src,
       duration: this.song().duration,
     });
+    this.layout.closeDrawer();
   }
 }
