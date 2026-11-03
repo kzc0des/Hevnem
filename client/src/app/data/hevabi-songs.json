@@ -1,0 +1,908 @@
+{
+    "albums":  [
+                   {
+                       "id":  1,
+                       "name":  "Pautang ng Pag-ibig",
+                       "tracks":  8,
+                       "thumbnail":  "/assets/cover_1.jpg",
+                       "cover":  "/assets/cover_1.jpg"
+                   },
+                   {
+                       "id":  2,
+                       "name":  "Sakred Boy",
+                       "tracks":  15,
+                       "thumbnail":  "/assets/cover_3.jpg",
+                       "cover":  "/assets/cover_3.jpg"
+                   },
+                   {
+                       "id":  3,
+                       "name":  "Kung Alam Mo Lang",
+                       "tracks":  12,
+                       "thumbnail":  "/assets/cover_2.jpg",
+                       "cover":  "/assets/cover_2.jpg"
+                   },
+                   {
+                       "id":  4,
+                       "name":  "Kwentong Jimenez",
+                       "tracks":  6,
+                       "thumbnail":  "/assets/cover_4.jpg",
+                       "cover":  "/assets/cover_4.jpg"
+                   },
+                   {
+                       "id":  5,
+                       "name":  "Maduming Timog",
+                       "tracks":  19,
+                       "thumbnail":  "/assets/maduming-timog-album.jpg",
+                       "cover":  "/assets/maduming-timog-album.jpg"
+                   },
+                   {
+                       "id":  6,
+                       "name":  "Featuring",
+                       "tracks":  9,
+                       "thumbnail":  "/assets/welcomed2q.jpg",
+                       "cover":  "/assets/welcomed2q.jpg"
+                   },
+                   {
+                       "id":  7,
+                       "name":  "Gang Mobile",
+                       "tracks":  18,
+                       "thumbnail":  "/assets/gang-mobile-album.jpg",
+                       "cover":  "/assets/gang-mobile-album.jpg"
+                   },
+                   {
+                       "id":  8,
+                       "name":  "Bahay Namin Maliit Lamang",
+                       "tracks":  7,
+                       "thumbnail":  "/assets/bahay-namin-maliit-lamang-album.jpg",
+                       "cover":  "/assets/bahay-namin-maliit-lamang-album.jpg"
+                   }
+               ],
+    "songs":  [
+                  {
+                      "id":  1,
+                      "name":  "Balisa",
+                      "album":  "Pautang ng Pag-ibig",
+                      "src":  "/songs/Pautang ng Pagibig/Hev Abi - BALISA.mp3",
+                      "cover":  "/assets/cover_1.jpg",
+                      "durationSeconds":  180,
+                      "durationFormatted":  "3:00"
+                  },
+                  {
+                      "id":  2,
+                      "name":  "I know",
+                      "album":  "Pautang ng Pag-ibig",
+                      "src":  "/songs/Pautang ng Pagibig/Hev Abi - I KNOW ft. Mcee Zabala - BONUS.mp3",
+                      "cover":  "/assets/cover_1.jpg",
+                      "durationSeconds":  204,
+                      "durationFormatted":  "3:24"
+                  },
+                  {
+                      "id":  3,
+                      "name":  "Introhan Natin",
+                      "album":  "Pautang ng Pag-ibig",
+                      "src":  "/songs/Pautang ng Pagibig/Hev Abi - INTROHAN NATIN.mp3",
+                      "cover":  "/assets/cover_1.jpg",
+                      "durationSeconds":  84,
+                      "durationFormatted":  "1:24"
+                  },
+                  {
+                      "id":  4,
+                      "name":  "Manhid",
+                      "album":  "Pautang ng Pag-ibig",
+                      "src":  "/songs/Pautang ng Pagibig/Hev Abi - MANHID.mp3",
+                      "cover":  "/assets/cover_1.jpg",
+                      "durationSeconds":  156,
+                      "durationFormatted":  "2:36"
+                  },
+                  {
+                      "id":  5,
+                      "name":  "Pantasya Panaginip",
+                      "album":  "Pautang ng Pag-ibig",
+                      "src":  "/songs/Pautang ng Pagibig/Hev Abi - PANTASYA PANAGINIP.mp3",
+                      "cover":  "/assets/cover_1.jpg",
+                      "durationSeconds":  212,
+                      "durationFormatted":  "3:32"
+                  },
+                  {
+                      "id":  6,
+                      "name":  "Pulang Karpet",
+                      "album":  "Pautang ng Pag-ibig",
+                      "src":  "/songs/Pautang ng Pagibig/Hev Abi - PULANG KARPET.mp3",
+                      "cover":  "/assets/cover_1.jpg",
+                      "durationSeconds":  122,
+                      "durationFormatted":  "2:02"
+                  },
+                  {
+                      "id":  7,
+                      "name":  "Pwede bang?",
+                      "album":  "Pautang ng Pag-ibig",
+                      "src":  "/songs/Pautang ng Pagibig/Hev Abi - PWEDE BANG_.mp3",
+                      "cover":  "/assets/cover_1.jpg",
+                      "durationSeconds":  143,
+                      "durationFormatted":  "2:23"
+                  },
+                  {
+                      "id":  8,
+                      "name":  "1999",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - 1999 feat. Harlem.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  131,
+                      "durationFormatted":  "2:11"
+                  },
+                  {
+                      "id":  9,
+                      "name":  "Albat",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Albat feat. Unotheone.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  169,
+                      "durationFormatted":  "2:49"
+                  },
+                  {
+                      "id":  10,
+                      "name":  "Ganggang",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Gang Gang feat. Unotheone (Official Music Video).mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  205,
+                      "durationFormatted":  "3:25"
+                  },
+                  {
+                      "id":  11,
+                      "name":  "ganitongrapbalikongcap",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - ganitongrapbalikongcap  3 Sticks.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  137,
+                      "durationFormatted":  "2:17"
+                  },
+                  {
+                      "id":  12,
+                      "name":  "Lahat Gagawin",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Lahat Gagawin.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  239,
+                      "durationFormatted":  "3:59"
+                  },
+                  {
+                      "id":  13,
+                      "name":  "Late Kenanrd",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Late Kenanrd feat. L.K, Unotheone, \u0026 A77EX.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  137,
+                      "durationFormatted":  "2:17"
+                  },
+                  {
+                      "id":  14,
+                      "name":  "Magka Kotse",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Magka Kotse.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  174,
+                      "durationFormatted":  "2:54"
+                  },
+                  {
+                      "id":  15,
+                      "name":  "Nice Tin",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Nice Tin feat. L.K \u0026 Unotheone.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  207,
+                      "durationFormatted":  "3:27"
+                  },
+                  {
+                      "id":  16,
+                      "name":  "Outside",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Outside (Official Music Video).mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  214,
+                      "durationFormatted":  "3:34"
+                  },
+                  {
+                      "id":  17,
+                      "name":  "Paano Ka Ba",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Paano Ka Ba_.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  187,
+                      "durationFormatted":  "3:07"
+                  },
+                  {
+                      "id":  18,
+                      "name":  "Para Sikat",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Para Sikat feat.  Unotheone \u0026 A77EX.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  250,
+                      "durationFormatted":  "4:10"
+                  },
+                  {
+                      "id":  19,
+                      "name":  "Sa Dako Paroon (Interlude)",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Sa Dako Paroon (Interlude).mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  149,
+                      "durationFormatted":  "2:29"
+                  },
+                  {
+                      "id":  20,
+                      "name":  "Tagaytay",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Tagaytay.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  134,
+                      "durationFormatted":  "2:14"
+                  },
+                  {
+                      "id":  21,
+                      "name":  "Walang Makapa",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Hev Abi - Walang Makapa (Official Music Video).mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  179,
+                      "durationFormatted":  "2:59"
+                  },
+                  {
+                      "id":  22,
+                      "name":  "Loyal To Everybody",
+                      "album":  "Sakred Boy",
+                      "src":  "/songs/Sakred Boy/Loyal To Everybody.mp3",
+                      "cover":  "/assets/cover_3.jpg",
+                      "durationSeconds":  103,
+                      "durationFormatted":  "1:43"
+                  },
+                  {
+                      "id":  23,
+                      "name":  "Alam mo ba Girl",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Alam Mo Ba Girl.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  223,
+                      "durationFormatted":  "3:43"
+                  },
+                  {
+                      "id":  24,
+                      "name":  "Antagonista",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Antagonista feat. Unotheone.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  187,
+                      "durationFormatted":  "3:07"
+                  },
+                  {
+                      "id":  25,
+                      "name":  "Binibiroksi",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Binibiroksi.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  132,
+                      "durationFormatted":  "2:12"
+                  },
+                  {
+                      "id":  26,
+                      "name":  "C2 Boyz",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - C2 Boyz.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  218,
+                      "durationFormatted":  "3:38"
+                  },
+                  {
+                      "id":  27,
+                      "name":  "drugr4ts",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - drugr4ts feat. Simmo, gins\u0026melodies.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  299,
+                      "durationFormatted":  "4:59"
+                  },
+                  {
+                      "id":  28,
+                      "name":  "From Torillo, With Love",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - From Torillo, With Love.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  219,
+                      "durationFormatted":  "3:39"
+                  },
+                  {
+                      "id":  29,
+                      "name":  "Introhan Ko Lang",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Introhan Ko Lang.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  63,
+                      "durationFormatted":  "1:03"
+                  },
+                  {
+                      "id":  30,
+                      "name":  "Kulay Downtown",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Kulay Downtown feat. Kristina Dawn.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  170,
+                      "durationFormatted":  "2:50"
+                  },
+                  {
+                      "id":  31,
+                      "name":  "Pasaway Mode",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Pasaway Mode feat. Nazty Kidd.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  188,
+                      "durationFormatted":  "3:08"
+                  },
+                  {
+                      "id":  32,
+                      "name":  "Still",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Still.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  134,
+                      "durationFormatted":  "2:14"
+                  },
+                  {
+                      "id":  33,
+                      "name":  "Sumugal",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Sumugal feat. Unotheone, LK.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  181,
+                      "durationFormatted":  "3:01"
+                  },
+                  {
+                      "id":  34,
+                      "name":  "Walang Alam",
+                      "album":  "Kung Alam Mo Lang",
+                      "src":  "/songs/Kung Alam Mo Lang/Hev Abi - Walang Alam.mp3",
+                      "cover":  "/assets/cover_2.jpg",
+                      "durationSeconds":  185,
+                      "durationFormatted":  "3:05"
+                  },
+                  {
+                      "id":  35,
+                      "name":  "Sa Kabila",
+                      "album":  "Kwentong Jimenez",
+                      "src":  "/songs/Kwentong Jimenez/Sa Kabila.mp3",
+                      "cover":  "/assets/cover_4.jpg",
+                      "durationSeconds":  192,
+                      "durationFormatted":  "3:12"
+                  },
+                  {
+                      "id":  36,
+                      "name":  "151 - B",
+                      "album":  "Kwentong Jimenez",
+                      "src":  "/songs/Kwentong Jimenez/151 - B.mp3",
+                      "cover":  "/assets/cover_4.jpg",
+                      "durationSeconds":  192,
+                      "durationFormatted":  "3:12"
+                  },
+                  {
+                      "id":  37,
+                      "name":  "Missing Piece",
+                      "album":  "Kwentong Jimenez",
+                      "src":  "/songs/Kwentong Jimenez/Missing Piece.mp3",
+                      "cover":  "/assets/cover_4.jpg",
+                      "durationSeconds":  224,
+                      "durationFormatted":  "3:44"
+                  },
+                  {
+                      "id":  38,
+                      "name":  "Istolok",
+                      "album":  "Kwentong Jimenez",
+                      "src":  "/songs/Kwentong Jimenez/Istolok.mp3",
+                      "cover":  "/assets/cover_4.jpg",
+                      "durationSeconds":  184,
+                      "durationFormatted":  "3:04"
+                  },
+                  {
+                      "id":  39,
+                      "name":  "Ayaw - ayaw",
+                      "album":  "Kwentong Jimenez",
+                      "src":  "/songs/Kwentong Jimenez/Ayaw - ayaw.mp3",
+                      "cover":  "/assets/cover_4.jpg",
+                      "durationSeconds":  171,
+                      "durationFormatted":  "2:51"
+                  },
+                  {
+                      "id":  40,
+                      "name":  "Told You",
+                      "album":  "Kwentong Jimenez",
+                      "src":  "/songs/Kwentong Jimenez/Told You.mp3",
+                      "cover":  "/assets/cover_4.jpg",
+                      "durationSeconds":  179,
+                      "durationFormatted":  "2:59"
+                  },
+                  {
+                      "id":  41,
+                      "name":  "WELCOME2TIMOGMAGULO",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/WELCOME2TIMOGMAGULO.mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  155,
+                      "durationFormatted":  "2:35"
+                  },
+                  {
+                      "id":  42,
+                      "name":  "ALL NIGHT LONG",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - ALL NIGHT LONG (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  140,
+                      "durationFormatted":  "2:20"
+                  },
+                  {
+                      "id":  43,
+                      "name":  "AYUSIN ANG SIRA",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - AYUSIN ANG SIRA (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  162,
+                      "durationFormatted":  "2:42"
+                  },
+                  {
+                      "id":  44,
+                      "name":  "SACRED HEART",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - SACRED HEART (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  173,
+                      "durationFormatted":  "2:53"
+                  },
+                  {
+                      "id":  45,
+                      "name":  "HOMESCHOOL",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - HOMESCHOOL (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  136,
+                      "durationFormatted":  "2:16"
+                  },
+                  {
+                      "id":  46,
+                      "name":  "ISANG GABI LANG",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - ISANG GABI LANG (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  148,
+                      "durationFormatted":  "2:28"
+                  },
+                  {
+                      "id":  47,
+                      "name":  "MASYADONG INTERESADO",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - MASYADONG INTERESADO (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  146,
+                      "durationFormatted":  "2:26"
+                  },
+                  {
+                      "id":  48,
+                      "name":  "ASO\u0027T PUSA (Interlude)",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - ASO\u0027T PUSA (Interlude).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  80,
+                      "durationFormatted":  "1:20"
+                  },
+                  {
+                      "id":  49,
+                      "name":  "WALANG HIYA",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - WALANG HIYA (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  204,
+                      "durationFormatted":  "3:24"
+                  },
+                  {
+                      "id":  50,
+                      "name":  "AWAY",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - AWAY feat. Jess Conelly (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  178,
+                      "durationFormatted":  "2:58"
+                  },
+                  {
+                      "id":  51,
+                      "name":  "SIZZLING",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - SIZZLING feat. LK (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  221,
+                      "durationFormatted":  "3:41"
+                  },
+                  {
+                      "id":  52,
+                      "name":  "FADED OFF",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - FADED OFF feat. MANILA GREY.mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  250,
+                      "durationFormatted":  "4:10"
+                  },
+                  {
+                      "id":  53,
+                      "name":  "LIL SHWTY",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - LIL SHWTY (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  180,
+                      "durationFormatted":  "3:00"
+                  },
+                  {
+                      "id":  54,
+                      "name":  "VALERIE",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - VALERIE feat. gins\u0026melodies, LK (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  206,
+                      "durationFormatted":  "3:26"
+                  },
+                  {
+                      "id":  55,
+                      "name":  "NAGHAHANAP SILA",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - NAGHAHANAP SILA feat. LK (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  161,
+                      "durationFormatted":  "2:41"
+                  },
+                  {
+                      "id":  56,
+                      "name":  "2PACCIN",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - 2PACCIN (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  116,
+                      "durationFormatted":  "1:56"
+                  },
+                  {
+                      "id":  57,
+                      "name":  "HANGGA\u0027T MAY ORAS PA KO",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - HANGGA\u0027T MAY ORAS PA KO (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  175,
+                      "durationFormatted":  "2:55"
+                  },
+                  {
+                      "id":  58,
+                      "name":  "FROM TIMOG MAGULO, WITH LOVE",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - FROM TIMOG MAGULO, WITH LOVE (Audio).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  132,
+                      "durationFormatted":  "2:12"
+                  },
+                  {
+                      "id":  59,
+                      "name":  "HONEYMOON (Outro)",
+                      "album":  "Maduming Timog",
+                      "src":  "/songs/Maduming Timog/Hev Abi - HONEYMOON (Outro).mp3",
+                      "cover":  "/assets/maduming-timog-album.jpg",
+                      "durationSeconds":  113,
+                      "durationFormatted":  "1:53"
+                  },
+                  {
+                      "id":  60,
+                      "name":  "Babaero",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/Babaero (feat. Hev Abi).mp3",
+                      "cover":  "/assets/babaero.jpg",
+                      "durationSeconds":  175,
+                      "durationFormatted":  "2:55"
+                  },
+                  {
+                      "id":  61,
+                      "name":  "Baliko Asinta",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/hev - baliko asinta.mp3",
+                      "cover":  "/assets/baliko-asinta.jpg",
+                      "durationSeconds":  127,
+                      "durationFormatted":  "2:07"
+                  },
+                  {
+                      "id":  62,
+                      "name":  "Di na Saluhin",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/Hev Abi - Di Na Saluhin.mp3",
+                      "cover":  "/assets/dinasaluhin.jpg",
+                      "durationSeconds":  195,
+                      "durationFormatted":  "3:15"
+                  },
+                  {
+                      "id":  63,
+                      "name":  "Kung Ika\u0027y Sasaglit",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/Hev Abi - Kung Ika\u0027y Sasaglit (Official Lyric Video).mp3",
+                      "cover":  "/assets/kungikaysasaglit.png",
+                      "durationSeconds":  159,
+                      "durationFormatted":  "2:39"
+                  },
+                  {
+                      "id":  64,
+                      "name":  "Lil Kasalanan Shortie",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/Lil Kasalanan Shortie.mp3",
+                      "cover":  "/assets/lilkasalanan.png",
+                      "durationSeconds":  164,
+                      "durationFormatted":  "2:44"
+                  },
+                  {
+                      "id":  65,
+                      "name":  "Mossa Downtown",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/Mossa Downtown (feat. gins \u0026 melodies).mp3",
+                      "cover":  "/assets/mossadowntown.jpg",
+                      "durationSeconds":  166,
+                      "durationFormatted":  "2:46"
+                  },
+                  {
+                      "id":  66,
+                      "name":  "Para sa Streets",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/Para Sa Streets.mp3",
+                      "cover":  "/assets/parasastreets.jpg",
+                      "durationSeconds":  194,
+                      "durationFormatted":  "3:14"
+                  },
+                  {
+                      "id":  67,
+                      "name":  "QC Girls",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/QC Girls.mp3",
+                      "cover":  "/assets/qcgirls.jpg",
+                      "durationSeconds":  121,
+                      "durationFormatted":  "2:01"
+                  },
+                  {
+                      "id":  68,
+                      "name":  "WELCOME2DTQ",
+                      "album":  "Featuring",
+                      "src":  "/songs/Solo Tracks/WELCOME2DTQ.mp3",
+                      "cover":  "/assets/welcomed2q.jpg",
+                      "durationSeconds":  179,
+                      "durationFormatted":  "2:59"
+                  },
+                  {
+                      "id":  69,
+                      "name":  "Iced Coffee o Mango Shake",
+                      "album":  "Pautang ng Pag-ibig",
+                      "src":  "/songs/Pautang ng Pagibig/ICED COFFEE O MANGO SHAKE.mp3",
+                      "cover":  "/assets/cover_1.jpg",
+                      "durationSeconds":  223,
+                      "durationFormatted":  "3:43"
+                  },
+                  {
+                      "id":  70,
+                      "name":  "Ang Makuha Siya  Alam Mong Wala",
+                      "album":  "Bahay Namin Maliit Lamang",
+                      "src":  "/songs/Bahay Namin Maliit Lamang/Hev Abi - ang makuha siya  alam mong wala.m4a",
+                      "cover":  "/assets/bahay-namin-maliit-lamang-album.jpg",
+                      "durationSeconds":  206,
+                      "durationFormatted":  "3:26"
+                  },
+                  {
+                      "id":  71,
+                      "name":  "Eksena De Rosas",
+                      "album":  "Bahay Namin Maliit Lamang",
+                      "src":  "/songs/Bahay Namin Maliit Lamang/Hev Abi - eksena de rosas.m4a",
+                      "cover":  "/assets/bahay-namin-maliit-lamang-album.jpg",
+                      "durationSeconds":  168,
+                      "durationFormatted":  "2:48"
+                  },
+                  {
+                      "id":  72,
+                      "name":  "Julie Pakipot",
+                      "album":  "Bahay Namin Maliit Lamang",
+                      "src":  "/songs/Bahay Namin Maliit Lamang/Hev Abi - julie pakipot.m4a",
+                      "cover":  "/assets/bahay-namin-maliit-lamang-album.jpg",
+                      "durationSeconds":  143,
+                      "durationFormatted":  "2:23"
+                  },
+                  {
+                      "id":  73,
+                      "name":  "Masyadong Mabulaklak",
+                      "album":  "Bahay Namin Maliit Lamang",
+                      "src":  "/songs/Bahay Namin Maliit Lamang/Hev Abi - masyadong mabulaklak.m4a",
+                      "cover":  "/assets/bahay-namin-maliit-lamang-album.jpg",
+                      "durationSeconds":  135,
+                      "durationFormatted":  "2:15"
+                  },
+                  {
+                      "id":  74,
+                      "name":  "Pasulyap Sulyap",
+                      "album":  "Bahay Namin Maliit Lamang",
+                      "src":  "/songs/Bahay Namin Maliit Lamang/Hev Abi - pasulyap sulyap.m4a",
+                      "cover":  "/assets/bahay-namin-maliit-lamang-album.jpg",
+                      "durationSeconds":  199,
+                      "durationFormatted":  "3:19"
+                  },
+                  {
+                      "id":  75,
+                      "name":  "Showbiz Lang, Sorry Babe",
+                      "album":  "Bahay Namin Maliit Lamang",
+                      "src":  "/songs/Bahay Namin Maliit Lamang/Hev Abi - showbiz lang, sorry babe.m4a",
+                      "cover":  "/assets/bahay-namin-maliit-lamang-album.jpg",
+                      "durationSeconds":  184,
+                      "durationFormatted":  "3:04"
+                  },
+                  {
+                      "id":  76,
+                      "name":  "Umaatras Ang Dila",
+                      "album":  "Bahay Namin Maliit Lamang",
+                      "src":  "/songs/Bahay Namin Maliit Lamang/Hev Abi - umaatras ang dila.m4a",
+                      "cover":  "/assets/bahay-namin-maliit-lamang-album.jpg",
+                      "durationSeconds":  146,
+                      "durationFormatted":  "2:26"
+                  },
+                  {
+                      "id":  77,
+                      "name":  "110Trey",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - 110trey.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  124,
+                      "durationFormatted":  "2:04"
+                  },
+                  {
+                      "id":  78,
+                      "name":  "Alam Nya Din",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Alam Nya Din.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  214,
+                      "durationFormatted":  "3:34"
+                  },
+                  {
+                      "id":  79,
+                      "name":  "Anak Ng Crackhead",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Anak Ng Crackhead.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  193,
+                      "durationFormatted":  "3:13"
+                  },
+                  {
+                      "id":  80,
+                      "name":  "Ang Kabet Song",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Ang Kabet Song.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  131,
+                      "durationFormatted":  "2:11"
+                  },
+                  {
+                      "id":  81,
+                      "name":  "Blythe",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Blythe.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  113,
+                      "durationFormatted":  "1:53"
+                  },
+                  {
+                      "id":  82,
+                      "name":  "Drunk Talk",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Drunk Talk.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  161,
+                      "durationFormatted":  "2:41"
+                  },
+                  {
+                      "id":  83,
+                      "name":  "East Downtown",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - East Downtown.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  126,
+                      "durationFormatted":  "2:06"
+                  },
+                  {
+                      "id":  84,
+                      "name":  "FWU",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - FWU.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  187,
+                      "durationFormatted":  "3:07"
+                  },
+                  {
+                      "id":  85,
+                      "name":  "God Mode",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - God Mode.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  175,
+                      "durationFormatted":  "2:55"
+                  },
+                  {
+                      "id":  86,
+                      "name":  "Melon Juice At Sativa Feat",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Melon Juice At Sativa Feat.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  218,
+                      "durationFormatted":  "3:38"
+                  },
+                  {
+                      "id":  87,
+                      "name":  "Nene",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Nene.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  205,
+                      "durationFormatted":  "3:25"
+                  },
+                  {
+                      "id":  88,
+                      "name":  "Panadero 2 No Heart Remix",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Panadero 2 No Heart Remix.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  167,
+                      "durationFormatted":  "2:47"
+                  },
+                  {
+                      "id":  89,
+                      "name":  "Panadero Freestyle",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Panadero Freestyle.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  153,
+                      "durationFormatted":  "2:33"
+                  },
+                  {
+                      "id":  90,
+                      "name":  "Sa Labas",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Sa Labas.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  141,
+                      "durationFormatted":  "2:21"
+                  },
+                  {
+                      "id":  91,
+                      "name":  "Salabatkalabasaokra Gang N\u0027 Nem",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Salabatkalabasaokra Gang N\u0027 Nem.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  236,
+                      "durationFormatted":  "3:56"
+                  },
+                  {
+                      "id":  92,
+                      "name":  "Tumutulak",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Tumutulak.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  120,
+                      "durationFormatted":  "2:00"
+                  },
+                  {
+                      "id":  93,
+                      "name":  "Wag Kang Maduga",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Wag Kang Maduga.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  156,
+                      "durationFormatted":  "2:36"
+                  },
+                  {
+                      "id":  94,
+                      "name":  "Wala Ko Sa Bahay",
+                      "album":  "Gang Mobile",
+                      "src":  "/songs/Gang Mobile/Downtown Q\u0027 - Wala Ko Sa Bahay.m4a",
+                      "cover":  "/assets/gang-mobile-album.jpg",
+                      "durationSeconds":  130,
+                      "durationFormatted":  "2:10"
+                  }
+              ]
+}
