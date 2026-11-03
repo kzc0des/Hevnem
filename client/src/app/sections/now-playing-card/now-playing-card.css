@@ -1,0 +1,38 @@
+.now-playing-container {
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), height 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.title-details {
+  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes coverSettle {
+  0% {
+    opacity: 0.85;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-cover-settle {
+  animation: coverSettle 450ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes titleFade {
+  0% {
+    opacity: 0.2;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-title-fade {
+  animation: titleFade 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
