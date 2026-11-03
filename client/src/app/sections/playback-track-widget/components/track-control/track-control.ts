@@ -14,6 +14,8 @@ export class TrackControl {
   currentTimeFormatted = this.audioService.currentTimeFormatted;
   durationFormatted = this.audioService.durationFormatted;
   progressPercent = this.audioService.progressPercent;
+  isShuffle = this.audioService.isShuffle;
+  repeatMode = this.audioService.repeatMode;
 
   onSeek(event: Event) {
     const input = event.target as HTMLInputElement;
