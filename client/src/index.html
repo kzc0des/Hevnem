@@ -3,14 +3,22 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Client</title>
+  <title>Hevnem</title>
   <base href="/">
+  <link rel="icon" href="/brand/hevnem-base.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
   <app-root></app-root>
+
+  <script>
+    document.addEventListener('contextmenu', (event) => {
+      if (event.target.closest('img, svg, picture')) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </body>
 
 </html>
