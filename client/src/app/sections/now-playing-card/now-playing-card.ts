@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { AudioPlayerService } from '../../services/audio-player.service';
 import { LayoutService } from '../../services/layout.service';
 import { TrackControl } from '../playback-track-widget/components/track-control/track-control';
@@ -14,6 +14,18 @@ export class NowPlayingCard {
   layout = inject(LayoutService);
 
   currentSong = this.audioService.currentSong;
+  isFlipped = signal<boolean>(false);
+
+  constructor() {
+    effect(() => {
+      this.currentSong();
+      this.isFlipped.set(false);
+    });
+  }
+
+  toggleFlip(): void {
+    this.isFlipped.update((flipped) => !flipped);
+  }
 
   formattedTitle = computed(() => {
     const raw = this.currentSong().name;
