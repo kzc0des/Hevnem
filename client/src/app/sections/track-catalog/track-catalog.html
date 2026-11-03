@@ -4,7 +4,7 @@
         <p class="opacity-75">{{ catalogService.currentSongs().length }} tracks</p>
     </section>
 
-    <section class="mt-1 max-h-120 overflow-y-auto scroll-smooth custom-scrollbar pr-1.5">
+    <section class="mt-1 lg:max-h-120 lg:overflow-y-auto scroll-smooth custom-scrollbar pr-1.5">
         <ul class="space-y-3">
             @for(song of catalogService.currentSongs(); track song.id; let i = $index) {
             <li class="animate-track-enter" [style.animation-delay]="(i * 35) + 'ms'">
