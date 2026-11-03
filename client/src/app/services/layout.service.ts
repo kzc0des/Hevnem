@@ -1,4 +1,4 @@
-import { effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { DestroyRef, effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AlbumName } from '../models/song-model';
 import { AudioPlayerService } from './audio-player.service';
@@ -9,6 +9,7 @@ import { AudioPlayerService } from './audio-player.service';
 export class LayoutService {
   private audioPlayerService = inject(AudioPlayerService);
   private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
   private isBrowser = isPlatformBrowser(this.platformId);
 
   readonly ALBUM_BACKGROUNDS: Record<AlbumName, string> = {
@@ -47,6 +48,12 @@ export class LayoutService {
   currentAccent = signal<string>(this.ALBUM_ACCENTS["Pautang ng Pag-ibig"]);
   private fadeTimeout?: ReturnType<typeof setTimeout>;
 
+  isImmersive = signal<boolean>(false);
+  isIdle = signal<boolean>(false);
+
+  private autoEnterTimeout?: ReturnType<typeof setTimeout>;
+  private idleDimTimeout?: ReturnType<typeof setTimeout>;
+
   constructor() {
     effect(() => {
       const currentAlbum = this.audioPlayerService.currentSong().albumName;
@@ -68,6 +75,122 @@ export class LayoutService {
           this.isFading.set(false);
         }, 800);
       }
+    });
+
+    effect(() => {
+      const isPlaying = this.audioPlayerService.isPlaying();
+      const immersive = this.isImmersive();
+
+      if (!this.isBrowser) return;
+
+      if (isPlaying && !immersive) {
+        this.resetAutoEnterTimer();
+      } else {
+        this.clearAutoEnterTimer();
+      }
+    });
+
+    if (this.isBrowser) {
+      this.setupGlobalListeners();
+    }
+  }
+
+  enterImmersive(): void {
+    this.isImmersive.set(true);
+    this.clearAutoEnterTimer();
+    this.resetIdleDimTimer();
+  }
+
+  exitImmersive(): void {
+    this.isImmersive.set(false);
+    this.isIdle.set(false);
+    this.clearIdleDimTimer();
+    if (this.audioPlayerService.isPlaying()) {
+      this.resetAutoEnterTimer();
+    }
+  }
+
+  toggleImmersive(): void {
+    if (this.isImmersive()) {
+      this.exitImmersive();
+    } else {
+      this.enterImmersive();
+    }
+  }
+
+  private resetAutoEnterTimer(): void {
+    this.clearAutoEnterTimer();
+    if (!this.audioPlayerService.isPlaying() || this.isImmersive()) return;
+
+    this.autoEnterTimeout = setTimeout(() => {
+      this.enterImmersive();
+    }, 5000);
+  }
+
+  private clearAutoEnterTimer(): void {
+    if (this.autoEnterTimeout) {
+      clearTimeout(this.autoEnterTimeout);
+      this.autoEnterTimeout = undefined;
+    }
+  }
+
+  private resetIdleDimTimer(): void {
+    this.clearIdleDimTimer();
+    this.isIdle.set(false);
+
+    if (!this.isImmersive()) return;
+
+    this.idleDimTimeout = setTimeout(() => {
+      this.isIdle.set(true);
+    }, 3000);
+  }
+
+  private clearIdleDimTimer(): void {
+    if (this.idleDimTimeout) {
+      clearTimeout(this.idleDimTimeout);
+      this.idleDimTimeout = undefined;
+    }
+  }
+
+  private setupGlobalListeners(): void {
+    const onUserActivity = () => {
+      if (this.isImmersive()) {
+        this.resetIdleDimTimer();
+      } else if (this.audioPlayerService.isPlaying()) {
+        this.resetAutoEnterTimer();
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement;
+      if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) return;
+
+      if ((event.key === 'f' || event.key === 'F') && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        this.toggleImmersive();
+        return;
+      }
+
+      if (event.key === 'Escape' && this.isImmersive()) {
+        event.preventDefault();
+        this.exitImmersive();
+        return;
+      }
+
+      onUserActivity();
+    };
+
+    window.addEventListener('pointermove', onUserActivity, { passive: true });
+    window.addEventListener('touchstart', onUserActivity, { passive: true });
+    window.addEventListener('keydown', onKeyDown);
+
+    this.destroyRef.onDestroy(() => {
+      this.clearAutoEnterTimer();
+      this.clearIdleDimTimer();
+      if (this.fadeTimeout) clearTimeout(this.fadeTimeout);
+      window.removeEventListener('pointermove', onUserActivity);
+      window.removeEventListener('touchstart', onUserActivity);
+      window.removeEventListener('keydown', onKeyDown);
     });
   }
 }
