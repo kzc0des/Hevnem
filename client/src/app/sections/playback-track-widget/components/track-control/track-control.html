@@ -1,0 +1,60 @@
+<div class="flex flex-col items-center w-full">
+    <!-- Buttons Row: mas prominenteng play button -->
+    <div class="flex items-center gap-5 mb-1.5">
+        <!-- Shuffle -->
+        <button class="text-hev-ink-3 hover:text-white transition p-1 cursor-pointer">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+            </svg>
+        </button>
+
+        <!-- Prev Track -->
+        <button class="text-hev-ink-2 hover:text-white transition p-1 cursor-pointer">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+            </svg>
+        </button>
+
+        <!-- Play/Pause Button: 44px (w-11 h-11) para kitang-kita tulad sa Figma -->
+        <button (click)="audioService.togglePlay()"
+            class="w-11 h-11 rounded-full bg-hev-cream text-hev-on-cream flex items-center justify-center hover:scale-105 active:scale-95 transition shadow-lg cursor-pointer">
+            @if (isPlaying()) {
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+            } @else {
+            <svg class="w-6 h-6 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+            </svg>
+            }
+        </button>
+
+        <!-- Next Track -->
+        <button class="text-hev-ink-2 hover:text-white transition p-1 cursor-pointer">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+            </svg>
+        </button>
+
+        <!-- Repeat -->
+        <button class="text-hev-ink-3 hover:text-white transition p-1 cursor-pointer">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Timeline Scrubber Row -->
+    <div class="w-full flex items-center gap-3 text-xs font-mono text-hev-ink-3">
+        <span class="w-8 text-right">{{ currentTimeFormatted() }}</span>
+
+        <div class="relative flex-1 flex items-center">
+            <input type="range" min="0" max="100" [value]="progressPercent()" (input)="onSeek($event)"
+                class="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-hev-cream focus:outline-none" />
+        </div>
+
+        <span class="w-8">{{ durationFormatted() }}</span>
+    </div>
+</div>
