@@ -1,11 +1,12 @@
-<div class="now-playing-container flex flex-col items-center justify-center text-center select-none max-w-lg mx-auto">
+<div class="now-playing-container flex flex-col items-center justify-center text-center select-none mx-auto w-full transition-all duration-700"
+    [class.max-w-lg]="!layout.isImmersive()" [class.max-w-3xl]="layout.isImmersive()">
     <div class="relative group">
-        <div
-            class="absolute -inset-1.5 rounded-3xl bg-white/10 blur-2xl opacity-40 group-hover:opacity-70 transition duration-500">
+        <div class="absolute -inset-1.5 rounded-3xl bg-white/10 blur-2xl opacity-40 group-hover:opacity-70 transition duration-500"
+            [class.blur-3xl]="layout.isImmersive()" [class.opacity-50]="layout.isImmersive()">
         </div>
 
-        <div
-            class="relative w-[min(450px,45vh)] h-[min(450px,45vh)] rounded-3xl overflow-hidden shadow-2xl shadow-black/80 ring-1 ring-white/15 bg-black">
+        <div class="card-artwork relative rounded-3xl overflow-hidden shadow-2xl shadow-black/80 ring-1 ring-white/15 bg-black"
+            [class.card-artwork-immersive]="layout.isImmersive()">
             @for (cover of [currentSong().cover]; track cover) {
             <img [src]="cover" [alt]="currentSong().name"
                 class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 animate-cover-settle" />
@@ -29,4 +30,10 @@
             Hev Abi <span class="mx-1 text-hev-ink-3/60">·</span> {{ currentSong().albumName }}
         </p>
     </div>
+
+    @if (layout.isImmersive()) {
+    <div class="w-full max-w-xl mt-6 transition-all duration-500 animate-title-fade">
+        <app-track-control />
+    </div>
+    }
 </div>

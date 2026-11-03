@@ -1,15 +1,17 @@
 import { Component, computed, inject } from '@angular/core';
 import { AudioPlayerService } from '../../services/audio-player.service';
-import catalogData from '../../data/hevabi-songs.json';
+import { LayoutService } from '../../services/layout.service';
+import { TrackControl } from '../playback-track-widget/components/track-control/track-control';
 
 @Component({
   selector: 'app-now-playing-card',
-  imports: [],
+  imports: [TrackControl],
   templateUrl: './now-playing-card.html',
   styleUrl: './now-playing-card.css',
 })
 export class NowPlayingCard {
   private audioService = inject(AudioPlayerService);
+  layout = inject(LayoutService);
 
   currentSong = this.audioService.currentSong;
 
