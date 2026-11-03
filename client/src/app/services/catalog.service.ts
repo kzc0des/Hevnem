@@ -1,6 +1,7 @@
 import { computed, Injectable, Signal, signal } from '@angular/core';
 import { AlbumName, AlbumSummary, Song } from '../models/song-model';
 import catalogData from '../data/hevabi-songs.json';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class CatalogService {
       id: s.id,
       name: s.name,
       album: s.album as AlbumName,
-      src: s.src,
+      src: this.resolveMediaUrl(s.src),
       cover: s.cover,
       duration: s.durationFormatted,
     };
@@ -63,5 +64,15 @@ export class CatalogService {
 
   onAlbumSelect(albumName: AlbumName) {
     this.currentAlbum.set(albumName);
+  }
+
+  private resolveMediaUrl(path: string): string {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      return path;
+    }
+    const base = environment.cdnBaseUrl?.replace(/\/$/, '') || '';
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return base ? `${base}${cleanPath}` : cleanPath;
   }
 }

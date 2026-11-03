@@ -12,12 +12,7 @@ export class AudioPlayerService {
   private isBrowser = isPlatformBrowser(this.platformId);
   private audio?: HTMLAudioElement;
 
-  currentSong = signal<SelectedSong>({
-    name: 'Balisa',
-    albumName: 'Pautang ng Pag-ibig',
-    cover: '/assets/cover_1.jpg',
-    src: '/songs/Pautang ng Pagibig/Hev Abi - BALISA.mp3',
-  });
+  currentSong = signal<SelectedSong>(this.getInitialTrack());
 
   isPlaying = signal<boolean>(false);
   currentTime = signal<number>(0);
@@ -44,6 +39,24 @@ export class AudioPlayerService {
       this.audio.volume = this.volume();
       this.setupAudioListeners();
     }
+  }
+  private getInitialTrack(): SelectedSong {
+    const firstSong = this.catalogService.getSongsByAlbum(this.catalogService.currentAlbum())[0];
+    if (firstSong) {
+      return {
+        name: firstSong.name,
+        albumName: firstSong.album,
+        cover: firstSong.cover,
+        src: firstSong.src,
+        duration: firstSong.duration,
+      };
+    }
+    return {
+      name: 'Balisa',
+      albumName: 'Pautang ng Pag-ibig',
+      cover: '',
+      src: '',
+    };
   }
 
   private setupAudioListeners() {
