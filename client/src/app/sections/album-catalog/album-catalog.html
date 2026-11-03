@@ -1,0 +1,15 @@
+<div class="flex flex-col px-2">
+    <section class="mb-3 px-1">
+        <p class="tracking-[.4em] text-xs font-semibold uppercase text-hev-ink-3">ALBUMS</p>
+    </section>
+
+    <section class="max-h-100 overflow-y-auto custom-scrollbar pr-1.5">
+        <ul class="space-y-2.5">
+            @for(album of albums; track album.id) {
+            <li>
+                <app-album-card [album]="album" (click)="albumClick(album.name)" class="cursor-pointer" />
+            </li>
+            }
+        </ul>
+    </section>
+</div>
