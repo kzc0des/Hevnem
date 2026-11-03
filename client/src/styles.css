@@ -121,3 +121,26 @@ body {
 .custom-scrollbar:hover::-webkit-scrollbar-thumb:hover {
     background-color: color-mix(in srgb, var(--album-accent, #fff) 90%, white 25%);
 }
+
+img,
+svg,
+picture {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none;
+    pointer-events: auto;
+}
+
+::selection {
+    background-color: transparent;
+    color: var(--color-hev-cream, #F5E6C8);
+    text-shadow: 0 0 1px currentColor, 0 0 10px rgba(245, 230, 200, 0.45);
+}
+
+::-moz-selection {
+    background-color: transparent;
+    color: var(--color-hev-cream, #F5E6C8);
+    text-shadow: 0 0 1px currentColor, 0 0 10px rgba(245, 230, 200, 0.45);
+}
