@@ -1,0 +1,123 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..600&family=Harmattan:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --color-maduming-timog-1: #035894;
+    --color-maduming-timog-2: #082134;
+    --color-maduming-timog-3: #04111B;
+    --color-glow-maduming-timog: #035894;
+
+    --color-kung-alam-mo-lang-1: #BC3718;
+    --color-kung-alam-mo-lang-2: #572114;
+    --color-kung-alam-mo-lang-3: #141919;
+    --color-glow-kung-alam-mo-lang: #BC3718;
+
+    --color-pautang-ng-pag-ibig-1: #A82436;
+    --color-pautang-ng-pag-ibig-2: #4D171F;
+    --color-pautang-ng-pag-ibig-3: #140A0D;
+    --color-glow-pautang-ng-pag-ibig: #A82436;
+
+    --color-kwentong-jimenez-1: #0F5C4D;
+    --color-kwentong-jimenez-2: #0A2924;
+    --color-kwentong-jimenez-3: #050F0F;
+    --color-glow-kwentong-jimenez: #0F5C4D;
+
+    --color-sakred-boy-1: #2D4D22;
+    --color-sakred-boy-2: #131F0F;
+    --color-sakred-boy-3: #050A04;
+    --color-glow-sakred-boy: #2D4D22;
+
+    --color-featuring-1: #0A3D44;
+    --color-featuring-2: #07191D;
+    --color-featuring-3: #030A0C;
+    --color-glow-featuring: #0A3D44;
+
+    --color-bahay-namin-maliit-lamang-1: #1F63D6;
+    --color-bahay-namin-maliit-lamang-2: #1D2547;
+    --color-bahay-namin-maliit-lamang-3: #0A0C16;
+    --color-glow-bahay-namin-maliit-lamang: #3F86F0;
+
+    --color-gang-mobile-1: #8C5A1C;
+    --color-gang-mobile-2: #2B1E12;
+    --color-gang-mobile-3: #0C0906;
+    --color-glow-gang-mobile: #D9902F;
+
+    --color-hev-ink-1: #FBF7EF;
+    --color-hev-ink-2: rgba(251, 247, 239, 0.7);
+    --color-hev-ink-3: rgba(251, 247, 239, 0.5);
+    --color-hev-line: rgba(255, 255, 255, 0.14);
+    --color-hev-glass: rgba(255, 255, 255, 0.07);
+    --color-hev-glass-2: rgba(255, 255, 255, 0.16);
+    --color-hev-cream: #F5E6C8;
+    --color-hev-on-cream: #1A1410;
+
+    --font-hev-display: 'Bodoni Moda', 'Didot', Georgia, serif;
+    --font-hev-ui: 'Harmattan', 'Segoe UI', system-ui, sans-serif;
+}
+
+:root {
+    interpolate-size: allow-keywords;
+    --amber-1: #8C5A1C;
+    --amber-2: #2B1E12;
+    --amber-3: #0C0906;
+    --amber-glow: #D9902F;
+    --cobalt-1: #1F63D6;
+    --cobalt-2: #1D2547;
+    --cobalt-3: #0A0C16;
+    --cobalt-glow: #3F86F0;
+}
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    height: 100dvh;
+}
+
+body {
+    font-family: var(--font-hev-ui);
+    color: var(--color-hev-ink-1);
+    background-color: #04090e;
+
+    overflow: hidden;
+}
+
+.display {
+    font-family: var(--font-hev-display);
+}
+
+/* Sleek Dynamic Scrollbar - Clean instant hover (walang black flash) */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+.custom-scrollbar:hover {
+    scrollbar-color: color-mix(in srgb, var(--album-accent, #fff) 70%, white 15%) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+}
+
+/* Pag hover, diretsong lilitaw ang buong kulay nang walang animation delay */
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--album-accent, #fff) 70%, white 15%);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in srgb, var(--album-accent, #fff) 90%, white 25%);
+}

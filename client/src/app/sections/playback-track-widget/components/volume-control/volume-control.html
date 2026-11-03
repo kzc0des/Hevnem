@@ -1,0 +1,8 @@
+<div class="flex items-center gap-2.5 min-w-37.5 justify-end">
+    <svg class="w-5 h-5 text-hev-ink-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07" />
+    </svg>
+
+    <input type="range" min="0" max="100" [value]="volume() * 100" (input)="onVolumeChange($event)"
+        class="w-20 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-hev-cream focus:outline-none" />
+</div>

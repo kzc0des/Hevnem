@@ -1,3 +1,5 @@
 #exclude all txt files
 *.txt
 drafts/
+client/public/songs/
+res/songs/

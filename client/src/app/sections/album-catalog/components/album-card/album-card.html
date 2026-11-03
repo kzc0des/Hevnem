@@ -1,0 +1,17 @@
+<div class="flex gap-4 items-center rounded-2xl p-2 border border-transparent transition-[background-color,border-color,box-shadow] duration-300 ease-out"
+    [class.bg-hev-glass-2]="isActive()" [class.border-white/10]="isActive()" [class.shadow-lg]="isActive()"
+    [class.bg-hev-glass]="!isActive()" [class.drop-shadow-hev-glass]="!isActive()">
+    <img class="w-18 h-18 object-cover rounded-2xl" [src]="album().thumbnail" alt="">
+    <section>
+        @if (album().name === "Featuring") {
+        <h3 class="display text-lg" [class.text-hev-cream]="isActive()">Single Tracks</h3>
+        }@else{
+        <h3 class="display text-xl" [class.text-hev-cream]="isActive()">{{ album().name }}</h3>
+        }
+        <div class="flex gap-2 text-hev-ink-3 text-lg">
+            <span>Album</span>
+            <span>&#8226;</span>
+            <span>{{ album().tracks }} tracks</span>
+        </div>
+    </section>
+</div>
