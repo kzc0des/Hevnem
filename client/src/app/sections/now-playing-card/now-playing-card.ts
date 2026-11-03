@@ -35,4 +35,9 @@ export class NowPlayingCard {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   });
+
+  displayAlbum = computed(() => {
+    const album = this.currentSong().albumName;
+    return album === 'Featuring' ? 'Single Tracks' : album;
+  });
 }
