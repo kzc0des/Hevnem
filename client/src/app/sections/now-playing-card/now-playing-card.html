@@ -1,4 +1,4 @@
-<div class="now-playing-container flex flex-col items-center justify-center text-center select-none mx-auto w-full transition-all duration-700"
+<div class="now-playing-container flex flex-col items-center justify-center text-center select-none mx-auto w-full transition-all duration-700 px-3 sm:px-0"
     [class.max-w-lg]="!layout.isImmersive()" [class.max-w-3xl]="layout.isImmersive()">
     <div class="relative group">
         <div class="absolute -inset-1.5 rounded-3xl bg-white/10 blur-2xl opacity-40 group-hover:opacity-70 transition duration-500"
@@ -33,14 +33,14 @@
             </div>
         </div>
 
-        <div class="title-details mt-5 flex flex-col items-center justify-start space-y-1">
-            <p class="text-[10px] font-semibold tracking-[0.35em] uppercase text-hev-ink-3">
+        <div class="title-details mt-4 sm:mt-5 flex flex-col items-center justify-start space-y-1">
+            <p class="text-[9px] sm:text-[10px] font-semibold tracking-[0.35em] uppercase text-hev-ink-3">
                 NOW PLAYING
             </p>
 
             @for (title of [formattedTitle()]; track title) {
             <h1
-                class="text-3xl sm:text-4xl md:text-[40px] font-hev-display italic font-normal text-hev-ink-1 tracking-wide leading-tight drop-shadow-md max-w-md text-center animate-title-fade">
+                class="text-2xl sm:text-4xl md:text-[40px] font-hev-display italic font-normal text-hev-ink-1 tracking-wide leading-tight drop-shadow-md max-w-md text-center animate-title-fade">
                 {{ title }}
             </h1>
             }
@@ -51,7 +51,7 @@
         </div>
 
         @if (layout.isImmersive()) {
-        <div class="w-full max-w-xl mt-6 transition-all duration-500 animate-title-fade">
+        <div class="w-full max-w-xl mt-5 sm:mt-6 transition-all duration-500 animate-title-fade">
             <app-track-control />
         </div>
         }
