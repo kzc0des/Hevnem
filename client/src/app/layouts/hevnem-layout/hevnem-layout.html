@@ -1,5 +1,6 @@
 <div [style.--album-accent]="background.currentAccent()"
-    class="relative h-screen flex flex-col justify-between overflow-hidden">
+    class="relative h-screen flex flex-col justify-between overflow-hidden"
+    [class.cursor-none]="background.isImmersive() && background.isIdle()">
 
     <div [style.background]="background.baseBackground()" class="absolute inset-0 pointer-events-none z-0">
     </div>
@@ -13,20 +14,31 @@
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-3 max-w-[75vw] max-h-[75vh] select-none z-0">
 
     <main class="relative z-10 flex-1 min-h-0 flex items-center w-full px-8 lg:px-10">
-        <section class="w-full max-w-380 mx-auto flex justify-between items-center gap-8">
-            <div class="w-110 shrink-0">
+        <section
+            class="w-full max-w-380 mx-auto flex justify-between items-center transition-all duration-700 ease-in-out"
+            [class.gap-8]="!background.isImmersive()" [class.gap-0]="background.isImmersive()">
+            <div class="shrink-0 transition-all duration-700 ease-in-out" [class.w-110]="!background.isImmersive()"
+                [class.w-0]="background.isImmersive()" [class.opacity-0]="background.isImmersive()"
+                [class.pointer-events-none]="background.isImmersive()"
+                [class.overflow-hidden]="background.isImmersive()">
                 <app-album-catalog />
             </div>
             <div class="flex-1 flex justify-center">
                 <app-now-playing-card />
             </div>
-            <div class="w-110 shrink-0">
+            <div class="shrink-0 transition-all duration-700 ease-in-out" [class.w-110]="!background.isImmersive()"
+                [class.w-0]="background.isImmersive()" [class.opacity-0]="background.isImmersive()"
+                [class.pointer-events-none]="background.isImmersive()"
+                [class.overflow-hidden]="background.isImmersive()">
                 <app-track-catalog />
             </div>
         </section>
     </main>
 
-    <footer class="relative z-10 shrink-0 pb-6 px-8 lg:px-12 w-full">
+    <footer class="relative z-10 shrink-0 px-8 lg:px-12 w-full transition-all duration-700 ease-in-out"
+        [class.pb-6]="!background.isImmersive()" [class.pb-0]="background.isImmersive()"
+        [class.h-0]="background.isImmersive()" [class.opacity-0]="background.isImmersive()"
+        [class.pointer-events-none]="background.isImmersive()" [class.overflow-hidden]="background.isImmersive()">
         <div class="w-full max-w-380 mx-auto">
             <app-playback-track-widget />
         </div>
