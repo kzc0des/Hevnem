@@ -1,0 +1,56 @@
+@if (isVisible()) {
+  <div
+    #introRoot
+    class="intro-curtain fixed inset-0 z-50 flex flex-col items-center justify-center select-none cursor-pointer overflow-hidden"
+    aria-label="Click or press any key to enter Hevnem"
+  >
+    <!-- Ambient oceanic tide backdrop glow -->
+    <div
+      class="intro-backdrop absolute inset-0"
+      [style.--ambient-accent]="layout.currentAccent()"
+    ></div>
+
+    <!-- Centered Brand Emblem with wave float -->
+    <div class="relative z-10 flex flex-col items-center gap-6">
+      <div class="relative w-64 h-24 sm:w-80 sm:h-32">
+        <!-- Base Layer (Satin Metallic Finish emerging like an ocean swell) -->
+        <div class="intro-base absolute inset-0 mask-hevnem-base overflow-hidden">
+          <!-- Metallic satin vertical gradient base -->
+          <div class="absolute inset-0 bg-gradient-to-b from-[#fbf8f1] via-[#ded7c8] to-[#b0a797]"></div>
+
+          <!-- Silky light wave passing through the metal -->
+          <div class="intro-sheen absolute inset-0 pointer-events-none"></div>
+        </div>
+
+        <!-- Accents Layer (Dynamic Album Accent blooming like deep sea luminescence) -->
+        <div
+          class="intro-accents absolute inset-0 mask-hevnem-accents transition-colors duration-700"
+          [style.backgroundColor]="layout.currentAccent()"
+          [style.filter]="'drop-shadow(0 0 18px ' + layout.currentAccent() + ')'"
+        ></div>
+
+        <!-- Specular Star Glint (flashes like sunlight on wave crest) -->
+        <div
+          class="intro-glint absolute top-[20%] left-[58%] pointer-events-none"
+          [style.--glint-accent]="layout.currentAccent()"
+        >
+          <svg class="w-7 h-7 -translate-x-1/2 -translate-y-1/2 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L14.2 9.8L24 12L14.2 14.2L12 24L9.8 14.2L0 12L9.8 9.8L12 0Z" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Tagline with fluid wave shimmer -->
+      <div class="overflow-hidden">
+        <p class="intro-tagline text-[11px] sm:text-xs tracking-[0.4em] uppercase font-mono font-medium">
+          Music of Hev Abi
+        </p>
+      </div>
+    </div>
+
+    <!-- Soft breathing hint footer -->
+    <div class="intro-hint absolute bottom-8 text-[10px] tracking-widest uppercase text-white/20 font-mono">
+      Click anywhere to enter
+    </div>
+  </div>
+}

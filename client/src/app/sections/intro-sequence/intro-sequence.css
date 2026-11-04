@@ -1,0 +1,84 @@
+.intro-curtain {
+  background-color: #04090e;
+}
+
+.intro-backdrop {
+  background: radial-gradient(
+    circle at center,
+    var(--ambient-accent, rgba(255, 255, 255, 0.08)) 0%,
+    rgba(4, 9, 14, 0.95) 65%,
+    #04090e 100%
+  );
+  opacity: 0;
+}
+
+/* Mask styles */
+.mask-hevnem-base {
+  mask: url('/assets/hevnem-base.png') no-repeat center / contain;
+  -webkit-mask: url('/assets/hevnem-base.png') no-repeat center / contain;
+}
+
+.mask-hevnem-accents {
+  mask: url('/assets/hevnem-accents.png') no-repeat center / contain;
+  -webkit-mask: url('/assets/hevnem-accents.png') no-repeat center / contain;
+}
+
+/* Initial static states for GSAP */
+.intro-base,
+.intro-accents,
+.intro-tagline {
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+/* Silky, feathered light wave passing through the metal */
+.intro-sheen {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.2) 60%,
+    transparent 70%,
+    transparent 100%
+  );
+  will-change: transform;
+}
+
+/* Specular star glint */
+.intro-glint {
+  opacity: 0;
+  filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px var(--glint-accent, rgba(255, 255, 255, 0.8)));
+  will-change: transform, opacity;
+}
+
+/* Tagline with fluid wave shimmer */
+.intro-tagline {
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.3) 38%,
+    #ffffff 50%,
+    rgba(255, 255, 255, 0.3) 62%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro-hint {
+  animation: hintBreathe 2.4s 1s ease-in-out infinite alternate both;
+}
+
+@keyframes hintBreathe {
+  0% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.35;
+  }
+}
