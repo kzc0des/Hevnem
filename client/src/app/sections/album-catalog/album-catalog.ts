@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, PLATFORM_ID, viewChild, viewChildren, effect } from '@angular/core';
+import { Component, ElementRef, inject, PLATFORM_ID, viewChildren, effect } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { CatalogService } from '../../services/catalog.service';
 import { AlbumCard } from './components/album-card/album-card';
@@ -15,7 +15,6 @@ import { LayoutService } from '../../services/layout.service';
 export class AlbumCatalog {
   catalogService = inject(CatalogService);
   private layout = inject(LayoutService);
-  scrollContainer = viewChild<ElementRef<HTMLElement>>('scrollContainer');
   albumItems = viewChildren<ElementRef<HTMLElement>>('albumItem');
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
@@ -25,12 +24,15 @@ export class AlbumCatalog {
   constructor() {
     effect(() => {
       const activeAlbum = this.catalogService.currentAlbum();
+      const activeDrawer = this.layout.activeDrawer();
       if (!this.isBrowser) return;
 
       const items = this.albumItems();
       const albumIdx = this.albums.findIndex((a) => a.name === activeAlbum);
       if (albumIdx !== -1 && items && items[albumIdx]) {
-        this.scrollToItem(items[albumIdx].nativeElement);
+        setTimeout(() => {
+          this.scrollToItem(items[albumIdx].nativeElement);
+        }, 50);
       }
     });
   }
@@ -43,17 +45,16 @@ export class AlbumCatalog {
   }
 
   private scrollToItem(itemElement: HTMLElement) {
-    const container = this.scrollContainer()?.nativeElement;
+    const container = itemElement.closest('.overflow-y-auto') as HTMLElement | null;
     if (!container) return;
 
-    const itemTop = itemElement.offsetTop;
-    const itemHeight = itemElement.offsetHeight;
-    const containerHeight = container.clientHeight;
-
-    const targetScrollTop = itemTop - (containerHeight / 2) + (itemHeight / 2);
+    const itemRect = itemElement.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const relativeTop = itemRect.top - containerRect.top + container.scrollTop;
+    const targetTop = relativeTop - (container.clientHeight / 2) + (itemElement.clientHeight / 2);
 
     container.scrollTo({
-      top: Math.max(0, targetScrollTop),
+      top: Math.max(0, targetTop),
       behavior: 'smooth',
     });
   }
