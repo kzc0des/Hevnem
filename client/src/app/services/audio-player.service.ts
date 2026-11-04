@@ -16,7 +16,6 @@ export class AudioPlayerService {
 
   private sequencer: PlaybackSequencer;
   private engine: CrossfadeEngine;
-  private wasPlayingOnInit = false;
 
   currentSong = signal<SelectedSong>(this.getInitialTrack());
   isPlaying = signal<boolean>(false);
@@ -71,9 +70,6 @@ export class AudioPlayerService {
         const saved = localStorage.getItem('hevnem:last_selected_track');
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (parsed.isPlaying === true) {
-            this.wasPlayingOnInit = true;
-          }
           const matched = this.catalogService.getAllSongs().find((s) => s.name === parsed.name);
           if (matched) {
             this.catalogService.onAlbumSelect(matched.album);
@@ -112,21 +108,9 @@ export class AudioPlayerService {
     const song = this.currentSong();
     if (!song.src) return;
 
-    if (this.wasPlayingOnInit) {
-      this.engine.load(song.src, true);
-
-      const unlockOnGesture = () => {
-        if (!this.isPlaying()) {
-          this.play();
-        }
-        window.removeEventListener('pointerdown', unlockOnGesture);
-        window.removeEventListener('keydown', unlockOnGesture);
-      };
-      window.addEventListener('pointerdown', unlockOnGesture, { once: true });
-      window.addEventListener('keydown', unlockOnGesture, { once: true });
-    } else {
-      this.engine.load(song.src, false);
-    }
+    this.currentTime.set(0);
+    this.isPlaying.set(false);
+    this.engine.load(song.src, false);
   }
 
   private persistTrack(song: { name: string; albumName?: string; album?: string }, isPlaying?: boolean) {
@@ -144,6 +128,7 @@ export class AudioPlayerService {
   }
 
   onSongSelect(song: SelectedSong) {
+    this.currentTime.set(0);
     this.persistTrack(song, true);
     this.currentSong.set(song);
     if (song.src) {
@@ -260,6 +245,7 @@ export class AudioPlayerService {
   }
 
   private handleTrackTransition(incomingSong: Song) {
+    this.currentTime.set(0);
     this.persistTrack(incomingSong, true);
     this.sequencer.commitTrack(this.currentSong().name, incomingSong);
     this.currentSong.set({

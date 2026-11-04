@@ -408,13 +408,19 @@ export class CrossfadeEngine {
     this.abort();
     this.isManualIntervention = false;
     this.reconnectRetries = 0;
+    this.lastKnownTime = 0;
+    this.wasPlayingBeforeDrop = autoPlay;
     if (this.reconnectTimeout) {
       clearTimeout(this.reconnectTimeout);
       this.reconnectTimeout = undefined;
     }
     this.setPlaybackHealth('idle');
+    this.callbacks.onTimeUpdate(0);
     if (this.isBrowser && this.activeAudio && src) {
       this.activeAudio.src = src;
+      try {
+        this.activeAudio.currentTime = 0;
+      } catch {}
       this.activeAudio.load();
       if (autoPlay) {
         this.play();
@@ -427,6 +433,8 @@ export class CrossfadeEngine {
     if (!this.activeAudio.src && fallbackSrc) {
       this.activeAudio.src = fallbackSrc;
     }
+    this.activeAudio.muted = false;
+    this.activeAudio.volume = this.masterVolume;
     this.activeAudio.play().catch((err) => console.warn('Audio play prevented:', err));
     this.startTimeTracking();
   }
