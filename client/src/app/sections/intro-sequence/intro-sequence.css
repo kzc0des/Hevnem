@@ -1,5 +1,10 @@
+:host {
+  display: contents;
+}
+
 .intro-curtain {
   background-color: #04090e;
+  z-index: 50;
 }
 
 .intro-backdrop {

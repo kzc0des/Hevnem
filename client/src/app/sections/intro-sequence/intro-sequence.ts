@@ -27,17 +27,13 @@ export class IntroSequence implements AfterViewInit {
 
   private readonly rootRef = viewChild<ElementRef<HTMLElement>>('introRoot');
 
-  protected readonly isVisible = signal(true);
   protected readonly isDismissing = signal(false);
 
   private ctx?: gsap.Context;
   private timeline?: gsap.core.Timeline;
 
   ngAfterViewInit(): void {
-    if (!this.isBrowser) {
-      this.isVisible.set(false);
-      return;
-    }
+    if (!this.isBrowser) return;
 
     const rootEl = this.rootRef()?.nativeElement;
     if (!rootEl) return;
@@ -113,7 +109,7 @@ export class IntroSequence implements AfterViewInit {
           duration: 0.8,
           ease: 'sine.inOut',
           onComplete: () => {
-            this.isVisible.set(false);
+            rootEl.style.display = 'none';
           },
         }
       );
@@ -127,7 +123,7 @@ export class IntroSequence implements AfterViewInit {
   @HostListener('window:keydown')
   @HostListener('click')
   dismiss(): void {
-    if (this.isDismissing() || !this.isVisible()) return;
+    if (this.isDismissing()) return;
     this.isDismissing.set(true);
 
     const rootEl = this.rootRef()?.nativeElement;
@@ -140,11 +136,9 @@ export class IntroSequence implements AfterViewInit {
         duration: 0.4,
         ease: 'power2.out',
         onComplete: () => {
-          this.isVisible.set(false);
+          rootEl.style.display = 'none';
         },
       });
-    } else {
-      this.isVisible.set(false);
     }
   }
 }
