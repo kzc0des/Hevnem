@@ -37,6 +37,9 @@ export class IntroSequence implements AfterViewInit {
 
   constructor() {
     this.sessionCoordinator.onIntroSeen(() => {
+      if (this.isBrowser) {
+        document.documentElement.classList.remove('intro-pending');
+      }
       this.hasSeenIntro.set(true);
       this.dismiss();
     });
@@ -142,6 +145,9 @@ export class IntroSequence implements AfterViewInit {
   @HostListener('window:keydown')
   @HostListener('click')
   dismiss(): void {
+    if (this.isBrowser) {
+      document.documentElement.classList.remove('intro-pending');
+    }
     this.markIntroSeen();
     if (this.isDismissing()) return;
     this.isDismissing.set(true);

@@ -22,6 +22,14 @@
   <meta name="twitter:image" content="https://hevnem.vercel.app/brand/hevnem-brand-logo.png">
 
   <link rel="icon" href="/brand/hevnem-base.ico" type="image/x-icon">
+  <script>
+    try {
+      var isReload = sessionStorage.getItem('hevnem:session_reloading') === 'true' || localStorage.getItem('hevnem:intro_seen') === 'true';
+      if (!isReload) {
+        document.documentElement.classList.add('intro-pending');
+      }
+    } catch (e) {}
+  </script>
 </head>
 
 <body>
