@@ -176,6 +176,10 @@ export class CrossfadeEngine {
     };
 
     deck.onended = () => {
+      if (this.isCrossfading && this.fadingIncomingDeck) {
+        this.completeCrossfade(deck, this.fadingIncomingDeck);
+        return;
+      }
       if (this.activeAudio === deck) {
         this.stopTimeTracking();
         this.callbacks.onEnded();
@@ -204,14 +208,35 @@ export class CrossfadeEngine {
 
     if (
       !this.isCrossfading &&
-      !this.isManualIntervention &&
-      this.isPreloaded &&
-      this.preloadedTrack &&
       cur >= dur - this.crossfadeDuration
     ) {
+      if (!this.isPreloaded || !this.preloadedTrack) {
+        const next = this.callbacks.peekNextTrack();
+        if (next && next.src) {
+          this.preloadIncomingTrack(next);
+        }
+      }
+
       const idle = this.idleAudio;
-      if (idle && idle.readyState >= 3) {
-        this.startCrossfade(this.preloadedTrack);
+      if (idle && this.preloadedTrack) {
+        if (idle.readyState >= 2) {
+          this.startCrossfade(this.preloadedTrack);
+        } else {
+          const onReady = () => {
+            idle.removeEventListener('loadeddata', onReady);
+            idle.removeEventListener('canplay', onReady);
+            if (
+              !this.isCrossfading &&
+              this.preloadedTrack &&
+              this.activeAudio &&
+              this.activeAudio.currentTime >= this.activeAudio.duration - this.crossfadeDuration
+            ) {
+              this.startCrossfade(this.preloadedTrack);
+            }
+          };
+          idle.addEventListener('loadeddata', onReady, { once: true });
+          idle.addEventListener('canplay', onReady, { once: true });
+        }
       }
     }
   }
@@ -228,6 +253,7 @@ export class CrossfadeEngine {
   }
 
   private startCrossfade(nextSong: Song) {
+    if (this.isCrossfading) return;
     this.isCrossfading = true;
     const outgoing = this.activeAudio!;
     const incoming = this.idleAudio!;
@@ -243,6 +269,7 @@ export class CrossfadeEngine {
 
     incoming.currentTime = 0;
     incoming.volume = 0;
+    incoming.muted = false;
     incoming.play().catch((err) => console.warn('Audio play prevented:', err));
     this.startTimeTracking();
 
@@ -263,7 +290,10 @@ export class CrossfadeEngine {
       }
     };
 
-    this.crossfadeInterval = setInterval(tick, 50);
+    if (this.crossfadeInterval) {
+      clearInterval(this.crossfadeInterval);
+    }
+    this.crossfadeInterval = setInterval(tick, 25);
   }
 
   private completeCrossfade(outgoing: HTMLAudioElement, incoming: HTMLAudioElement) {
@@ -453,10 +483,11 @@ export class CrossfadeEngine {
       this.activeAudio.currentTime = seconds;
       this.callbacks.onTimeUpdate(seconds);
       const dur = this.activeAudio.duration;
-      if (dur > 0 && dur - seconds <= this.crossfadeDuration) {
-        this.isManualIntervention = true;
-      } else {
-        this.isManualIntervention = false;
+      if (dur > 0 && seconds >= dur - this.preloadOffset) {
+        const next = this.callbacks.peekNextTrack();
+        if (next && next.src) {
+          this.preloadIncomingTrack(next);
+        }
       }
     }
   }

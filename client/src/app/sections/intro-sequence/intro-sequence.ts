@@ -148,6 +148,7 @@ export class IntroSequence implements AfterViewInit {
     if (this.isBrowser) {
       document.documentElement.classList.remove('intro-pending');
     }
+    this.layout.introDismissed.set(true);
     this.markIntroSeen();
     if (this.isDismissing()) return;
     this.isDismissing.set(true);
