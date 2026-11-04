@@ -1,5 +1,4 @@
-#exclude all txt files
+# exclude all txt files
 *.txt
 drafts/
 client/public/songs/
-res/songs/
