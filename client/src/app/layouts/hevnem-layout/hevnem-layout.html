@@ -2,9 +2,7 @@
     class="relative h-dvh flex flex-col justify-between overflow-hidden"
     [class.cursor-none]="background.isImmersive() && background.isIdle()">
 
-    @if (isBrowser) {
-        <app-intro-sequence />
-    }
+    <app-intro-sequence />
 
     <div [style.background]="background.baseBackground()" class="absolute inset-0 pointer-events-none z-0">
     </div>

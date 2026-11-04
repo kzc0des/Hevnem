@@ -144,3 +144,14 @@ picture {
     color: var(--color-hev-cream, #F5E6C8);
     text-shadow: 0 0 1px currentColor, 0 0 10px rgba(245, 230, 200, 0.45);
 }
+
+html.intro-pending main,
+html.intro-pending footer,
+html.intro-pending app-top-nav-bar {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+html:not(.intro-pending) .intro-curtain {
+    display: none !important;
+}

@@ -93,7 +93,7 @@ export class TabSessionCoordinator {
   };
 
   shouldShowIntro(): boolean {
-    if (!this.isBrowser) return false;
+    if (!this.isBrowser) return true;
 
     if (this.isReloading) {
       try {
