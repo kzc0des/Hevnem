@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { LayoutService } from '../../services/layout.service';
+import { TabSessionCoordinator } from '../../helpers/tab-session-coordinator';
 import gsap from 'gsap';
 
 @Component({
@@ -26,14 +27,27 @@ export class IntroSequence implements AfterViewInit {
   private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   private readonly rootRef = viewChild<ElementRef<HTMLElement>>('introRoot');
+  private readonly sessionCoordinator = new TabSessionCoordinator({ isBrowser: this.isBrowser });
 
+  hasSeenIntro = signal<boolean>(!this.sessionCoordinator.shouldShowIntro());
   protected readonly isDismissing = signal(false);
 
   private ctx?: gsap.Context;
   private timeline?: gsap.core.Timeline;
 
+  constructor() {
+    this.sessionCoordinator.onIntroSeen(() => {
+      this.hasSeenIntro.set(true);
+      this.dismiss();
+    });
+
+    this.destroyRef.onDestroy(() => {
+      this.sessionCoordinator.destroy();
+    });
+  }
+
   ngAfterViewInit(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || this.hasSeenIntro()) return;
 
     const rootEl = this.rootRef()?.nativeElement;
     if (!rootEl) return;
@@ -41,6 +55,7 @@ export class IntroSequence implements AfterViewInit {
     this.ctx = gsap.context(() => {
       this.timeline = gsap.timeline({
         onComplete: () => {
+          this.markIntroSeen();
           this.dismiss();
         },
       });
@@ -120,9 +135,14 @@ export class IntroSequence implements AfterViewInit {
     });
   }
 
+  private markIntroSeen(): void {
+    this.sessionCoordinator.markIntroSeen();
+  }
+
   @HostListener('window:keydown')
   @HostListener('click')
   dismiss(): void {
+    this.markIntroSeen();
     if (this.isDismissing()) return;
     this.isDismissing.set(true);
 
