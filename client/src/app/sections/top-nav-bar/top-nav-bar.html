@@ -1,6 +1,8 @@
 <section
     class="w-full max-w-380 mx-auto flex justify-between items-center px-4 sm:px-8 lg:px-10 py-3 sm:py-5 pt-[max(0.75rem,env(safe-area-inset-top))]">
-    <div class="flex items-center gap-3 sm:gap-4 select-none">
+    <div class="flex items-center gap-3 sm:gap-4 select-none transition-opacity duration-700 ease-in-out"
+        [class.opacity-0]="layout.isImmersive() && layout.isIdle()"
+        [class.pointer-events-none]="layout.isImmersive() && layout.isIdle()">
         <span class="text-2xl sm:text-3xl display text-hev-ink-1">Hevnem</span>
         <span class="hidden sm:inline text-3xl text-hev-ink-3/40"> | </span>
         <div class="hidden sm:flex items-center gap-3 opacity-60 text-lg text-hev-ink-2">
@@ -10,11 +12,9 @@
         </div>
     </div>
 
-    <div class="flex items-center gap-2 transition-opacity duration-500"
-        [class.lg:opacity-0]="layout.isImmersive() && layout.isIdle()"
-        [class.lg:pointer-events-none]="layout.isImmersive() && layout.isIdle()"
-        [class.opacity-40]="layout.isImmersive() && layout.isIdle()"
-        [class.hover:opacity-100]="layout.isImmersive() && layout.isIdle()">
+    <div class="flex items-center gap-2 transition-opacity duration-700 ease-in-out"
+        [class.opacity-0]="layout.isImmersive() && layout.isIdle()"
+        [class.pointer-events-none]="layout.isImmersive() && layout.isIdle()">
         @if (layout.isImmersive()) {
         <button (click)="layout.exitImmersive()"
             class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 hover:bg-black/60 text-white/90 border border-white/10 text-xs font-hev-ui tracking-wider transition backdrop-blur-md cursor-pointer select-none"

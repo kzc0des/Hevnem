@@ -4,7 +4,7 @@
         <span class="w-7 sm:w-8 text-right">{{ currentTimeFormatted() }}</span>
 
         <div class="relative flex-1 flex items-center">
-            <input type="range" min="0" max="100" [value]="progressPercent()" (input)="onSeek($event)"
+            <input type="range" min="0" max="100" step="any" [value]="progressPercent()" (input)="onSeek($event)"
                 class="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-hev-cream focus:outline-none" />
         </div>
 
@@ -35,9 +35,19 @@
             </svg>
         </button>
 
-        <button (click)="audioService.togglePlay()"
-            class="w-12 h-12 sm:w-11 sm:h-11 rounded-full bg-hev-cream text-hev-on-cream flex items-center justify-center hover:scale-105 active:scale-95 transition shadow-lg cursor-pointer">
-            @if (isPlaying()) {
+        <button (click)="onPlayClick()"
+            class="w-12 h-12 sm:w-11 sm:h-11 rounded-full bg-hev-cream text-hev-on-cream flex items-center justify-center hover:scale-105 active:scale-95 transition shadow-lg cursor-pointer"
+            [title]="playbackHealth() === 'error' ? 'Connection lost - Click to retry' : (isPlaying() ? 'Pause' : 'Play')">
+            @if (playbackHealth() === 'reconnecting' || playbackHealth() === 'buffering') {
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 animate-spin text-hev-on-cream" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            } @else if (playbackHealth() === 'error') {
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            } @else if (isPlaying()) {
             <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
             </svg>
