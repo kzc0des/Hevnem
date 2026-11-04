@@ -11,7 +11,9 @@
         [class.opacity-100]="background.isFading()" [class.opacity-0]="!background.isFading()">
     </div>
 
-    <app-top-nav-bar class="relative z-10 shrink-0" />
+    <div #navBar class="stage-nav relative z-10 shrink-0">
+        <app-top-nav-bar />
+    </div>
     <img src="/brand/maginoo-pilyo-logo.png" alt="maginoo-pilyo"
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-8 max-w-[75vw] max-h-[75vh] select-none z-0">
 
@@ -21,18 +23,18 @@
             class="w-full max-w-380 mx-auto flex justify-center lg:justify-between items-center transition-all duration-600 ease-in-out"
             [class.gap-8]="!background.isImmersive()" [class.gap-0]="background.isImmersive()">
 
-            <div class="hidden lg:block shrink-0 transition-all duration-600 ease-in-out"
+            <div #albumCatalog class="hidden lg:block shrink-0 transition-all duration-600 ease-in-out"
                 [class.w-110]="!background.isImmersive()" [class.w-0]="background.isImmersive()"
                 [class.opacity-0]="background.isImmersive()" [class.pointer-events-none]="background.isImmersive()"
                 [class.overflow-hidden]="background.isImmersive()">
                 <app-album-catalog />
             </div>
 
-            <div class="flex-1 flex justify-center max-w-full">
+            <div #nowPlayingCard class="flex-1 flex justify-center max-w-full">
                 <app-now-playing-card />
             </div>
 
-            <div class="hidden lg:block shrink-0 transition-all duration-600 ease-in-out"
+            <div #trackCatalog class="hidden lg:block shrink-0 transition-all duration-600 ease-in-out"
                 [class.w-110]="!background.isImmersive()" [class.w-0]="background.isImmersive()"
                 [class.opacity-0]="background.isImmersive()" [class.pointer-events-none]="background.isImmersive()"
                 [class.overflow-hidden]="background.isImmersive()">

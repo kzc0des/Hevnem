@@ -59,6 +59,7 @@ export class LayoutService {
   isImmersive = signal<boolean>(false);
   isIdle = signal<boolean>(false);
   activeDrawer = signal<ActiveDrawer>(null);
+  introDismissed = signal<boolean>(false);
 
   private autoEnterTimeout?: ReturnType<typeof setTimeout>;
   private idleDimTimeout?: ReturnType<typeof setTimeout>;

@@ -147,7 +147,8 @@ picture {
 
 html.intro-pending main,
 html.intro-pending footer,
-html.intro-pending app-top-nav-bar {
+html.intro-pending app-top-nav-bar,
+html.intro-pending .stage-nav {
     visibility: hidden !important;
     opacity: 0 !important;
 }

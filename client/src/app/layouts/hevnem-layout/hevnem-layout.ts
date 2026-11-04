@@ -29,6 +29,10 @@ export class HevnemLayout {
   private destroyRef = inject(DestroyRef);
   protected readonly isBrowser = isPlatformBrowser(this.platformId);
 
+  private navBar = viewChild<ElementRef<HTMLElement>>('navBar');
+  private albumCatalog = viewChild<ElementRef<HTMLElement>>('albumCatalog');
+  private nowPlayingCard = viewChild<ElementRef<HTMLElement>>('nowPlayingCard');
+  private trackCatalog = viewChild<ElementRef<HTMLElement>>('trackCatalog');
   private playbackDock = viewChild<ElementRef<HTMLElement>>('playbackDock');
   private stageContainer = viewChild<ElementRef<HTMLElement>>('stageContainer');
 
@@ -42,6 +46,12 @@ export class HevnemLayout {
         }
       });
     }
+
+    effect(() => {
+      const dismissed = this.background.introDismissed();
+      if (!this.isBrowser || !dismissed) return;
+      this.playEntranceSequence();
+    });
 
     effect(() => {
       const isImmersive = this.background.isImmersive();
@@ -81,5 +91,32 @@ export class HevnemLayout {
         });
       }
     });
+  }
+
+  private playEntranceSequence(): void {
+    if (!this.isBrowser) return;
+    const nav = this.navBar()?.nativeElement;
+    const card = this.nowPlayingCard()?.nativeElement;
+    const albums = this.albumCatalog()?.nativeElement;
+    const tracks = this.trackCatalog()?.nativeElement;
+    const dock = this.playbackDock()?.nativeElement;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    if (nav) {
+      tl.fromTo(nav, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65 }, 0);
+    }
+    if (card) {
+      tl.fromTo(card, { y: 24, scale: 0.95, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.75 }, 0.05);
+    }
+    if (albums) {
+      tl.fromTo(albums, { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.65 }, 0.1);
+    }
+    if (tracks) {
+      tl.fromTo(tracks, { x: 24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.65 }, 0.1);
+    }
+    if (dock) {
+      tl.fromTo(dock, { y: 35, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65 }, 0.12);
+    }
   }
 }
