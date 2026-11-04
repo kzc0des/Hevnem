@@ -2,6 +2,8 @@
     class="relative h-dvh flex flex-col justify-between overflow-hidden"
     [class.cursor-none]="background.isImmersive() && background.isIdle()">
 
+    <app-intro-sequence />
+
     <div [style.background]="background.baseBackground()" class="absolute inset-0 pointer-events-none z-0">
     </div>
     <div [style.background]="background.incomingBackground()"
