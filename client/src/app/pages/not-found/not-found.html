@@ -1,0 +1,135 @@
+<div
+  class="not-found-container relative min-h-screen w-full flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
+  <div class="watermark-backdrop absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+    <img src="/brand/maginoo-pilyo-logo.png" alt="" aria-hidden="true"
+      class="w-180 max-w-[140vw] opacity-[0.06] select-none filter invert brightness-200" />
+  </div>
+
+  <div class="ambient-glow absolute w-130 h-130 rounded-full pointer-events-none"></div>
+
+  <header class="absolute top-6 right-6 z-20">
+    <button type="button" (click)="toggleLanguage()" [title]="copy().toggleHint"
+      class="language-toggle flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium tracking-wider text-hev-ink-2 bg-white/6 border border-white/10 backdrop-blur-md hover:text-hev-cream hover:bg-white/10 transition-all cursor-pointer">
+      <svg class="w-3.5 h-3.5 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        <path d="M2 12h20"></path>
+      </svg>
+      <span>{{ copy().toggleLabel }}</span>
+    </button>
+  </header>
+
+  <main class="relative z-10 flex flex-col items-center text-center max-w-lg mx-auto w-full">
+    <p class="text-xs sm:text-sm font-semibold tracking-[0.25em] text-hev-ink-2/80 uppercase mb-4">
+      {{ copy().badge }}
+    </p>
+
+    <div class="hero-glyph-row flex items-center justify-center gap-3 sm:gap-6 my-2 sm:my-4">
+      <span
+        class="glyph-digit font-hev-display text-7xl sm:text-9xl font-normal text-hev-cream select-none leading-none">
+        4
+      </span>
+
+      <button type="button" (click)="togglePlay()"
+        [attr.aria-label]="isPlaying() ? 'Pause Walang Makapa' : 'Play Walang Makapa'"
+        class="vinyl-disc-btn group relative cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-hev-cream">
+        <div class="vinyl-disc relative rounded-full shadow-2xl transition-transform duration-300 group-hover:scale-105"
+          [class.spinning]="isPlaying()">
+          <div class="vinyl-grooves absolute inset-0 rounded-full"></div>
+          <div class="vinyl-sheen absolute inset-0 rounded-full"></div>
+
+          <div
+            class="vinyl-center absolute inset-[28%] rounded-full flex items-center justify-center shadow-inner overflow-hidden">
+            <div class="absolute inset-0 bg-linear-to-tr from-[#1b3815] via-[#2d5924] to-[#12240f]"></div>
+            <div class="absolute inset-1.5 rounded-full border border-white/20"></div>
+
+            <div class="relative z-10 flex items-center justify-center text-hev-cream drop-shadow-md">
+              @if (!isPlaying()) {
+              <svg
+                class="w-6 h-6 sm:w-7 sm:h-7 translate-x-0.5 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all"
+                viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              } @else {
+              <div class="center-spindle w-3 h-3 rounded-full bg-sakred-boy-3 border border-white/30 shadow-inner">
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </button>
+
+      <span
+        class="glyph-digit font-hev-display text-7xl sm:text-9xl font-normal text-hev-cream select-none leading-none">
+        4
+      </span>
+    </div>
+
+    <h1 class="font-hev-display italic text-3xl sm:text-4xl text-hev-ink-1 font-normal tracking-wide mt-2 mb-3">
+      {{ copy().title }}
+    </h1>
+
+    <p class="text-sm sm:text-base text-hev-ink-2 max-w-md font-normal leading-relaxed px-2 mb-6 sm:mb-7">
+      {{ copy().description }}
+    </p>
+
+    <div
+      class="player-widget w-full max-w-md bg-white/5 border border-white/12 backdrop-blur-xl rounded-2xl p-4 shadow-2xl flex flex-col gap-2.5 mb-7 transition-all">
+      <div class="flex items-center justify-between gap-3">
+        <button type="button" (click)="togglePlay()"
+          class="play-control-btn flex items-center gap-2 px-2.5 py-1 rounded-lg bg-white/8 hover:bg-white/[0.14] text-hev-cream transition-all cursor-pointer">
+          <span class="text-xs font-mono font-semibold tracking-wider opacity-80">404</span>
+          @if (!isPlaying()) {
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          } @else {
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+          }
+        </button>
+
+        <div class="flex-1 text-left overflow-hidden">
+          <p class="text-xs sm:text-sm font-medium text-hev-ink-1 truncate tracking-tight">
+            Walang Makapa
+          </p>
+          <p class="text-[11px] text-hev-ink-3 truncate">
+            Hev Abi · Sakred Boy
+          </p>
+        </div>
+
+        <div class="text-right font-mono text-xs text-hev-ink-2/90 tabular-nums">
+          <span>{{ formattedCurrentTime() }}</span>
+          <span class="opacity-50 mx-1">/</span>
+          <span class="opacity-75">{{ formattedDuration() }}</span>
+        </div>
+      </div>
+
+      <div class="scrubber-container relative flex items-center w-full h-4 group">
+        <input type="range" min="0" [max]="duration() || 100" [value]="currentTime()" (input)="seek($event)"
+          aria-label="Audio scrubber"
+          class="scrubber-slider w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer outline-none" />
+        <div
+          class="scrubber-fill absolute left-0 h-1 bg-hev-cream rounded-full pointer-events-none transition-[width] duration-75"
+          [style.width.%]="progressPercent()"></div>
+      </div>
+    </div>
+
+    <div class="actions-row flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+      <a routerLink="/"
+        class="primary-btn w-full sm:w-auto px-7 py-3 rounded-full bg-hev-cream text-hev-on-cream font-medium text-sm tracking-wide shadow-lg hover:brightness-105 active:scale-95 transition-all text-center">
+        {{ copy().backBtn }}
+      </a>
+
+      <button type="button" (click)="playRandom()"
+        class="secondary-btn w-full sm:w-auto px-6 py-3 rounded-full bg-white/6 hover:bg-white/12 text-hev-ink-1 border border-white/15 font-medium text-sm tracking-wide active:scale-95 transition-all cursor-pointer">
+        {{ copy().randomBtn }}
+      </button>
+    </div>
+
+    <p class="text-xs text-hev-ink-3/80 font-normal tracking-wide mt-6 flex items-center justify-center gap-1.5">
+      <span>{{ copy().escHint }}</span>
+    </p>
+  </main>
+</div>

@@ -1,0 +1,117 @@
+.not-found-container {
+  background-color: #050a04;
+  background-image: radial-gradient(
+    ellipse at 50% 22%,
+    #1d3d17 0%,
+    #11250f 45%,
+    #050a04 100%
+  );
+  color: var(--color-hev-ink-1, #fbf7ef);
+  font-family: var(--font-hev-ui, 'Harmattan', system-ui, sans-serif);
+}
+
+.ambient-glow {
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(45, 77, 34, 0.4) 0%,
+    rgba(19, 31, 15, 0.1) 45%,
+    rgba(5, 10, 4, 0) 70%
+  );
+  filter: blur(40px);
+}
+
+.vinyl-disc {
+  width: 130px;
+  height: 130px;
+  background-color: #0d0d0d;
+  box-shadow:
+    0 16px 36px -8px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 24px rgba(45, 77, 34, 0.25);
+  transform-origin: center center;
+}
+
+@media (min-width: 640px) {
+  .vinyl-disc {
+    width: 165px;
+    height: 165px;
+  }
+}
+
+.vinyl-grooves {
+  background: repeating-radial-gradient(
+    circle at center,
+    #111111 0,
+    #111111 2px,
+    #1a1a1a 3px,
+    #141414 4px
+  );
+  opacity: 0.95;
+}
+
+.vinyl-sheen {
+  background: conic-gradient(
+    from 35deg at center,
+    rgba(255, 255, 255, 0.16) 0deg,
+    transparent 35deg,
+    rgba(255, 255, 255, 0.08) 80deg,
+    transparent 125deg,
+    rgba(255, 255, 255, 0.16) 180deg,
+    transparent 215deg,
+    rgba(255, 255, 255, 0.08) 260deg,
+    transparent 305deg,
+    rgba(255, 255, 255, 0.16) 360deg
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes spinRecord {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: spinRecord 6s linear infinite;
+}
+
+.scrubber-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background-color: var(--color-hev-cream, #f5e6c8);
+  box-shadow: 0 0 8px rgba(245, 230, 200, 0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.scrubber-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+.scrubber-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  border: none;
+  background-color: var(--color-hev-cream, #f5e6c8);
+  box-shadow: 0 0 8px rgba(245, 230, 200, 0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.scrubber-slider::-moz-range-thumb:hover {
+  transform: scale(1.25);
+}
+
+.primary-btn {
+  box-shadow: 0 8px 24px -4px rgba(245, 230, 200, 0.25);
+}

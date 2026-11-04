@@ -1,8 +1,14 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-    {
-        path: "",
-        loadComponent: () => import('./layouts/hevnem-layout/hevnem-layout').then((l) => l.HevnemLayout)
-    }
+  {
+    path: '',
+    loadComponent: () =>
+      import('./layouts/hevnem-layout/hevnem-layout').then((l) => l.HevnemLayout),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./pages/not-found/not-found').then((m) => m.NotFoundComponent),
+  },
 ];
