@@ -1,3 +1,4 @@
+@if (!hasSeenIntro()) {
 <div #introRoot
   class="intro-curtain fixed inset-0 z-50 flex flex-col items-center justify-center select-none cursor-pointer overflow-hidden"
   aria-label="Click or press any key to enter Hevnem">
@@ -6,7 +7,7 @@
   <div class="relative z-10 flex flex-col items-center gap-6">
     <div class="relative w-64 h-24 sm:w-80 sm:h-32">
       <div class="intro-base absolute inset-0 mask-hevnem-base overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#fbf8f1] via-[#ded7c8] to-[#b0a797]"></div>
+        <div class="absolute inset-0 bg-linear-to-b from-[#fbf8f1] via-[#ded7c8] to-[#b0a797]"></div>
 
         <div class="intro-sheen absolute inset-0 pointer-events-none"></div>
       </div>
@@ -34,3 +35,4 @@
     Click anywhere to enter
   </div>
 </div>
+}

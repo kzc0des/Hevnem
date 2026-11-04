@@ -44,10 +44,16 @@ export class LayoutService {
     "Bahay Namin Maliit Lamang": "var(--color-bahay-namin-maliit-lamang-1)",
   };
 
-  baseBackground = signal<string>(this.ALBUM_BACKGROUNDS["Pautang ng Pag-ibig"]);
+  baseBackground = signal<string>(
+    this.ALBUM_BACKGROUNDS[this.audioPlayerService.currentSong().albumName] ??
+      this.ALBUM_BACKGROUNDS["Pautang ng Pag-ibig"]
+  );
   incomingBackground = signal<string>('');
   isFading = signal<boolean>(false);
-  currentAccent = signal<string>(this.ALBUM_ACCENTS["Pautang ng Pag-ibig"]);
+  currentAccent = signal<string>(
+    this.ALBUM_ACCENTS[this.audioPlayerService.currentSong().albumName] ??
+      this.ALBUM_ACCENTS["Pautang ng Pag-ibig"]
+  );
   private fadeTimeout?: ReturnType<typeof setTimeout>;
 
   isImmersive = signal<boolean>(false);
@@ -191,7 +197,70 @@ export class LayoutService {
 
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement;
-      if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) return;
+      if (
+        target &&
+        (target.tagName === 'TEXTAREA' ||
+          (target.tagName === 'INPUT' && !['range', 'button', 'checkbox'].includes((target as HTMLInputElement).type)) ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
+      if (event.code === 'Space' || event.key === ' ') {
+        event.preventDefault();
+        this.audioPlayerService.togglePlay();
+        onUserActivity();
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        this.audioPlayerService.seekRelative(-5);
+        onUserActivity();
+        return;
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        this.audioPlayerService.seekRelative(5);
+        onUserActivity();
+        return;
+      }
+
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        this.audioPlayerService.adjustVolume(0.05);
+        onUserActivity();
+        return;
+      }
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        this.audioPlayerService.adjustVolume(-0.05);
+        onUserActivity();
+        return;
+      }
+
+      if ((event.key === 'm' || event.key === 'M') && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        this.audioPlayerService.toggleMute();
+        onUserActivity();
+        return;
+      }
+
+      if ((event.key === 'n' || event.key === 'N') && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        this.audioPlayerService.next();
+        onUserActivity();
+        return;
+      }
+
+      if ((event.key === 'p' || event.key === 'P') && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        this.audioPlayerService.previous();
+        onUserActivity();
+        return;
+      }
 
       if ((event.key === 'f' || event.key === 'F') && !event.ctrlKey && !event.metaKey && !event.altKey) {
         event.preventDefault();

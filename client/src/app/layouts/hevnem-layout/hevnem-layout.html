@@ -2,7 +2,9 @@
     class="relative h-dvh flex flex-col justify-between overflow-hidden"
     [class.cursor-none]="background.isImmersive() && background.isIdle()">
 
-    <app-intro-sequence />
+    @if (isBrowser) {
+        <app-intro-sequence />
+    }
 
     <div [style.background]="background.baseBackground()" class="absolute inset-0 pointer-events-none z-0">
     </div>
@@ -15,13 +17,13 @@
     <img src="/brand/maginoo-pilyo-logo.png" alt="maginoo-pilyo"
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-8 max-w-[75vw] max-h-[75vh] select-none z-0">
 
-    <main class="relative z-10 flex-1 min-h-0 flex items-center w-full px-4 sm:px-8 lg:px-10"
+    <main #stageContainer class="relative z-10 flex-1 min-h-0 flex items-center w-full px-4 sm:px-8 lg:px-10 will-change-transform"
         [class.pointer-events-none]="background.activeDrawer() !== null">
         <section
-            class="w-full max-w-380 mx-auto flex justify-center lg:justify-between items-center transition-all duration-700 ease-in-out"
+            class="w-full max-w-380 mx-auto flex justify-center lg:justify-between items-center transition-all duration-600 ease-in-out"
             [class.gap-8]="!background.isImmersive()" [class.gap-0]="background.isImmersive()">
 
-            <div class="hidden lg:block shrink-0 transition-all duration-700 ease-in-out"
+            <div class="hidden lg:block shrink-0 transition-all duration-600 ease-in-out"
                 [class.w-110]="!background.isImmersive()" [class.w-0]="background.isImmersive()"
                 [class.opacity-0]="background.isImmersive()" [class.pointer-events-none]="background.isImmersive()"
                 [class.overflow-hidden]="background.isImmersive()">
@@ -32,7 +34,7 @@
                 <app-now-playing-card />
             </div>
 
-            <div class="hidden lg:block shrink-0 transition-all duration-700 ease-in-out"
+            <div class="hidden lg:block shrink-0 transition-all duration-600 ease-in-out"
                 [class.w-110]="!background.isImmersive()" [class.w-0]="background.isImmersive()"
                 [class.opacity-0]="background.isImmersive()" [class.pointer-events-none]="background.isImmersive()"
                 [class.overflow-hidden]="background.isImmersive()">
@@ -41,10 +43,7 @@
         </section>
     </main>
 
-    <!-- Playback Dock -->
-    <footer class="relative z-10 shrink-0 px-3 sm:px-8 lg:px-12 w-full transition-all duration-700 ease-in-out pb-[max(2.5rem,calc(env(safe-area-inset-bottom)+1.5rem))] sm:pb-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] lg:pb-4"
-        [class.h-0]="background.isImmersive()" [class.opacity-0]="background.isImmersive()"
-        [class.pointer-events-none]="background.isImmersive()" [class.overflow-hidden]="background.isImmersive()">
+    <footer #playbackDock class="relative z-10 shrink-0 px-3 sm:px-8 lg:px-12 w-full pb-[max(2.5rem,calc(env(safe-area-inset-bottom)+1.5rem))] sm:pb-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] lg:pb-4 will-change-transform">
         <div class="w-full max-w-380 mx-auto">
             <app-playback-track-widget />
         </div>

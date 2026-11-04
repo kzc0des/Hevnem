@@ -1,7 +1,7 @@
-<div class="now-playing-container flex flex-col items-center justify-center text-center select-none mx-auto w-full transition-all duration-700 px-3 sm:px-0"
+<div class="now-playing-container flex flex-col items-center justify-center text-center select-none mx-auto w-full transition-all duration-600 px-3 sm:px-0"
     [class.max-w-lg]="!layout.isImmersive()" [class.max-w-3xl]="layout.isImmersive()">
     <div class="relative group">
-        <div class="absolute -inset-1.5 rounded-3xl bg-white/10 blur-2xl opacity-40 group-hover:opacity-70 transition duration-500"
+        <div class="absolute -inset-1.5 rounded-3xl bg-white/10 blur-2xl opacity-40 group-hover:opacity-70 transition duration-600"
             [class.blur-3xl]="layout.isImmersive()" [class.opacity-50]="layout.isImmersive()">
         </div>
 
@@ -51,7 +51,7 @@
         </div>
 
         @if (layout.isImmersive()) {
-        <div class="w-full max-w-xl mt-5 sm:mt-6 transition-all duration-500 animate-title-fade">
+        <div class="w-full max-w-xl mt-5 sm:mt-6 animate-control-enter">
             <app-track-control />
         </div>
         }

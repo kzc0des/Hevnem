@@ -1,7 +1,9 @@
-import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { AlbumName, RepeatMode, SelectedSong, Song } from '../models/song-model';
 import { isPlatformBrowser } from '@angular/common';
 import { CatalogService } from './catalog.service';
+import { PlaybackSequencer } from '../helpers/playback-sequencer';
+import { CrossfadeEngine } from '../helpers/crossfade-engine';
 
 @Injectable({
   providedIn: 'root',
@@ -9,21 +11,23 @@ import { CatalogService } from './catalog.service';
 export class AudioPlayerService {
   private platformId = inject(PLATFORM_ID);
   private catalogService = inject(CatalogService);
+  private destroyRef = inject(DestroyRef);
   private isBrowser = isPlatformBrowser(this.platformId);
-  private audio?: HTMLAudioElement;
+
+  private sequencer: PlaybackSequencer;
+  private engine: CrossfadeEngine;
+  private wasPlayingOnInit = false;
 
   currentSong = signal<SelectedSong>(this.getInitialTrack());
-
   isPlaying = signal<boolean>(false);
+  playbackHealth = signal<'idle' | 'buffering' | 'reconnecting' | 'error'>('idle');
   currentTime = signal<number>(0);
   duration = signal<number>(0);
   volume = signal<number>(0.8);
+  private lastVolume = 0.8;
 
   repeatMode = signal<RepeatMode>('off');
   isShuffle = signal<boolean>(false);
-
-  private shufflePool: Song[] = [];
-  private playedHistory: Song[] = [];
 
   currentTimeFormatted = computed(() => this.formatTime(this.currentTime()));
   durationFormatted = computed(() => this.formatTime(this.duration()));
@@ -34,13 +38,57 @@ export class AudioPlayerService {
   });
 
   constructor() {
-    if (this.isBrowser) {
-      this.audio = new Audio();
-      this.audio.volume = this.volume();
-      this.setupAudioListeners();
-    }
+    this.sequencer = new PlaybackSequencer(this.catalogService);
+    this.engine = new CrossfadeEngine(
+      {
+        onTimeUpdate: (t) => this.currentTime.set(t),
+        onDurationChange: (d) => this.duration.set(d),
+        onPlayStateChange: (p) => {
+          this.isPlaying.set(p);
+          this.persistTrack(this.currentSong(), p);
+        },
+        onPlaybackHealthChange: (h) => this.playbackHealth.set(h),
+        onEnded: () => this.handleTrackEnded(),
+        onTrackTransition: (incoming) => this.handleTrackTransition(incoming),
+        peekNextTrack: () => this.sequencer.peekNextTrack(this.currentSong().name),
+        canCrossfade: () => this.repeatMode() !== 'track',
+      },
+      { isBrowser: this.isBrowser }
+    );
+
+    this.engine.setVolume(this.volume());
+
+    this.restoreInitialPlayback();
+
+    this.destroyRef.onDestroy(() => {
+      this.engine.destroy();
+    });
   }
+
   private getInitialTrack(): SelectedSong {
+    if (this.isBrowser) {
+      try {
+        const saved = localStorage.getItem('hevnem:last_selected_track');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.isPlaying === true) {
+            this.wasPlayingOnInit = true;
+          }
+          const matched = this.catalogService.getAllSongs().find((s) => s.name === parsed.name);
+          if (matched) {
+            this.catalogService.onAlbumSelect(matched.album);
+            return {
+              name: matched.name,
+              albumName: matched.album,
+              cover: matched.cover,
+              src: matched.src,
+              duration: matched.duration,
+            };
+          }
+        }
+      } catch {}
+    }
+
     const firstSong = this.catalogService.getSongsByAlbum(this.catalogService.currentAlbum())[0];
     if (firstSong) {
       return {
@@ -59,37 +107,51 @@ export class AudioPlayerService {
     };
   }
 
-  private setupAudioListeners() {
-    if (!this.audio) return;
-    this.audio.ontimeupdate = () => {
-      this.currentTime.set(this.audio?.currentTime || 0);
-    };
-    this.audio.onloadedmetadata = () => {
-      this.duration.set(this.audio?.duration || 0);
-    };
-    this.audio.onended = () => {
-      this.currentTime.set(0);
-      if (this.repeatMode() === 'track') {
-        this.audio?.play().catch((err) => console.warn('Audio play prevented:', err));
-      } else {
-        this.next(true);
-      }
-    };
-    this.audio.onplay = () => this.isPlaying.set(true);
-    this.audio.onpause = () => this.isPlaying.set(false);
+  private restoreInitialPlayback() {
+    if (!this.isBrowser) return;
+    const song = this.currentSong();
+    if (!song.src) return;
+
+    if (this.wasPlayingOnInit) {
+      this.engine.load(song.src, true);
+
+      const unlockOnGesture = () => {
+        if (!this.isPlaying()) {
+          this.play();
+        }
+        window.removeEventListener('pointerdown', unlockOnGesture);
+        window.removeEventListener('keydown', unlockOnGesture);
+      };
+      window.addEventListener('pointerdown', unlockOnGesture, { once: true });
+      window.addEventListener('keydown', unlockOnGesture, { once: true });
+    } else {
+      this.engine.load(song.src, false);
+    }
+  }
+
+  private persistTrack(song: { name: string; albumName?: string; album?: string }, isPlaying?: boolean) {
+    if (!this.isBrowser) return;
+    try {
+      localStorage.setItem(
+        'hevnem:last_selected_track',
+        JSON.stringify({
+          name: song.name,
+          album: song.albumName || song.album,
+          isPlaying: isPlaying !== undefined ? isPlaying : this.isPlaying(),
+        })
+      );
+    } catch {}
   }
 
   onSongSelect(song: SelectedSong) {
+    this.persistTrack(song, true);
     this.currentSong.set(song);
-    if (this.isBrowser && this.audio && song.src) {
-      this.audio.src = song.src;
-      this.audio.load();
-      this.play();
+    if (song.src) {
+      this.engine.load(song.src, true);
     }
   }
 
   togglePlay() {
-    if (!this.audio) return;
     if (this.isPlaying()) {
       this.pause();
     } else {
@@ -98,137 +160,115 @@ export class AudioPlayerService {
   }
 
   play() {
-    if (!this.audio) return;
-    if (!this.audio.src && this.currentSong().src) {
-      this.audio.src = this.currentSong().src!;
-    }
-    this.audio.play().catch((err) => console.warn('Audio play prevented:', err));
+    this.persistTrack(this.currentSong(), true);
+    this.engine.play(this.currentSong().src);
   }
 
   pause() {
-    this.audio?.pause();
+    this.persistTrack(this.currentSong(), false);
+    this.engine.pause();
+  }
+
+  retryPlayback() {
+    this.engine.retryPlayback();
   }
 
   seek(seconds: number) {
-    if (this.audio) {
-      this.audio.currentTime = seconds;
-      this.currentTime.set(seconds);
-    }
+    this.engine.seek(seconds);
+    this.currentTime.set(seconds);
   }
 
   setVolume(val: number) {
     this.volume.set(val);
-    if (this.audio) {
-      this.audio.volume = val;
+    this.engine.setVolume(val);
+  }
+
+  seekRelative(delta: number) {
+    const dur = this.duration();
+    const cur = this.currentTime();
+    const target = Math.max(0, Math.min(dur, cur + delta));
+    this.seek(target);
+  }
+
+  adjustVolume(delta: number) {
+    const next = Math.max(0, Math.min(1, Math.round((this.volume() + delta) * 100) / 100));
+    this.setVolume(next);
+  }
+
+  toggleMute() {
+    if (this.volume() > 0) {
+      this.lastVolume = this.volume();
+      this.setVolume(0);
+    } else {
+      this.setVolume(this.lastVolume > 0 ? this.lastVolume : 0.8);
     }
   }
 
   toggleRepeat() {
-    const modes: RepeatMode[] = ['off', 'album', 'track'];
-    const nextIndex = (modes.indexOf(this.repeatMode()) + 1) % modes.length;
-    this.repeatMode.set(modes[nextIndex]);
+    const next = this.sequencer.toggleRepeat();
+    this.repeatMode.set(next);
+    if (next === 'track') {
+      this.engine.abort();
+    }
   }
 
   toggleShuffle() {
-    this.isShuffle.update((prev) => !prev);
-    if (this.isShuffle()) {
-      this.buildShufflePool();
-    } else {
-      this.shufflePool = [];
-    }
-  }
-
-  private buildShufflePool() {
-    const all = this.catalogService
-      .getAllSongs()
-      .filter((s) => s.name !== this.currentSong().name);
-
-    for (let i = all.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [all[i], all[j]] = [all[j], all[i]];
-    }
-    this.shufflePool = all;
+    const next = this.sequencer.toggleShuffle(this.currentSong().name);
+    this.isShuffle.set(next);
+    this.engine.abort();
   }
 
   next(isAutoAdvance = false) {
+    if (!isAutoAdvance) {
+      this.engine.abort();
+    }
+
     if (isAutoAdvance && this.repeatMode() === 'track') {
       this.seek(0);
       this.play();
       return;
     }
 
-    const currentTrack = this.catalogService
-      .getAllSongs()
-      .find((s) => s.name === this.currentSong().name);
-    if (currentTrack) {
-      this.playedHistory.push(currentTrack);
-    }
-
-    if (this.isShuffle()) {
-      if (this.shufflePool.length === 0) {
-        this.buildShufflePool();
-      }
-      const nextTrack = this.shufflePool.shift();
-      if (nextTrack) {
-        this.catalogService.onAlbumSelect(nextTrack.album);
-        this.playTrack(nextTrack);
-      }
-      return;
-    }
-
-    const albumSongs = this.catalogService.currentSongs();
-    const currentIndex = albumSongs.findIndex((s) => s.name === this.currentSong().name);
-
-    if (currentIndex !== -1 && currentIndex < albumSongs.length - 1) {
-      this.playTrack(albumSongs[currentIndex + 1]);
-    } else {
-      if (this.repeatMode() === 'album') {
-        this.playTrack(albumSongs[0]);
-      } else {
-        const albums = this.catalogService.getAlbumList();
-        const currentAlbumIdx = albums.indexOf(this.catalogService.currentAlbum());
-        const nextAlbum = albums[(currentAlbumIdx + 1) % albums.length];
-        this.catalogService.onAlbumSelect(nextAlbum);
-        const nextAlbumSongs = this.catalogService.getSongsByAlbum(nextAlbum);
-        if (nextAlbumSongs.length > 0) {
-          this.playTrack(nextAlbumSongs[0]);
-        }
-      }
+    const nextTrack = this.sequencer.getNextTrack(this.currentSong().name, isAutoAdvance);
+    if (nextTrack) {
+      this.playTrack(nextTrack);
     }
   }
 
   previous() {
+    this.engine.abort();
+
     if (this.currentTime() > 3) {
       this.seek(0);
       return;
     }
 
-    if (this.isShuffle() && this.playedHistory.length > 0) {
-      const prevTrack = this.playedHistory.pop()!;
-      this.catalogService.onAlbumSelect(prevTrack.album);
+    const prevTrack = this.sequencer.getPreviousTrack(this.currentSong().name);
+    if (prevTrack) {
       this.playTrack(prevTrack);
-      return;
     }
+  }
 
-    const albumSongs = this.catalogService.currentSongs();
-    const currentIndex = albumSongs.findIndex((s) => s.name === this.currentSong().name);
-
-    if (currentIndex > 0) {
-      this.playTrack(albumSongs[currentIndex - 1]);
+  private handleTrackEnded() {
+    this.currentTime.set(0);
+    if (this.repeatMode() === 'track') {
+      this.seek(0);
+      this.play();
     } else {
-      if (this.repeatMode() === 'album') {
-        this.playTrack(albumSongs[albumSongs.length - 1]);
-      } else {
-        const albums = this.catalogService.getAlbumList();
-        const currentAlbumIdx = albums.indexOf(this.catalogService.currentAlbum());
-        const prevAlbum = albums[(currentAlbumIdx - 1 + albums.length) % albums.length];
-        this.catalogService.onAlbumSelect(prevAlbum);
-        const prevAlbumSongs = this.catalogService.getSongsByAlbum(prevAlbum);
-        if (prevAlbumSongs.length > 0) {
-          this.playTrack(prevAlbumSongs[prevAlbumSongs.length - 1]);
-        }
-      }
+      this.next(true);
     }
+  }
+
+  private handleTrackTransition(incomingSong: Song) {
+    this.persistTrack(incomingSong, true);
+    this.sequencer.commitTrack(this.currentSong().name, incomingSong);
+    this.currentSong.set({
+      name: incomingSong.name,
+      albumName: incomingSong.album,
+      cover: incomingSong.cover,
+      src: incomingSong.src,
+      duration: incomingSong.duration,
+    });
   }
 
   private playTrack(song: Song) {
