@@ -15,8 +15,9 @@
 
                 <div
                     class="card-face card-front absolute inset-0 rounded-3xl overflow-hidden shadow-2xl shadow-black/80 ring-1 ring-white/15 bg-black">
-                    @for (cover of [currentSong().cover]; track cover) {
+                    @for (cover of [resolvedCover()]; track cover) {
                     <img [src]="cover" [alt]="currentSong().name"
+                        (error)="handleImageError()"
                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 animate-cover-settle" />
                     }
                 </div>
