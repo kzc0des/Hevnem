@@ -15,6 +15,7 @@ import { TrackCatalog } from '../../sections/track-catalog/track-catalog';
 import { PlaybackTrackWidget } from '../../sections/playback-track-widget/playback-track-widget';
 import { IntroSequence } from '../../sections/intro-sequence/intro-sequence';
 import { LayoutService } from '../../services/layout.service';
+import { DevToolsShieldService } from '../../services/devtools-shield.service';
 import gsap from 'gsap';
 
 @Component({
@@ -25,6 +26,7 @@ import gsap from 'gsap';
 })
 export class HevnemLayout {
   background = inject(LayoutService);
+  private readonly shield = inject(DevToolsShieldService);
   private platformId = inject(PLATFORM_ID);
   private destroyRef = inject(DestroyRef);
   protected readonly isBrowser = isPlatformBrowser(this.platformId);
@@ -37,6 +39,8 @@ export class HevnemLayout {
   private stageContainer = viewChild<ElementRef<HTMLElement>>('stageContainer');
 
   constructor() {
+    this.shield.init();
+
     if (this.isBrowser) {
       this.destroyRef.onDestroy(() => {
         const dock = this.playbackDock()?.nativeElement;
