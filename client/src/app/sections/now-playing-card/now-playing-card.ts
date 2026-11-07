@@ -3,14 +3,17 @@ import {
   computed,
   DestroyRef,
   effect,
+  ElementRef,
   inject,
   PLATFORM_ID,
   signal,
+  viewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AudioPlayerService } from '../../services/audio-player.service';
 import { LayoutService } from '../../services/layout.service';
 import { TrackControl } from '../playback-track-widget/components/track-control/track-control';
+import gsap from 'gsap';
 
 @Component({
   selector: 'app-now-playing-card',
@@ -24,6 +27,9 @@ export class NowPlayingCard {
   private platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   layout = inject(LayoutService);
+
+  private readonly titleHeading = viewChild<ElementRef<HTMLElement>>('titleHeading');
+  private readonly coverImg = viewChild<ElementRef<HTMLElement>>('coverImg');
 
   currentSong = this.audioService.currentSong;
   isFlipped = signal<boolean>(false);
@@ -42,6 +48,26 @@ export class NowPlayingCard {
       this.currentSong();
       this.isFlipped.set(false);
       this.hasImageError.set(false);
+
+      if (this.isBrowser) {
+        const titleEl = this.titleHeading()?.nativeElement;
+        const coverEl = this.coverImg()?.nativeElement;
+
+        if (titleEl) {
+          gsap.fromTo(
+            titleEl,
+            { opacity: 0.2, y: 4 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'sine.out', overwrite: true }
+          );
+        }
+        if (coverEl) {
+          gsap.fromTo(
+            coverEl,
+            { opacity: 0.85, scale: 1.03 },
+            { opacity: 1, scale: 1, duration: 0.45, ease: 'sine.out', overwrite: true }
+          );
+        }
+      }
     });
 
     if (this.isBrowser) {

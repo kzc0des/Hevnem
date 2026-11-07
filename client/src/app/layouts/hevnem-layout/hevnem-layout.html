@@ -17,7 +17,8 @@
     <img src="/brand/maginoo-pilyo-logo.png" alt="maginoo-pilyo"
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-8 max-w-[75vw] max-h-[75vh] select-none z-0">
 
-    <main #stageContainer class="relative z-10 flex-1 min-h-0 flex items-center w-full px-4 sm:px-8 lg:px-10 will-change-transform"
+    <main #stageContainer
+        class="relative z-10 flex-1 min-h-0 flex items-center w-full px-4 sm:px-8 lg:px-10 will-change-transform"
         [class.pointer-events-none]="background.activeDrawer() !== null">
         <section
             class="w-full max-w-380 mx-auto flex justify-center lg:justify-between items-center transition-all duration-600 ease-in-out"
@@ -43,7 +44,35 @@
         </section>
     </main>
 
-    <footer #playbackDock class="relative z-10 shrink-0 px-3 sm:px-8 lg:px-12 w-full pb-[max(2.5rem,calc(env(safe-area-inset-bottom)+1.5rem))] sm:pb-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] lg:pb-4 will-change-transform">
+    <div class="hidden md:block pointer-events-none absolute inset-x-0 bottom-24 lg:bottom-28 z-20 transition-opacity duration-700 ease-in-out"
+        [class.opacity-0]="background.isImmersive() && background.isIdle()"
+        [class.pointer-events-none]="background.isImmersive() && background.isIdle()"
+        [class.opacity-20]="!(background.isImmersive() && background.isIdle())">
+        <div class="w-full max-w-380 mx-auto px-4 sm:px-8 lg:px-10 flex justify-end">
+            <a href="https://kenzovidal.tech" target="_blank" rel="noopener noreferrer"
+                class="pointer-events-auto cursor-pointer group/sig flex flex-col items-center select-none"
+                title="Visit Kenzo's portfolio">
+                <span
+                    class="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase font-mono text-hev-ink-3 font-semibold group-hover/sig:text-hev-ink-2 transition-colors">
+                    ENGINEERED BY
+                </span>
+                <div class="relative flex flex-col items-center -mt-0.5">
+                    <span
+                        class="font-signature text-2xl lg:text-3xl text-hev-cream group-hover/sig:text-white tracking-wide drop-shadow-md transition-colors">
+                        Kenzo Vidal
+                    </span>
+                    <svg class="w-24 sm:w-28 -mt-1 text-hev-cream/50 group-hover/sig:text-hev-cream transition-colors"
+                        viewBox="0 0 120 14" fill="none">
+                        <path d="M4 6C35 12 75 13 116 4" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <footer #playbackDock
+        class="relative z-10 shrink-0 px-3 sm:px-8 lg:px-12 w-full pb-[max(2.5rem,calc(env(safe-area-inset-bottom)+1.5rem))] sm:pb-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] lg:pb-4 will-change-transform">
         <div class="w-full max-w-380 mx-auto">
             <app-playback-track-widget />
         </div>
@@ -80,6 +109,15 @@
                 } @else if (background.activeDrawer() === 'tracks') {
                 <app-track-catalog />
                 }
+
+                <div class="pt-6 pb-3 text-center select-none opacity-20 hover:opacity-80 transition">
+                    <p class="text-[10px] tracking-[0.25em] uppercase font-mono text-hev-cream">
+                        Hevnem <span class="mx-1">&#8226;</span> Engineered by <a href="https://kenzovidal.tech"
+                            target="_blank" rel="noopener noreferrer"
+                            class="hover:underline hover:text-white transition-colors cursor-pointer decoration-white/40">Kenzo
+                            Vidal</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

@@ -270,7 +270,7 @@ export class CrossfadeEngine {
     incoming.currentTime = 0;
     incoming.volume = 0;
     incoming.muted = false;
-    incoming.play().catch((err) => console.warn('Audio play prevented:', err));
+    this.handlePlayPromise(incoming.play(), 'crossfade');
     this.startTimeTracking();
 
     const durationMs = this.crossfadeDuration * 1000;
@@ -408,10 +408,11 @@ export class CrossfadeEngine {
         if (targetTime > 0) {
           try {
             active.currentTime = targetTime;
-          } catch {}
+          } catch { }
         }
         if (shouldPlay) {
           active.play().catch((err) => {
+            if (err?.name === 'AbortError') return;
             console.warn('Playback resume failed during reconnect:', err);
             this.handleMediaError();
           });
@@ -450,7 +451,7 @@ export class CrossfadeEngine {
       this.activeAudio.src = src;
       try {
         this.activeAudio.currentTime = 0;
-      } catch {}
+      } catch { }
       this.activeAudio.load();
       if (autoPlay) {
         this.play();
@@ -465,8 +466,17 @@ export class CrossfadeEngine {
     }
     this.activeAudio.muted = false;
     this.activeAudio.volume = this.masterVolume;
-    this.activeAudio.play().catch((err) => console.warn('Audio play prevented:', err));
+    this.handlePlayPromise(this.activeAudio.play(), 'play');
     this.startTimeTracking();
+  }
+
+  private handlePlayPromise(promise: Promise<void>, context = 'playback') {
+    promise.catch((err) => {
+      if (err?.name === 'AbortError') {
+        return;
+      }
+      console.warn(`Audio play prevented (${context}):`, err);
+    });
   }
 
   pause() {

@@ -1,37 +1,47 @@
 export type TabSessionCallback = () => void;
 
-interface SessionMessage {
-  type: 'JOIN' | 'ACK' | 'LEAVE' | 'INTRO_SEEN';
-  id?: string;
-  target?: string;
+interface TabRegistryEntry {
+  lastSeen: number;
 }
+
+type TabRegistry = Record<string, TabRegistryEntry>;
+
+const REGISTRY_KEY = 'hevnem:tab_registry';
+const INTRO_KEY = 'hevnem:intro_seen';
+const RELOADING_KEY = 'hevnem:session_reloading';
+const HEARTBEAT_INTERVAL_MS = 2500;
+const LEASE_TTL_MS = 5500;
 
 export class TabSessionCoordinator {
   readonly tabId: string;
   private channel?: BroadcastChannel;
-  private knownPeers = new Set<string>();
+  private heartbeatTimer?: ReturnType<typeof setInterval>;
   private introSeenListeners = new Set<TabSessionCallback>();
   private isBrowser: boolean;
   private isReloading = false;
 
   constructor(options: { isBrowser: boolean }) {
     this.isBrowser = options.isBrowser;
-    this.tabId = 'tab_' + Math.random().toString(36).substring(2, 11) + '_' + Date.now();
+    this.tabId = 'tab_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now();
 
     if (!this.isBrowser) return;
 
     try {
-      this.isReloading = sessionStorage.getItem('hevnem:session_reloading') === 'true';
-      sessionStorage.removeItem('hevnem:session_reloading');
+      this.isReloading = sessionStorage.getItem(RELOADING_KEY) === 'true';
+      sessionStorage.removeItem(RELOADING_KEY);
     } catch {}
+
+    this.pulseHeartbeat();
+    this.heartbeatTimer = setInterval(() => this.pulseHeartbeat(), HEARTBEAT_INTERVAL_MS);
 
     if (typeof BroadcastChannel !== 'undefined') {
       try {
         this.channel = new BroadcastChannel('hevnem:tab-presence');
-        this.channel.onmessage = (event: MessageEvent<SessionMessage>) => {
-          this.handleChannelMessage(event.data);
+        this.channel.onmessage = (event) => {
+          if (event.data?.type === 'INTRO_SEEN') {
+            this.notifyIntroSeenListeners();
+          }
         };
-        this.channel.postMessage({ type: 'JOIN', id: this.tabId });
       } catch {}
     }
 
@@ -39,56 +49,66 @@ export class TabSessionCoordinator {
     window.addEventListener('storage', this.handleStorageEvent);
   }
 
-  private handleChannelMessage(msg: SessionMessage): void {
-    if (!msg || !msg.type) return;
-
-    switch (msg.type) {
-      case 'JOIN':
-        if (msg.id && msg.id !== this.tabId) {
-          this.knownPeers.add(msg.id);
-          this.channel?.postMessage({
-            type: 'ACK',
-            id: this.tabId,
-            target: msg.id,
-          });
-        }
-        break;
-
-      case 'ACK':
-        if (msg.id && msg.id !== this.tabId && (!msg.target || msg.target === this.tabId)) {
-          this.knownPeers.add(msg.id);
-        }
-        break;
-
-      case 'LEAVE':
-        if (msg.id) {
-          this.knownPeers.delete(msg.id);
-        }
-        break;
-
-      case 'INTRO_SEEN':
-        this.notifyIntroSeenListeners();
-        break;
+  private readRegistry(): TabRegistry {
+    try {
+      const raw = localStorage.getItem(REGISTRY_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
     }
   }
 
-  private handleStorageEvent = (event: StorageEvent): void => {
-    if (event.key === 'hevnem:intro_seen' && event.newValue === 'true') {
-      this.notifyIntroSeenListeners();
+  private writeRegistry(registry: TabRegistry): void {
+    try {
+      localStorage.setItem(REGISTRY_KEY, JSON.stringify(registry));
+    } catch {}
+  }
+
+  private pulseHeartbeat(): void {
+    const registry = this.readRegistry();
+    const now = Date.now();
+
+    for (const [id, entry] of Object.entries(registry)) {
+      if (now - entry.lastSeen > LEASE_TTL_MS) {
+        delete registry[id];
+      }
     }
-  };
+
+    registry[this.tabId] = { lastSeen: now };
+    this.writeRegistry(registry);
+  }
+
+  private countOtherActiveTabs(): number {
+    const registry = this.readRegistry();
+    const now = Date.now();
+    let count = 0;
+    for (const [id, entry] of Object.entries(registry)) {
+      if (id !== this.tabId && now - entry.lastSeen <= LEASE_TTL_MS) {
+        count++;
+      }
+    }
+    return count;
+  }
 
   private handlePageHide = (): void => {
     try {
-      sessionStorage.setItem('hevnem:session_reloading', 'true');
+      sessionStorage.setItem(RELOADING_KEY, 'true');
     } catch {}
 
-    this.channel?.postMessage({ type: 'LEAVE', id: this.tabId });
+    const registry = this.readRegistry();
+    delete registry[this.tabId];
+    this.writeRegistry(registry);
 
-    if (this.knownPeers.size === 0) {
+    if (this.countOtherActiveTabs() === 0) {
       try {
-        localStorage.removeItem('hevnem:intro_seen');
+        localStorage.removeItem(INTRO_KEY);
       } catch {}
+    }
+  };
+
+  private handleStorageEvent = (event: StorageEvent): void => {
+    if (event.key === INTRO_KEY && event.newValue === 'true') {
+      this.notifyIntroSeenListeners();
     }
   };
 
@@ -97,23 +117,24 @@ export class TabSessionCoordinator {
 
     if (this.isReloading) {
       try {
-        localStorage.setItem('hevnem:intro_seen', 'true');
+        localStorage.setItem(INTRO_KEY, 'true');
       } catch {}
       return false;
+    }
+
+    const otherTabs = this.countOtherActiveTabs();
+    if (otherTabs === 0) {
+      try {
+        localStorage.removeItem(INTRO_KEY);
+      } catch {}
+      return true;
     }
 
     try {
-      if (localStorage.getItem('hevnem:intro_seen') === 'true') {
+      if (localStorage.getItem(INTRO_KEY) === 'true') {
         return false;
       }
     } catch {}
-
-    if (this.knownPeers.size > 0) {
-      try {
-        localStorage.setItem('hevnem:intro_seen', 'true');
-      } catch {}
-      return false;
-    }
 
     return true;
   }
@@ -122,7 +143,7 @@ export class TabSessionCoordinator {
     if (!this.isBrowser) return;
 
     try {
-      localStorage.setItem('hevnem:intro_seen', 'true');
+      localStorage.setItem(INTRO_KEY, 'true');
     } catch {}
 
     this.channel?.postMessage({ type: 'INTRO_SEEN' });
@@ -147,6 +168,11 @@ export class TabSessionCoordinator {
   destroy(): void {
     if (!this.isBrowser) return;
 
+    if (this.heartbeatTimer) {
+      clearInterval(this.heartbeatTimer);
+      this.heartbeatTimer = undefined;
+    }
+
     window.removeEventListener('pagehide', this.handlePageHide);
     window.removeEventListener('storage', this.handleStorageEvent);
 
@@ -155,8 +181,10 @@ export class TabSessionCoordinator {
       this.channel = undefined;
     }
 
-    this.knownPeers.clear();
+    const registry = this.readRegistry();
+    delete registry[this.tabId];
+    this.writeRegistry(registry);
+
     this.introSeenListeners.clear();
   }
 }
-
