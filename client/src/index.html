@@ -24,8 +24,25 @@
   <link rel="icon" href="/brand/hevnem-base.ico" type="image/x-icon">
   <script>
     try {
-      var isReload = sessionStorage.getItem('hevnem:session_reloading') === 'true' || localStorage.getItem('hevnem:intro_seen') === 'true';
-      if (!isReload) {
+      var isReload = sessionStorage.getItem('hevnem:session_reloading') === 'true';
+      var introSeen = localStorage.getItem('hevnem:intro_seen') === 'true';
+      if (introSeen && !isReload) {
+        var rawReg = localStorage.getItem('hevnem:tab_registry');
+        var reg = rawReg ? JSON.parse(rawReg) : {};
+        var now = Date.now();
+        var hasLive = false;
+        for (var k in reg) {
+          if (now - reg[k].lastSeen <= 5500) {
+            hasLive = true;
+            break;
+          }
+        }
+        if (!hasLive) {
+          localStorage.removeItem('hevnem:intro_seen');
+          introSeen = false;
+        }
+      }
+      if (!isReload && !introSeen) {
         document.documentElement.classList.add('intro-pending');
       }
     } catch (e) {}
