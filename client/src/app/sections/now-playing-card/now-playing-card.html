@@ -1,11 +1,11 @@
 <div class="now-playing-container flex flex-col items-center justify-center text-center select-none mx-auto w-full transition-all duration-600 px-3 sm:px-0"
     [class.max-w-lg]="!layout.isImmersive()" [class.max-w-3xl]="layout.isImmersive()">
-    <div class="relative group">
+    <div class="relative group w-full flex flex-col items-center">
         <div class="absolute -inset-1.5 rounded-3xl bg-white/10 blur-2xl opacity-40 group-hover:opacity-70 transition duration-600"
             [class.blur-3xl]="layout.isImmersive()" [class.opacity-50]="layout.isImmersive()">
         </div>
 
-        <div class="card-artwork perspective-container cursor-pointer select-none"
+        <div class="card-artwork perspective-container cursor-pointer select-none mx-auto"
             [class.card-artwork-immersive]="layout.isImmersive()" (click)="toggleFlip()" role="button" tabindex="0"
             (keydown.enter)="toggleFlip()" (keydown.space)="toggleFlip(); $event.preventDefault()"
             title="Click to flip artwork">
@@ -15,11 +15,8 @@
 
                 <div
                     class="card-face card-front absolute inset-0 rounded-3xl overflow-hidden shadow-2xl shadow-black/80 ring-1 ring-white/15 bg-black">
-                    @for (cover of [resolvedCover()]; track cover) {
-                    <img [src]="cover" [alt]="currentSong().name"
-                        (error)="handleImageError()"
-                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 animate-cover-settle" />
-                    }
+                    <img #coverImg [src]="resolvedCover()" [alt]="currentSong().name" (error)="handleImageError()"
+                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
                 </div>
                 <div class="card-face card-back absolute inset-0 rounded-3xl overflow-hidden shadow-2xl shadow-black/80 ring-1 ring-white/20 flex items-center justify-center p-8 transition-all duration-500"
                     [style.background]="layout.baseBackground()">
@@ -34,19 +31,18 @@
             </div>
         </div>
 
-        <div class="title-details mt-4 sm:mt-5 flex flex-col items-center justify-start space-y-1">
+        <div
+            class="title-details mt-4 sm:mt-5 flex flex-col items-center justify-start space-y-1 w-full max-w-full px-2">
             <p class="text-[9px] sm:text-[10px] font-semibold tracking-[0.35em] uppercase text-hev-ink-3">
                 NOW PLAYING
             </p>
 
-            @for (title of [formattedTitle()]; track title) {
-            <h1
-                class="text-2xl sm:text-4xl md:text-[40px] font-hev-display italic font-normal text-hev-ink-1 tracking-wide leading-tight drop-shadow-md max-w-md text-center animate-title-fade">
-                {{ title }}
+            <h1 #titleHeading
+                class="text-2xl sm:text-4xl md:text-[40px] font-hev-display italic font-normal text-hev-ink-1 tracking-wide leading-tight drop-shadow-md max-w-md text-center break-words">
+                {{ formattedTitle() }}
             </h1>
-            }
 
-            <p class="text-xs sm:text-sm font-hev-ui tracking-wider text-hev-ink-2/80">
+            <p class="text-xs sm:text-sm font-hev-ui tracking-wider text-hev-ink-2/80 max-w-md text-center truncate">
                 Hev Abi <span class="mx-1 text-hev-ink-3/60">·</span> {{ displayAlbum() }}
             </p>
         </div>
